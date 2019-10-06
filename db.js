@@ -41,7 +41,10 @@ const DB = realm => ({
     realm.write(() => realm.delete(obj)),
 })
 
-Realm.open({ schema: [TeamSchema, PlayerSchema, LeagueSchema] })
+Realm.open({
+    // path: 'anotherRealm.realm',
+    schema: [TeamSchema, PlayerSchema, LeagueSchema]
+  })
   .then(realm => {
     // let allLeagues = realm.objects('League');
     // realm.delete(allLeagues); // Deletes all leagues
