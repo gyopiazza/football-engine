@@ -43,10 +43,12 @@ const DB = realm => ({
 
 Realm.open({ schema: [TeamSchema, PlayerSchema, LeagueSchema] })
   .then(realm => {
-    const db = DB(realm)
-    
     // let allLeagues = realm.objects('League');
     // realm.delete(allLeagues); // Deletes all leagues
+  
+  
+    // v1: API Wrapper
+    const db = DB(realm)
     
     const leagues = realm.objects("League")
     db.create('League', {
@@ -70,6 +72,28 @@ Realm.open({ schema: [TeamSchema, PlayerSchema, LeagueSchema] })
     //   name: 'Alfredo Canale',
     // })
     // console.log('Players:', players)
+  
+  
+    // v2: Native API
+//     realm.write(() => {
+//       const leagues = realm.objects('League')
+//       realm.create('League', {
+//         id: uuid(),
+//         name: 'Serie A'
+//       })
+//       console.log('Leagues:', leagues)
+      
+//       const teams = realm.objects("Team")
+//       realm.create('Team', {
+//         id: uuid(),
+//         name: 'Napoli',
+//         league: leagues[0]
+//       })
+//       console.log('Teams:', teams)
+//     })
+
+
+    
 
   
   
