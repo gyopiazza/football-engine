@@ -46,7 +46,6 @@ Realm.open({ schema: [TeamSchema, PlayerSchema, LeagueSchema] })
     // let allLeagues = realm.objects('League');
     // realm.delete(allLeagues); // Deletes all leagues
   
-  
     // v1: API Wrapper
     const db = DB(realm)
     
