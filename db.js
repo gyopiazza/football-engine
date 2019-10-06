@@ -3,7 +3,9 @@ const Realm = require("realm");
 // Define your models and their properties
 const TeamSchema = {
   name: "Team",
+  primaryKey: 'id',
   properties: {
+    id: 'int',
     name: "string",
     league: "League"
   }
@@ -11,7 +13,9 @@ const TeamSchema = {
 
 const PlayerSchema = {
   name: "Player",
+  primaryKey: 'id',
   properties: {
+    id: 'int',
     name: "string",
     teams: "Team[]"
   }
@@ -19,7 +23,9 @@ const PlayerSchema = {
 
 const LeagueSchema = {
   name: "League",
+  primaryKey: 'id',
   properties: {
+    id: 'int',
     name: "string"
   }
 };
@@ -42,11 +48,18 @@ Realm.open({ schema: [TeamSchema, PlayerSchema, LeagueSchema] })
     console.log('Leagues:', leagues)
     // console.log('League[0]:', leagues[0].name)
   
-    const players = realm.objects("Player")
-    db.create('Player', {
-      name: 'Alfredo Canale',
-    })
-    console.log('Players:', players)
+    const teams = realm.objects("Team")
+    // db.create('Team', {
+    //   name: 'Napoli',
+    //   league: leagues[0]
+    // })
+    console.log('Teams:', teams)
+  
+    // const players = realm.objects("Player")
+    // db.create('Player', {
+    //   name: 'Alfredo Canale',
+    // })
+    // console.log('Players:', players)
 
     //     // Create Realm objects and write to local storage
     //     realm.write(() => {
