@@ -46,11 +46,19 @@ Realm.open({ schema: [TeamSchema, PlayerSchema, LeagueSchema] })
   .then(realm => {
     const db = DB(realm)
     
+    // let allLeagues = realm.objects('League');
+    // realm.delete(allLeagues); // Deletes all leagues
+    
     const leagues = realm.objects("League")
     // db.create('League', {
     //   // id: uuid(),
     //   name: 'Serie B'
     // })
+    db.update('League', {
+      // id: leagues[0].id,
+      ...leagues[0],
+      name: 'Serie B'
+    })
     console.log('Leagues:', leagues)
     // console.log('League[0]:', leagues[0].name)
   
@@ -60,11 +68,11 @@ Realm.open({ schema: [TeamSchema, PlayerSchema, LeagueSchema] })
     //   name: 'Napoli',
     //   league: leagues[0]
     // })
-    db.update('Team', {
-      ...teams[1],
-      league: leagues[1]
-    })
-    // console.log('Teams:', teams)
+    // db.update('Team', {
+    //   ...teams[1],
+    //   league: leagues[1]
+    // })
+    console.log('Teams:', teams)
     // teams[1].league = leagues[1]
   
     // const players = realm.objects("Player")
@@ -73,6 +81,11 @@ Realm.open({ schema: [TeamSchema, PlayerSchema, LeagueSchema] })
     // })
     // console.log('Players:', players)
 
+  
+  
+  
+  
+  
     //     // Create Realm objects and write to local storage
     //     realm.write(() => {
     //       const myCar = realm.create("Car", {
