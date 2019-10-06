@@ -13,7 +13,6 @@ const PlayerSchema = {
   name: "Player",
   properties: {
     name: "string",
-    birthday: "date",
     teams: "Team[]"
   }
 };
@@ -37,10 +36,17 @@ Realm.open({ schema: [TeamSchema, PlayerSchema, LeagueSchema] })
     const db = DB(realm)
     
     const leagues = realm.objects("League")
-    db.create('League', {
-      ''
-    })
+    // db.create('League', {
+    //   name: 'Serie A'
+    // })
     console.log('Leagues:', leagues)
+    // console.log('League[0]:', leagues[0].name)
+  
+    const players = realm.objects("Player")
+    db.create('Player', {
+      name: 'Alfredo Canale',
+    })
+    console.log('Players:', players)
 
     //     // Create Realm objects and write to local storage
     //     realm.write(() => {
