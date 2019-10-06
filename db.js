@@ -37,6 +37,8 @@ const DB = realm => ({
     realm.write(() => realm.create(schema, data.id ? data : { id: uuid(), ...data })),
   update: (schema, data) =>
     realm.write(() => realm.create(schema, data, true)),
+  delete: (obj) =>
+    realm.write(() => realm.delete(obj)),
 })
 
 Realm.open({ schema: [TeamSchema, PlayerSchema, LeagueSchema] })
@@ -47,30 +49,21 @@ Realm.open({ schema: [TeamSchema, PlayerSchema, LeagueSchema] })
     // realm.delete(allLeagues); // Deletes all leagues
     
     const leagues = realm.objects("League")
-    // db.create('League', {
-    //   // id: uuid(),
-    //   name: 'Serie B'
-    // })
-    // db.update('League', {
-    //   // id: leagues[0].id,
-    //   ...leagues[0],
-    //   name: 'Serie B'
-    // })
+    db.create('League', {
+      // id: uuid(),
+      name: 'Serie A'
+    })
     // console.log('Leagues:', leagues)
     console.log('League[0]:', leagues[0])
   
     const teams = realm.objects("Team")
-    // db.create('Team', {
-    //   // id: uuid(),
-    //   name: 'Napoli',
-    //   league: leagues[0]
-    // })
-    // db.update('Team', {
-    //   ...teams[1],
-    //   league: leagues[1]
-    // })
-    // console.log('Teams:', teams)
-    // teams[1].league = leagues[1]
+    db.create('Team', {
+      // id: uuid(),
+      name: 'Napoli',
+      league: leagues[0]
+    })
+    // db.delete(teams[0].league)
+    console.log('Teams:', teams)
   
     // const players = realm.objects("Player")
     // db.create('Player', {
