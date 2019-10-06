@@ -60,11 +60,11 @@ Realm.open({ schema: [TeamSchema, PlayerSchema, LeagueSchema] })
     //   name: 'Napoli',
     //   league: leagues[0]
     // })
-    console.log('Teams:', teams)
     db.update('Team', {
       ...teams[1],
-      
+      league: leagues[1]
     })
+    // console.log('Teams:', teams)
     // teams[1].league = leagues[1]
   
     // const players = realm.objects("Player")
