@@ -1,5 +1,6 @@
 dependencies:
   express: 4.16.4
+  hyperid: 2.0.2
   realm: 3.2.0
 packages:
   /abbrev/1.1.1:
@@ -703,6 +704,13 @@ packages:
       node: '>= 4.5.0'
     resolution:
       integrity: sha512-c8Ndjc9Bkpfx/vCJueCPy0jlP4ccCCSNDp8xwCZzPjKJUm+B+u9WX2x98Qx4n1PiMNTWo3D7KK5ifNV/yJyRzg==
+  /hyperid/2.0.2:
+    dependencies:
+      uuid: 3.3.3
+      uuid-parse: 1.1.0
+    dev: false
+    resolution:
+      integrity: sha512-D4krJfLyXZTZZibL5CEUJzyL001ah1TOK+5wlsra9eMnb0RtMZcBRkblxVRDwzB9VIm9PKXJ4zZtAisFCKuuKQ==
   /iconv-lite/0.4.23:
     dependencies:
       safer-buffer: 2.1.2
@@ -1577,6 +1585,10 @@ packages:
       node: '>= 0.4.0'
     resolution:
       integrity: sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
+  /uuid-parse/1.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-OdmXxA8rDsQ7YpNVbKSJkNzTw2I+S5WsbMDnCtIWSQaosNAcWtFuI/YK1TjzUI6nbkgiqEyh8gWngfcv8Asd9A==
   /uuid/3.3.3:
     dev: false
     hasBin: true
@@ -1630,4 +1642,5 @@ shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
   express: ^4.16.4
+  hyperid: ^2.0.2
   realm: ^3.2.0

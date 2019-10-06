@@ -1,11 +1,13 @@
 const Realm = require("realm");
+const hyperid = require('hyperid')
+const uuid = hyperid(true)
 
 // Define your models and their properties
 const TeamSchema = {
   name: "Team",
   primaryKey: 'id',
   properties: {
-    id: 'int',
+    id: 'string',
     name: "string",
     league: "League"
   }
@@ -15,7 +17,7 @@ const PlayerSchema = {
   name: "Player",
   primaryKey: 'id',
   properties: {
-    id: 'int',
+    id: 'string',
     name: "string",
     teams: "Team[]"
   }
@@ -25,14 +27,14 @@ const LeagueSchema = {
   name: "League",
   primaryKey: 'id',
   properties: {
-    id: 'int',
+    id: 'string',
     name: "string"
   }
 };
 
 const DB = realm => ({
   create: (schema, data) => {
-    realm.write(() => realm.create(schema, data))
+    realm.write(() => realm.create(schema, data.id ? data : { id: uuid(), ...data }))
   },
 
 })
