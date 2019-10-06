@@ -24,20 +24,20 @@ Realm.open({
     const db = DB(realm)
     
     const leagues = realm.objects("League")
-    db.create('League', {
-      // id: uuid(),
-      name: 'Serie A',
-      season: '2019/2020'
-    })
+    // db.create('League', {
+    //   // id: uuid(),
+    //   name: 'Serie A',
+    //   season: '2019/2020'
+    // })
     // console.log('Leagues:', leagues)
     console.log('League[0]:', leagues[0])
   
     const teams = realm.objects("Team")
-    db.create('Team', {
-      // id: uuid(),
-      name: 'Napoli',
-      league: leagues[0]
-    })
+    // db.create('Team', {
+    //   // id: uuid(),
+    //   name: 'Napoli',
+    //   league: leagues[0]
+    // })
     // db.delete(teams[0].league)
     console.log('Teams:', teams)
   

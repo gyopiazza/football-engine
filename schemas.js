@@ -1,4 +1,4 @@
-export const TeamSchema = {
+module.exports.TeamSchema = {
   name: "Team",
   primaryKey: 'id',
   properties: {
@@ -8,7 +8,7 @@ export const TeamSchema = {
   }
 };
 
-export const PlayerSchema = {
+module.exports.PlayerSchema = {
   name: "Player",
   primaryKey: 'id',
   properties: {
@@ -18,7 +18,7 @@ export const PlayerSchema = {
   }
 };
 
-export const LeagueSchema = {
+module.exports.LeagueSchema = {
   name: "League",
   primaryKey: 'id',
   properties: {
@@ -27,5 +27,3 @@ export const LeagueSchema = {
     season: "string"
   }
 };
-
-export default {}
