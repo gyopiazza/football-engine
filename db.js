@@ -28,7 +28,8 @@ const LeagueSchema = {
   primaryKey: 'id',
   properties: {
     id: 'string',
-    name: "string"
+    name: "string",
+    season: "string"
   }
 };
 
@@ -55,7 +56,8 @@ Realm.open({
     const leagues = realm.objects("League")
     db.create('League', {
       // id: uuid(),
-      name: 'Serie A'
+      name: 'Serie A',
+      season: '2019/2020'
     })
     // console.log('Leagues:', leagues)
     console.log('League[0]:', leagues[0])
