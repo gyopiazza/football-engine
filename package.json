@@ -12,12 +12,12 @@
   },
   "dependencies": {
     "express": "^4.16.4",
-    "realm": "^3.2.0",
     "hyperid": "^2.0.2",
-    "tape": "^4.11.0"
+    "tape": "^4.11.0",
+    "realm": "^3.2.0"
   },
   "engines": {
-    "node": "12.x"
+    "node": "8.x"
   },
   "repository": {
     "url": "https://glitch.com/edit/#!/hello-express"

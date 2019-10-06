@@ -1,4 +1,7 @@
+const fs = require('fs');
 const test = require('tape');
+
+// Start with a fresh DB
 
 test('timing test', function (t) {
     t.plan(2);
