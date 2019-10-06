@@ -33,13 +33,10 @@ const LeagueSchema = {
 };
 
 const DB = realm => ({
-  create: (schema, data) => {
-    realm.write(() => realm.create(schema, data.id ? data : { id: uuid(), ...data }))
-  },
-  update: (schema, data) => {
-    realm.write(() => realm.create(schema, data, true))
-  },
-
+  create: (schema, data) =>
+    realm.write(() => realm.create(schema, data.id ? data : { id: uuid(), ...data })),
+  update: (schema, data) =>
+    realm.write(() => realm.create(schema, data, true)),
 })
 
 Realm.open({ schema: [TeamSchema, PlayerSchema, LeagueSchema] })
@@ -54,13 +51,13 @@ Realm.open({ schema: [TeamSchema, PlayerSchema, LeagueSchema] })
     //   // id: uuid(),
     //   name: 'Serie B'
     // })
-    db.update('League', {
-      // id: leagues[0].id,
-      ...leagues[0],
-      name: 'Serie B'
-    })
-    console.log('Leagues:', leagues)
-    // console.log('League[0]:', leagues[0].name)
+    // db.update('League', {
+    //   // id: leagues[0].id,
+    //   ...leagues[0],
+    //   name: 'Serie B'
+    // })
+    // console.log('Leagues:', leagues)
+    console.log('League[0]:', leagues[0])
   
     const teams = realm.objects("Team")
     // db.create('Team', {
@@ -72,7 +69,7 @@ Realm.open({ schema: [TeamSchema, PlayerSchema, LeagueSchema] })
     //   ...teams[1],
     //   league: leagues[1]
     // })
-    console.log('Teams:', teams)
+    // console.log('Teams:', teams)
     // teams[1].league = leagues[1]
   
     // const players = realm.objects("Player")
