@@ -1,37 +1,7 @@
 const Realm = require("realm");
 const hyperid = require('hyperid')
 const uuid = hyperid(true)
-
-// Define your models and their properties
-const TeamSchema = {
-  name: "Team",
-  primaryKey: 'id',
-  properties: {
-    id: 'string',
-    name: "string",
-    league: "League"
-  }
-};
-
-const PlayerSchema = {
-  name: "Player",
-  primaryKey: 'id',
-  properties: {
-    id: 'string',
-    name: "string",
-    teams: "Team[]"
-  }
-};
-
-const LeagueSchema = {
-  name: "League",
-  primaryKey: 'id',
-  properties: {
-    id: 'string',
-    name: "string",
-    season: "string"
-  }
-};
+const schemas = require('./schemas')
 
 const DB = realm => ({
   create: (schema, data) =>
@@ -44,7 +14,7 @@ const DB = realm => ({
 
 Realm.open({
     // path: 'anotherRealm.realm',
-    schema: [TeamSchema, PlayerSchema, LeagueSchema]
+    schema: [schemas.TeamSchema, schemas.PlayerSchema, schemas.LeagueSchema]
   })
   .then(realm => {
     // let allLeagues = realm.objects('League');
