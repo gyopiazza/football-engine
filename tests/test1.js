@@ -32,24 +32,47 @@ test('Create League', function (t) {
   .then(realm => {
     const leagues = realm.objects("League")
     const teams = realm.objects("Team")
-    const data = {
-      id: uuid(),
-      name: 'Serie A',
-      season: '2019/2020'
-    }
-    
-    realm.write(() => realm.create('League', data))
-    
-    t.ok(realm)
-    t.ok(leagues[0])
-    t.equal(leagues[0].name, 'Serie A')
-    
-    db.create('Team', {
-      // id: uuid(),
-      name: 'Napoli',
-      league: leagues[0]
+        
+    // Populate DB
+    realm.write(() => {
+      realm.create('League', {
+        id: uuid(),
+        name: 'Serie A',
+        season: '2019/2020'
+      })
+      realm.create('League', {
+        id: uuid(),
+        name: 'Serie C',
+        season: '2019/2020'
+      })
+      realm.create('Team', {
+        id: uuid(),
+        name: 'Napoli',
+        league: leagues[0]
+      })
+      realm.create('Team', {
+        id: uuid(),
+        name: 'Bari',
+        league: leagues[1]
+      })
+      
+      t.ok(leagues.length)
+      t.ok(teams.length)
+      t.ok(leagues.filtered('name = "Serie A"').length)
+      
+      realm.delete(teams[0].league)
+      
     })
-    db.delete(teams[0].league)
+    
+    
+    // t.ok(leagues[0])
+    // t.equal(leagues[0].name, 'Serie A')
+    // t.equal(leagues[1].name, 'Serie C')
+    
+    
+    
+    
+    // realm.delete(teams[0].league)
     
     realm.close()
     t.end()
