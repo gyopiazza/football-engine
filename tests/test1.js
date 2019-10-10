@@ -7,10 +7,10 @@ const schemas = require('../schemas')
 
 // Start with a fresh DB
 const files = [
-'default.realm.lock',
-'default.realm.note',
-'default.realm',
-'default.realm.management'
+'tests/test.realm.lock',
+'tests/test.realm.note',
+'tests/test.realm',
+'tests/test.realm.management'
 ]
 
 files.forEach(file => fs.existsSync(file) ? fs.unlinkSync(file) : null)
@@ -36,7 +36,7 @@ test('timing test', function (t) {
       name: 'Serie A',
       season: '2019/2020'
     }
-    realm.create('League', data)
+    realm.write(() => realm.create('League', data))
     t.ok(leagues[0])
     t.equal(leagues[0].name, 'Serie A')
   })

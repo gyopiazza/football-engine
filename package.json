@@ -8,13 +8,15 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "test": "tape tests/**/*.js | tap-spec",
     "reset-db": "rm default.realm.lock && rm default.realm.note && rm default.realm && rm -rf default.realm.management"
   },
   "dependencies": {
     "express": "^4.16.4",
     "hyperid": "^2.0.2",
     "tape": "^4.11.0",
-    "realm": "^3.2.0"
+    "realm": "^3.2.0",
+    "tap-spec": "^5.0.0"
   },
   "engines": {
     "node": "10.x"
