@@ -63,6 +63,7 @@ test('Various DB Tests', function (t) {
       t.ok(leagues.length, 'should have leagues')
       t.ok(teams.length, 'should have teams')
       t.ok(leagues.filtered('name = "Serie A"').length, 'should find "Serie A"')
+      t.ok(leagues.filtered('name = "Serie C"').length, 'should find "Serie C"')
 
       realm.delete(teams[0].league)
       t.notOk(leagues.filtered('name = "Serie A"').length, 'should have deleted "Serie A"')
