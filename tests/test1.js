@@ -13,9 +13,13 @@ const files = [
 'tests/test.realm.management'
 ]
 
-// files.forEach(file => fs.existsSync(file) ? fs.unlinkSync(file) : null)
+files.forEach(file => fs.existsSync(file)
+  ? fs.lstatSync(file).isDirectory()
+    ? fs.rmdirSync(file, { recursive: true })
+    : fs.unlinkSync(file)
+  : null)
 
-test('Create League', function (t) {
+test('Various DB Tests', function (t) {
 //     t.plan(2)
 
 //     t.equal(typeof Date.now, 'function')
@@ -26,7 +30,7 @@ test('Create League', function (t) {
 //     }, 100)
   
   Realm.open({
-    path: 'test.realm',
+    path: 'tests/test.realm',
     schema: [schemas.TeamSchema, schemas.PlayerSchema, schemas.LeagueSchema]
   })
   .then(realm => {
@@ -56,24 +60,15 @@ test('Create League', function (t) {
         league: leagues[1]
       })
       
-      t.ok(leagues.length)
-      t.ok(teams.length)
-      t.ok(leagues.filtered('name = "Serie A"').length)
-      
+      t.ok(leagues.length, 'should have leagues')
+      t.ok(teams.length, 'should have teams')
+      t.ok(leagues.filtered('name = "Serie A"').length, 'should find "Serie A"')
+
       realm.delete(teams[0].league)
+      t.notOk(leagues.filtered('name = "Serie A"').length, 'should have deleted "Serie A"')
       
     })
-    
-    
-    // t.ok(leagues[0])
-    // t.equal(leagues[0].name, 'Serie A')
-    // t.equal(leagues[1].name, 'Serie C')
-    
-    
-    
-    
-    // realm.delete(teams[0].league)
-    
+
     realm.close()
     t.end()
   })
