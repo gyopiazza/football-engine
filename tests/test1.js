@@ -13,9 +13,9 @@ const files = [
 'tests/test.realm.management'
 ]
 
-files.forEach(file => fs.existsSync(file) ? fs.unlinkSync(file) : null)
+// files.forEach(file => fs.existsSync(file) ? fs.unlinkSync(file) : null)
 
-test('timing test', function (t) {
+test('Create League', function (t) {
 //     t.plan(2)
 
 //     t.equal(typeof Date.now, 'function')
@@ -31,14 +31,28 @@ test('timing test', function (t) {
   })
   .then(realm => {
     const leagues = realm.objects("League")
+    const teams = realm.objects("Team")
     const data = {
       id: uuid(),
       name: 'Serie A',
       season: '2019/2020'
     }
+    
     realm.write(() => realm.create('League', data))
+    
+    t.ok(realm)
     t.ok(leagues[0])
     t.equal(leagues[0].name, 'Serie A')
+    
+    db.create('Team', {
+      // id: uuid(),
+      name: 'Napoli',
+      league: leagues[0]
+    })
+    db.delete(teams[0].league)
+    
+    realm.close()
+    t.end()
   })
   
   
