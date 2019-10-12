@@ -6,7 +6,7 @@ module.exports.TeamSchema = {
     name: "string",
     league: "League"
   }
-};
+}
 
 module.exports.PlayerSchema = {
   name: "Player",
@@ -16,14 +16,25 @@ module.exports.PlayerSchema = {
     name: "string",
     teams: "Team[]"
   }
-};
+}
 
 module.exports.LeagueSchema = {
   name: "League",
   primaryKey: 'id',
   properties: {
     id: 'string',
-    name: "string",
-    season: "string"
+    name: "string"
   }
-};
+}
+
+module.exports.CompetitionSchema = {
+  name: "Competition",
+  primaryKey: 'id',
+  properties: {
+    id: 'string',
+    name: "string",
+    season: "string",
+    start: "date",
+    end: "date"
+  }
+}

@@ -31,14 +31,14 @@ test('Various DB Tests', function (t) {
   
   Realm.open({
     path: 'tests/test.realm',
-    schema: [schemas.TeamSchema, schemas.PlayerSchema, schemas.LeagueSchema]
+    schema: [schemas.TeamSchema, schemas.PlayerSchema, schemas.LeagueSchema, schemas.CompetitionSchema]
   })
   .then(realm => {
     const leagues = realm.objects("League")
     const teams = realm.objects("Team")
         
-    // Populate DB
     realm.write(() => {
+      // Populate DB
       realm.create('League', {
         id: uuid(),
         name: 'Serie A',
@@ -46,9 +46,17 @@ test('Various DB Tests', function (t) {
       })
       realm.create('League', {
         id: uuid(),
-        name: 'Serie C',
-        season: '2019/2020'
+        name: 'Serie C'
       })
+      
+      realm.create('League', {
+        id: uuid(),
+        name: 'Serie A 19/20',
+        league: leagues[0],
+        start: '2019/08/24',
+        end: '2020/05/24'
+      })
+      
       realm.create('Team', {
         id: uuid(),
         name: 'Napoli',
@@ -60,6 +68,7 @@ test('Various DB Tests', function (t) {
         league: leagues[1]
       })
       
+      // Test DB records
       t.ok(leagues.length, 'should have leagues')
       t.ok(teams.length, 'should have teams')
       t.ok(leagues.filtered('name = "Serie A"').length, 'should find "Serie A"')
