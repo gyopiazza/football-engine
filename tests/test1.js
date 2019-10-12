@@ -41,18 +41,18 @@ test('Various DB Tests', function (t) {
       // Populate DB
       realm.create('League', {
         id: uuid(),
-        name: 'Serie A',
-        season: '2019/2020'
+        name: 'Serie A'
       })
       realm.create('League', {
         id: uuid(),
         name: 'Serie C'
       })
       
-      realm.create('League', {
+      realm.create('Competition', {
         id: uuid(),
         name: 'Serie A 19/20',
         league: leagues[0],
+        season: '19/20',
         start: '2019/08/24',
         end: '2020/05/24'
       })
