@@ -1,3 +1,6 @@
+/*
+Leagues
+*/
 module.exports.LeagueSchema = {
   name: 'League',
   primaryKey: 'id',
@@ -8,6 +11,9 @@ module.exports.LeagueSchema = {
   }
 }
 
+/*
+Seasons
+*/
 module.exports.SeasonSchema = {
   name: 'Season',
   primaryKey: 'key',
@@ -18,6 +24,9 @@ module.exports.SeasonSchema = {
   }
 }
 
+/*
+Competitions
+*/
 module.exports.CompetitionSchema = {
   name: 'Competition',
   primaryKey: 'key',
@@ -33,6 +42,22 @@ module.exports.CompetitionSchema = {
   }
 }
 
+/*
+Groups
+
+/competition/:key/groups
+/competition/seriea.2019/groups
+{
+  "competition":{
+    "key":"seriea.2019",
+    "name":"Serie A 19/20"},
+  "rounds":[
+    {"num":1,"name":"Group A"},
+    {"num":2,"name":"Group B"},
+    ...
+    ]
+}
+*/
 module.exports.GroupSchema = {
   name: 'Group',
   primaryKey: 'id',
@@ -45,6 +70,22 @@ module.exports.GroupSchema = {
   }
 }
 
+/*
+Rounds
+
+/competition/:key/rounds
+/competition/seriea.2019/rounds
+{
+  "competition":{
+    "key":"seriea.2019",
+    "name":"Serie A 19/20"},
+  "rounds":[
+    {"num":1,"name":"Matchday 1"},
+    {"num":2,"name":"Matchday 2"},
+    ...
+    ]
+}
+*/
 module.exports.RoundSchema = {
   name: 'Round',
   primaryKey: 'id',
@@ -56,6 +97,9 @@ module.exports.RoundSchema = {
   }
 }
 
+/*
+Teams
+*/
 module.exports.TeamSchema = {
   name: 'Team',
   primaryKey: 'id',
