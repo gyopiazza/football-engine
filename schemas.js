@@ -40,7 +40,8 @@ module.exports.GroupSchema = {
     id: 'string',
     name: 'string',
     competition: 'Competition',
-    num: 'number'
+    num: 'number',
+    teams: 'Team[]'
   }
 }
 
@@ -61,7 +62,7 @@ module.exports.TeamSchema = {
   properties: {
     id: 'string',
     name: 'string',
-    league: 'League'
+    // country: 'Country'
   }
 }
 
@@ -71,6 +72,7 @@ module.exports.PlayerSchema = {
   properties: {
     id: 'string',
     name: 'string',
-    teams: 'Team[]'
+    teams: 'Team[]',
+    // country: 'Country'
   }
 }
