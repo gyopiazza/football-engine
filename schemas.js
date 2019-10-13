@@ -140,7 +140,8 @@ module.exports.LineupSchema = {
   properties: {
     id: 'string',
     name: 'string',
-    // country: 'Country'
+    team: 'Team',
+    players: 'Player[]'
   }
 }
 
@@ -153,7 +154,7 @@ module.exports.PlayerSchema = {
   properties: {
     id: 'string',
     name: 'string',
-    teams: 'Team[]',
+    team: 'Team[]',
     // country: 'Country'
   }
 }
