@@ -93,6 +93,7 @@ module.exports.RoundSchema = {
     id: 'string',
     name: 'string',
     competition: 'Competition',
+    // group: 'Group',
     num: 'number'
   }
 }
@@ -110,6 +111,9 @@ module.exports.TeamSchema = {
   }
 }
 
+/*
+Players
+*/
 module.exports.PlayerSchema = {
   name: 'Player',
   primaryKey: 'id',
