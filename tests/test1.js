@@ -47,7 +47,6 @@ test('Various DB Tests', function (t) {
         id: uuid(),
         name: 'Serie C'
       })
-      
       realm.create('Competition', {
         id: uuid(),
         name: 'Serie A 19/20',
@@ -56,7 +55,6 @@ test('Various DB Tests', function (t) {
         start: '2019/08/24',
         end: '2020/05/24'
       })
-      
       realm.create('Team', {
         id: uuid(),
         name: 'Napoli',
