@@ -93,6 +93,7 @@ module.exports.RoundSchema = {
     id: 'string',
     num: 'number',
     name: 'string',
+    knockout: { type: 'boolean', default: false },
     competition: 'Competition',
     matches: 'Match[]'
   }
@@ -123,7 +124,10 @@ module.exports.MatchSchema = {
     name: 'string',
     round: 'Round',
     group: 'Group',
-    team_home: 'Group',
+    team_home: 'Team',
+    team_away: 'Team',
+    goals_home: 'number',
+    goals_away: 'number',
   }
 }
 
