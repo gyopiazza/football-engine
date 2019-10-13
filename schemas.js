@@ -101,19 +101,6 @@ module.exports.RoundSchema = {
 
 /*
 Matches
-
-/competition/:key/matches
-/competition/seriea.2019/matches
-{
-  "competition":{
-    "key":"seriea.2019",
-    "name":"Serie A 19/20"},
-  "rounds":[
-    {"num":1,"name":"Matchday 1", start: '2019/08/24', end: '2019/08/24'},
-    {"num":2,"name":"Matchday 2", start: '2019/08/24', end: '2019/08/24'},
-    ...
-  ]
-}
 */
 module.exports.MatchSchema = {
   name: 'Match',
@@ -136,6 +123,19 @@ Teams
 */
 module.exports.TeamSchema = {
   name: 'Team',
+  primaryKey: 'id',
+  properties: {
+    id: 'string',
+    name: 'string',
+    // country: 'Country'
+  }
+}
+
+/*
+Lineups
+*/
+module.exports.LineupSchema = {
+  name: 'Lineup',
   primaryKey: 'id',
   properties: {
     id: 'string',
