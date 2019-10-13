@@ -35,8 +35,12 @@ test('Various DB Tests', function (t) {
   })
   .then(realm => {
     const leagues = realm.objects("League")
+    const seasons = realm.objects("Season")
+    const competitions = realm.objects("Competition")
+    const groups = realm.objects("Group")
+    const rounds = realm.objects("Round")
     const teams = realm.objects("Team")
-    const seasons = realm.objects("Team")
+    const teams = realm.objects("Team")
         
     realm.write(() => {
       // Populate DB
@@ -51,23 +55,19 @@ test('Various DB Tests', function (t) {
       })
       realm.create('Team', {
         id: uuid(),
-        name: 'Napoli',
-        league: leagues[0]
+        name: 'Napoli'
       })
       realm.create('Team', {
         id: uuid(),
-        name: 'Palermo',
-        league: leagues[0]
+        name: 'Palermo'
       })
       realm.create('Team', {
         id: uuid(),
-        name: 'Bari',
-        league: leagues[0]
+        name: 'Bari'
       })
       realm.create('Team', {
         id: uuid(),
-        name: 'Lecce',
-        league: leagues[0]
+        name: 'Lecce'
       })
       realm.create('Competition', {
         id: uuid(),
@@ -77,8 +77,37 @@ test('Various DB Tests', function (t) {
         season: seasons[0],
         start: '2019/08/24',
         end: '2020/05/24',
-        teams: []
+        teams: teams
       })
+      realm.create('Group', {
+        id: uuid(),
+        num: 1,
+        name: 'All Teams',
+        competition: competitions[0],
+        teams: teams
+      })
+      realm.create('Round', {
+        id: uuid(),
+        num: 1,
+        name: 'Matchday 1',
+        knockout: false,
+        competition: competitions[0],
+        matches: []
+      })
+      realm.create('Match', {
+        id: uuid(),        
+        round: rounds[0],
+        group: groups[0],
+        start: '2019/08/24',
+        team_home: teams[0],
+        team_away: teams[1],
+        goals_home: 0,
+        goals_away: 0,
+      })
+      
+      // Update round with matches
+      rounds[0].matches = matches
+      
       // END populate DB
           
       // Test DB records
@@ -90,7 +119,7 @@ test('Various DB Tests', function (t) {
       realm.delete(teams[0].league)
       t.notOk(leagues.filtered('name = "Serie A"').length, 'should have deleted "Serie A"')
       
-      // Test 
+      // Test team points and standings
       
     })
 

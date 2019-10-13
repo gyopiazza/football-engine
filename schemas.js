@@ -117,8 +117,6 @@ module.exports.MatchSchema = {
   primaryKey: 'id',
   properties: {
     id: 'string',
-    num: 'number',
-    name: 'string',
     round: 'Round',
     group: 'Group',
     start: 'date',
