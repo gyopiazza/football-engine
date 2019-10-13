@@ -103,7 +103,7 @@ test('Various DB Tests', function (t) {
         start: '2019/08/24',
         team_home: teams[0],
         team_away: teams[1],
-        goals_home: 0,
+        goals_home: 3,
         goals_away: 0,
       })
       realm.create('Match', {
@@ -125,11 +125,12 @@ test('Various DB Tests', function (t) {
       // Test DB records
       t.ok(leagues.length, 'should have leagues')
       t.ok(teams.length, 'should have teams')
-      t.ok(leagues.filtered('name = "Serie A"').length, 'should find "Serie A"')
-      t.equal(rounds[0].matches.length, 2, 'should have 2 matches')
+      t.ok(leagues.filtered('name = "Serie A"').length, 'should find "Serie A" in leagues')
+      t.equal(groups[0].teams.length, 4, 'group should have 4 teams')
+      t.equal(rounds[0].matches.length, 2, 'round should have 2 matches')
 
       // Test team points and standings
-      
+      t.equal(api.calculateStandings(matches)[0].name, 'Napoli', 'Napoli should be 1st')
     })
 
     realm.close()
