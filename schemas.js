@@ -1,7 +1,7 @@
 /*
 Leagues
 */
-module.exports.LeagueSchema = {
+module.exports.League = {
   name: 'League',
   primaryKey: 'id',
   properties: {
@@ -14,7 +14,7 @@ module.exports.LeagueSchema = {
 /*
 Seasons
 */
-module.exports.SeasonSchema = {
+module.exports.Season = {
   name: 'Season',
   primaryKey: 'key',
   properties: {
@@ -27,7 +27,7 @@ module.exports.SeasonSchema = {
 /*
 Competitions
 */
-module.exports.CompetitionSchema = {
+module.exports.Competition = {
   name: 'Competition',
   primaryKey: 'key',
   properties: {
@@ -56,12 +56,12 @@ Groups
   ]
 }
 */
-module.exports.GroupSchema = {
+module.exports.Group = {
   name: 'Group',
   primaryKey: 'id',
   properties: {
     id: 'string',
-    num: 'number',
+    num: 'float',
     name: 'string',
     competition: 'Competition',
     teams: 'Team[]'
@@ -82,14 +82,14 @@ Rounds
   ]
 }
 */
-module.exports.RoundSchema = {
+module.exports.Round = {
   name: 'Round',
   primaryKey: 'id',
   properties: {
     id: 'string',
-    num: 'number',
+    num: 'float',
     name: 'string',
-    knockout: { type: 'boolean', default: false },
+    knockout: { type: 'bool', default: false },
     competition: 'Competition',
     matches: 'Match[]'
   }
@@ -112,7 +112,7 @@ Matches
   ]
 }
 */
-module.exports.MatchSchema = {
+module.exports.Match = {
   name: 'Match',
   primaryKey: 'id',
   properties: {
@@ -122,15 +122,15 @@ module.exports.MatchSchema = {
     start: 'date',
     team_home: 'Team',
     team_away: 'Team',
-    goals_home: 'number',
-    goals_away: 'number',
+    goals_home: 'float',
+    goals_away: 'float',
   }
 }
 
 /*
 Teams
 */
-module.exports.TeamSchema = {
+module.exports.Team = {
   name: 'Team',
   primaryKey: 'id',
   properties: {
@@ -143,7 +143,7 @@ module.exports.TeamSchema = {
 /*
 Lineups
 */
-module.exports.LineupSchema = {
+module.exports.Lineup = {
   name: 'Lineup',
   primaryKey: 'id',
   properties: {
@@ -158,7 +158,7 @@ module.exports.LineupSchema = {
 /*
 Players
 */
-module.exports.PlayerSchema = {
+module.exports.Player = {
   name: 'Player',
   primaryKey: 'id',
   properties: {

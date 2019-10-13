@@ -4,6 +4,8 @@ const Realm = require("realm")
 const hyperid = require('hyperid')
 const uuid = hyperid(true)
 const schemas = require('../schemas')
+const api = require('../api')
+
 
 // Start with a fresh DB
 const files = [
@@ -31,7 +33,7 @@ test('Various DB Tests', function (t) {
   
   Realm.open({
     path: 'tests/test.realm',
-    schema: [schemas.TeamSchema, schemas.PlayerSchema, schemas.LeagueSchema, schemas.CompetitionSchema]
+    schema: [schemas.League, schemas.Season, schemas.Competition, schemas.Group, schemas.Round, schemas.Match, schemas.Team, schemas.Lineup, schemas.Player]
   })
   .then(realm => {
     const leagues = realm.objects("League")
@@ -39,7 +41,7 @@ test('Various DB Tests', function (t) {
     const competitions = realm.objects("Competition")
     const groups = realm.objects("Group")
     const rounds = realm.objects("Round")
-    const teams = realm.objects("Team")
+    const matches = realm.objects("Match")
     const teams = realm.objects("Team")
         
     realm.write(() => {
@@ -104,6 +106,16 @@ test('Various DB Tests', function (t) {
         goals_home: 0,
         goals_away: 0,
       })
+      realm.create('Match', {
+        id: uuid(),        
+        round: rounds[0],
+        group: groups[0],
+        start: '2019/08/24',
+        team_home: teams[2],
+        team_away: teams[3],
+        goals_home: 0,
+        goals_away: 0,
+      })
       
       // Update round with matches
       rounds[0].matches = matches
@@ -114,11 +126,8 @@ test('Various DB Tests', function (t) {
       t.ok(leagues.length, 'should have leagues')
       t.ok(teams.length, 'should have teams')
       t.ok(leagues.filtered('name = "Serie A"').length, 'should find "Serie A"')
-      t.ok(leagues.filtered('name = "Serie C"').length, 'should find "Serie C"')
+      t.equal(rounds[0].matches.length, 2, 'should have 2 matches')
 
-      realm.delete(teams[0].league)
-      t.notOk(leagues.filtered('name = "Serie A"').length, 'should have deleted "Serie A"')
-      
       // Test team points and standings
       
     })
@@ -126,6 +135,7 @@ test('Various DB Tests', function (t) {
     realm.close()
     t.end()
   })
+  .catch(e => console.log(e))
   
   
 })
