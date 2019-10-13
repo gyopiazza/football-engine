@@ -101,6 +101,22 @@ module.exports.RoundSchema = {
 
 /*
 Matches
+
+/competition/:key/round/:num|today|next
+/competition/seriea.2019/round/2 - Serie A 19/20 Matchday 2
+/competition/seriea.2019/round/today - Serie A 19/20 Today's Matchday
+/competition/seriea.2019/round/next - Serie A 19/20 Next Matchday
+
+{
+  "competition":
+    {"key":"seriea.2019","title":"World Cup 2014"},
+  "round":
+    {"num":2,"title":"Matchday 2","start_at":"2014/06/13","end_at":"2014/06/13"},
+  "games":[
+    {"team1_key":"mex","team1_title":"Mexico","team1_code":"MEX","team2_key":"cmr","team2_title":"Cameroon","team2_code":"CMR","play_at":"2014/06/13","score1":null,"score2":null,"score1ot":null,"score2ot":null,"score1p":null,"score2p":null},
+    {"team1_key":"esp","team1_title":"Spain","team1_code":"ESP","team2_key":"ned","team2_title":"Netherlands","team2_code":"NED","play_at":"2014/06/13","score1":null,"score2":null,"score1ot":null,"score2ot":null,"score1p":null,"score2p":null},
+    {"team1_key":"chi","team1_title":"Chile","team1_code":"CHI","team2_key":"aus","team2_title":"Australia","team2_code":"AUS","play_at":"2014/06/13","score1":null,"score2":null,"score1ot":null,"score2ot":null,"score1p":null,"score2p":null}]
+}
 */
 module.exports.MatchSchema = {
   name: 'Match',
@@ -141,7 +157,8 @@ module.exports.LineupSchema = {
     id: 'string',
     name: 'string',
     team: 'Team',
-    players: 'Player[]'
+    players: 'Player[]',
+    match: 'Match'
   }
 }
 
