@@ -48,9 +48,7 @@ Groups
 /competition/:key/groups
 /competition/seriea.2019/groups
 {
-  "competition":{
-    "key":"seriea.2019",
-    "name":"Serie A 19/20"},
+  "competition":{ "key":"seriea.2019", "name":"Serie A 19/20"},
   "rounds":[
     {"num":1,"name":"Group A"},
     {"num":2,"name":"Group B"},
@@ -76,9 +74,7 @@ Rounds
 /competition/:key/rounds
 /competition/seriea.2019/rounds
 {
-  "competition":{
-    "key":"seriea.2019",
-    "name":"Serie A 19/20"},
+  "competition":{ "key":"seriea.2019", "name":"Serie A 19/20"},
   "rounds":[
     {"num":1,"name":"Matchday 1", start: '2019/08/24', end: '2019/08/24'},
     {"num":2,"name":"Matchday 2", start: '2019/08/24', end: '2019/08/24'},
@@ -108,14 +104,12 @@ Matches
 /competition/seriea.2019/round/next - Serie A 19/20 Next Matchday
 
 {
-  "competition":
-    {"key":"seriea.2019","title":"World Cup 2014"},
-  "round":
-    {"num":2,"title":"Matchday 2","start_at":"2014/06/13","end_at":"2014/06/13"},
+  "competition": "competition":{ "key":"seriea.2019", "name":"Serie A 19/20"},
+  "round": {"num":2,"name":"Matchday 2","start":"2019/09/13","end":"2019/09/13"},
   "games":[
-    {"team1_key":"mex","team1_title":"Mexico","team1_code":"MEX","team2_key":"cmr","team2_title":"Cameroon","team2_code":"CMR","play_at":"2014/06/13","score1":null,"score2":null,"score1ot":null,"score2ot":null,"score1p":null,"score2p":null},
-    {"team1_key":"esp","team1_title":"Spain","team1_code":"ESP","team2_key":"ned","team2_title":"Netherlands","team2_code":"NED","play_at":"2014/06/13","score1":null,"score2":null,"score1ot":null,"score2ot":null,"score1p":null,"score2p":null},
-    {"team1_key":"chi","team1_title":"Chile","team1_code":"CHI","team2_key":"aus","team2_title":"Australia","team2_code":"AUS","play_at":"2014/06/13","score1":null,"score2":null,"score1ot":null,"score2ot":null,"score1p":null,"score2p":null}]
+    {"team_home": <Team>, "team_away": <Team>, "goals_home": 1, "goals_away": 0, "start": 2019/09/13 15:00"}
+    ...
+  ]
 }
 */
 module.exports.MatchSchema = {
@@ -127,6 +121,7 @@ module.exports.MatchSchema = {
     name: 'string',
     round: 'Round',
     group: 'Group',
+    start: 'date',
     team_home: 'Team',
     team_away: 'Team',
     goals_home: 'number',

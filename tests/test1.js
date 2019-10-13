@@ -36,6 +36,7 @@ test('Various DB Tests', function (t) {
   .then(realm => {
     const leagues = realm.objects("League")
     const teams = realm.objects("Team")
+    const seasons = realm.objects("Team")
         
     realm.write(() => {
       // Populate DB
@@ -43,17 +44,10 @@ test('Various DB Tests', function (t) {
         id: uuid(),
         name: 'Serie A'
       })
-      realm.create('League', {
+      realm.create('Season', {
         id: uuid(),
-        name: 'Serie C'
-      })
-      realm.create('Competition', {
-        id: uuid(),
-        name: 'Serie A 19/20',
-        league: leagues[0],
-        season: '19/20',
-        start: '2019/08/24',
-        end: '2020/05/24'
+        key: '19/20',
+        name: '2019/2020'
       })
       realm.create('Team', {
         id: uuid(),
@@ -62,10 +56,31 @@ test('Various DB Tests', function (t) {
       })
       realm.create('Team', {
         id: uuid(),
-        name: 'Bari',
-        league: leagues[1]
+        name: 'Palermo',
+        league: leagues[0]
       })
-      
+      realm.create('Team', {
+        id: uuid(),
+        name: 'Bari',
+        league: leagues[0]
+      })
+      realm.create('Team', {
+        id: uuid(),
+        name: 'Lecce',
+        league: leagues[0]
+      })
+      realm.create('Competition', {
+        id: uuid(),
+        key: 'seriea.2019',
+        name: 'Serie A 19/20',
+        league: leagues[0],
+        season: seasons[0],
+        start: '2019/08/24',
+        end: '2020/05/24',
+        teams: []
+      })
+      // END populate DB
+          
       // Test DB records
       t.ok(leagues.length, 'should have leagues')
       t.ok(teams.length, 'should have teams')
@@ -74,6 +89,8 @@ test('Various DB Tests', function (t) {
 
       realm.delete(teams[0].league)
       t.notOk(leagues.filtered('name = "Serie A"').length, 'should have deleted "Serie A"')
+      
+      // Test 
       
     })
 
