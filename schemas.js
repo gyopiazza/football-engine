@@ -55,7 +55,7 @@ Groups
     {"num":1,"name":"Group A"},
     {"num":2,"name":"Group B"},
     ...
-    ]
+  ]
 }
 */
 module.exports.GroupSchema = {
@@ -63,9 +63,9 @@ module.exports.GroupSchema = {
   primaryKey: 'id',
   properties: {
     id: 'string',
+    num: 'number',
     name: 'string',
     competition: 'Competition',
-    num: 'number',
     teams: 'Team[]'
   }
 }
@@ -80,10 +80,10 @@ Rounds
     "key":"seriea.2019",
     "name":"Serie A 19/20"},
   "rounds":[
-    {"num":1,"name":"Matchday 1"},
-    {"num":2,"name":"Matchday 2"},
+    {"num":1,"name":"Matchday 1", start: '2019/08/24', end: '2019/08/24'},
+    {"num":2,"name":"Matchday 2", start: '2019/08/24', end: '2019/08/24'},
     ...
-    ]
+  ]
 }
 */
 module.exports.RoundSchema = {
@@ -91,10 +91,39 @@ module.exports.RoundSchema = {
   primaryKey: 'id',
   properties: {
     id: 'string',
+    num: 'number',
     name: 'string',
     competition: 'Competition',
-    // group: 'Group',
-    num: 'number'
+    matches: 'Match[]'
+  }
+}
+
+/*
+Matches
+
+/competition/:key/matches
+/competition/seriea.2019/matches
+{
+  "competition":{
+    "key":"seriea.2019",
+    "name":"Serie A 19/20"},
+  "rounds":[
+    {"num":1,"name":"Matchday 1", start: '2019/08/24', end: '2019/08/24'},
+    {"num":2,"name":"Matchday 2", start: '2019/08/24', end: '2019/08/24'},
+    ...
+  ]
+}
+*/
+module.exports.MatchSchema = {
+  name: 'Match',
+  primaryKey: 'id',
+  properties: {
+    id: 'string',
+    num: 'number',
+    name: 'string',
+    round: 'Round',
+    group: 'Group',
+    team_home: 'Group',
   }
 }
 
