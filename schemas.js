@@ -164,7 +164,7 @@ module.exports.Player = {
   properties: {
     id: 'string',
     name: 'string',
-    team: 'Team[]',
+    team: 'Team',
     // country: 'Country'
   }
 }
