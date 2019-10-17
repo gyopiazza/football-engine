@@ -168,3 +168,18 @@ module.exports.Player = {
     // country: 'Country'
   }
 }
+
+/*
+Events (yellow/red cards, goals, substitutions...)
+*/
+module.exports.Event = {
+  name: 'Event',
+  primaryKey: 'id',
+  properties: {
+    id: 'string',
+    name: 'string',
+    team: 'Team',
+    match: 'Match'
+    // country: 'Country'
+  }
+}
