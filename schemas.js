@@ -179,7 +179,8 @@ module.exports.Event = {
     id: 'string',
     name: 'string',
     team: 'Team',
-    match: 'Match'
+    match: 'Match',
+    minute: 'float'
     // country: 'Country'
   }
 }
