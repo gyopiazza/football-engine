@@ -97,7 +97,7 @@ test('Various DB Tests', function (t) {
         matches: []
       })
       realm.create('Match', {
-        id: uuid(),        
+        id: uuid(),
         round: rounds[0],
         group: groups[0],
         start: '2019/08/24',
@@ -107,7 +107,7 @@ test('Various DB Tests', function (t) {
         goals_away: 0,
       })
       realm.create('Match', {
-        id: uuid(),        
+        id: uuid(),
         round: rounds[0],
         group: groups[0],
         start: '2019/08/24',
