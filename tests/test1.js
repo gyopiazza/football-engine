@@ -130,8 +130,8 @@ test('Various DB Tests', function (t) {
       t.equal(rounds[0].matches.length, 2, 'round should have 2 matches')
 
       // Test team points and standings
-      const standings = matches.reduce(api.standingsReducer)
-      console.log(standings)
+      const standings = matches.reduce(api.standingsReducer, [])
+      t.equal(standings[0].name, 'Napoli', '"Napoli" should be first')
       // console.log(api.calculateStandings(matches))
       // t.equal(api.calculateStandings(matches)[0].name, 'Napoli', 'Napoli should be 1st')
     })
