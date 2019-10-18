@@ -2,6 +2,8 @@ const pointsPerWin = 3
 const pointsPerDraw = 1
 const pointsPerLose = 0
 
+// TODO: remove reduce() and make it a reducer function
+// TODO: change those findIndex into a mapper function
 const calculateStandings = matches =>
   matches.reduce((standings, match) => {
     if (match.goals_home > match.goals_away) {
@@ -28,7 +30,7 @@ const calculateStandings = matches =>
       }
       let teamAwayIndex = standings.findIndex(team => team.name === match.team_away.name)
       if (teamAwayIndex > -1) {
-        standings[teamAwayIndex].points += pointsPerWin
+        standings[teamAwayIndex].points += pointsPerDraw
       } else {
         standings.push({
           name: match.team_away.name,
