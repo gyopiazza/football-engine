@@ -57,10 +57,6 @@ test('Various DB Tests', function (t) {
       })
       realm.create('Team', {
         id: uuid(),
-        name: 'Napoli'
-      })
-      realm.create('Team', {
-        id: uuid(),
         name: 'Palermo'
       })
       realm.create('Team', {
@@ -70,6 +66,10 @@ test('Various DB Tests', function (t) {
       realm.create('Team', {
         id: uuid(),
         name: 'Lecce'
+      })
+      realm.create('Team', {
+        id: uuid(),
+        name: 'Napoli'
       })
       realm.create('Competition', {
         id: uuid(),
@@ -116,7 +116,7 @@ test('Various DB Tests', function (t) {
         goals_home: 0,
         goals_away: 0,
       })
-      
+
       // Update round with matches
       rounds[0].matches = matches
       
@@ -132,8 +132,6 @@ test('Various DB Tests', function (t) {
       // Test team points and standings
       const standings = matches.reduce(api.standingsReducer, [])
       t.equal(standings[0].name, 'Napoli', '"Napoli" should be first')
-      // console.log(api.calculateStandings(matches))
-      // t.equal(api.calculateStandings(matches)[0].name, 'Napoli', 'Napoli should be 1st')
     })
 
     realm.close()
