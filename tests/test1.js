@@ -271,13 +271,13 @@ test('Various DB Tests', function (t) {
       t.equal(rounds[0].matches.length, 2, 'round 1 should have 2 matches')
       t.equal(rounds[1].matches.length, 2, 'round 2 should have 2 matches')
             
-      const standings = matches
-        .filtered('round.competition.key = "seriea.2019"')
-        .reduce(api.standingsReducer, [])
-        .sort(api.standingsSorter)
+//       const standings = matches
+//         .filtered('round.competition.key = "seriea.2019"')
+//         .reduce(api.standingsReducer, [])
+//         .sort(api.standingsSorter)
 
-      t.equal(standings[0].name, 'Napoli', '"Napoli" should be first')
-      t.equal(standings[2].name, 'Lecce', '"Lecce" should be third')
+//       t.equal(standings[0].name, 'Napoli', '"Napoli" should be first')
+//       t.equal(standings[2].name, 'Lecce', '"Lecce" should be third')
       
       // END Test Serie A
       

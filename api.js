@@ -27,12 +27,12 @@ const standingsReducer = (standings, match) => {
     // home wins
     if (match.goals_home > match.goals_away) {
       standings = updateTeam(standings, match.team_home, pointsPerWin, match.goals_home)
-    // teams draw
+    // draw
     } else if (match.goals_home === match.goals_away) {
       standings = updateTeam(standings, match.team_home, pointsPerDraw, match.goals_home)
       standings = updateTeam(standings, match.team_away, pointsPerDraw, match.goals_away)
     // away wins
-    } else {
+    } else if (match.goals_away > match.goals_home) {
       standings = updateTeam(standings, match.team_away, pointsPerWin, match.goals_away)
     }
     return standings
@@ -49,10 +49,11 @@ const standingsSorter = (a, b) => {
 const calculateCup = ({ competition, rounds, matches, groups }) => {
   // console.log(matches)
   return groups.reduce((standings, group) => {
-    console.log('====================')
-    console.log('====================')
-    console.log('====================')
-    console.log(matches.filter(match => match.group && match.group.name === group.name).reduce(standingsReducer, []))
+    // console.log('====================')
+    // console.log('====================')
+    // console.log('====================')
+    // console.log(matches.filter(match => match.group && match.group.name === group.name).reduce(standingsReducer, []))
+    matches.filter(match => match.group && match.group.name === group.name).reduce(standingsReducer, [])
     standings[group.name] = matches
         .filter(match => match.group && match.group.name === group.name)
         .reduce(standingsReducer, [])
