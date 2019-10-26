@@ -121,40 +121,40 @@ test('Various DB Tests', function (t) {
       })
 
       // Matches      
-      realm.create('Match', {
+      const serieA_match1 = realm.create('Match', {
         id: uuid(),
         round: serieA_round1,
-        group: groups[0],
+        group: serieA_group,
         start: '2019/08/24',
         team_home: palermo,
         team_away: bari,
         goals_home: 1,
         goals_away: 1,
       })
-      realm.create('Match', {
+      const serieA_match2 = realm.create('Match', {
         id: uuid(),
         round: rounds[0],
-        group: groups[0],
+        group: serieA_group,
         start: '2019/08/24',
         team_home: lecce,
         team_away: napoli,
         goals_home: 0,
         goals_away: 3,
       })
-      realm.create('Match', {
+      const serieA_match3 = realm.create('Match', {
         id: uuid(),
         round: rounds[1],
-        group: groups[0],
+        group: serieA_group,
         start: '2019/08/31',
         team_home: napoli,
         team_away: palermo,
         goals_home: 2,
         goals_away: 0,
       })
-      realm.create('Match', {
+      const serieA_match4 = realm.create('Match', {
         id: uuid(),
         round: rounds[1],
-        group: groups[0],
+        group: serieA_group,
         start: '2019/08/31',
         team_home: bari,
         team_away: lecce,
