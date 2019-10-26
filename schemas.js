@@ -171,6 +171,7 @@ module.exports.Player = {
 
 /*
 Events (yellow/red cards, goals, substitutions...)
+IDs: yellow, red, goal, sub
 */
 module.exports.Event = {
   name: 'Event',
@@ -179,8 +180,8 @@ module.exports.Event = {
     id: 'string',
     name: 'string',
     team: 'Team',
+    player: 'Player',
     match: 'Match',
     minute: 'float'
-    // country: 'Country'
   }
 }

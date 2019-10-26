@@ -198,7 +198,7 @@ test('Various DB Tests', function (t) {
         num: 1,
         name: 'Semifinals',
         knockout: false,
-        competition: serieA_competition,
+        competition: coppaItalia_competition,
         matches: []
       })
       const coppaItalia_round2 = realm.create('Round', {
@@ -206,7 +206,7 @@ test('Various DB Tests', function (t) {
         num: 1,
         name: 'Final',
         knockout: false,
-        competition: serieA_competition,
+        competition: coppaItalia_competition,
         matches: []
       })
       const coppaItalia_match1 = realm.create('Match', {
@@ -230,23 +230,30 @@ test('Various DB Tests', function (t) {
         goals_away: 4,
       })
       
+      // END Competition: Coppa Italia
+      
       // END populate DB
           
-      // Test DB records
+      // START Test DB records
+      
       t.ok(leagues.length, 'should have leagues')
       t.ok(teams.length, 'should have teams')
       t.ok(leagues.filtered('name = "Serie A"').length, 'should find "Serie A" in leagues')
       t.equal(groups[0].teams.length, 4, 'group should have 4 teams')
       t.equal(rounds[0].matches.length, 2, 'round 1 should have 2 matches')
       t.equal(rounds[1].matches.length, 2, 'round 2 should have 2 matches')
-
-      // Test team points and standings
+      
+      // END Test DB records
+      
+      // START Test Serie A
       const standings = matches
+        .filtered('group.competition.name = "Serie A"')
         .reduce(api.standingsReducer, [])
         .sort(api.standingsSorter)
 
       t.equal(standings[0].name, 'Napoli', '"Napoli" should be first')
       t.equal(standings[2].name, 'Lecce', '"Lecce" should be third')
+      // END Test Serie A
     })
     
     // End tests
