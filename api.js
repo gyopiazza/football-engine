@@ -2,14 +2,16 @@ const pointsPerWin = 3
 const pointsPerDraw = 1
 const pointsPerLose = 0
 
-const addPoints = (standings, team, points) => {
+const updateTeam = (standings, team, points = 0, goals = 0) => {
   let teamIndex = standings.findIndex(t => t.id === team.id)
   if (teamIndex > -1) {
     standings[teamIndex].points += (team.points || 0) + points
+    standings[teamIndex].goals += (team.goals || 0) + goals
   } else {
     standings.push({
       ...JSON.parse(JSON.stringify(team)), // TODO: Find a better way to convert realm obj to regular obj
-      points: (team.points || 0) + points
+      points: (team.points || 0) + points,
+      goals: (team.goals || 0) + goals,
     })
   }
   return standings
@@ -18,14 +20,14 @@ const addPoints = (standings, team, points) => {
 const standingsReducer = (standings, match) => {
     // home wins
     if (match.goals_home > match.goals_away) {
-      standings = addPoints(standings, match.team_home, pointsPerWin)
+      standings = updateTeam(standings, match.team_home, pointsPerWin, match.goals_home)
     // teams draw
     } else if (match.goals_home === match.goals_away) {
-      standings = addPoints(standings, match.team_home, pointsPerDraw)
-      standings = addPoints(standings, match.team_away, pointsPerDraw)
+      standings = updateTeam(standings, match.team_home, pointsPerDraw, match.goals_home)
+      standings = updateTeam(standings, match.team_away, pointsPerDraw, match.goals_away)
     // away wins
     } else {
-      standings = addPoints(standings, match.team_away, pointsPerWin)
+      standings = updateTeam(standings, match.team_away, pointsPerWin, match.goals_away)
     }
     return standings
 }

@@ -96,13 +96,28 @@ test('Various DB Tests', function (t) {
         competition: competitions[0],
         matches: []
       })
+      realm.create('Round', {
+        id: uuid(),
+        num: 1,
+        name: 'Matchday 2',
+        knockout: false,
+        competition: competitions[0],
+        matches: []
+      })
+      
+      // Team references
+      const palermo = teams[0]
+      const bari = teams[1]
+      const lecce = teams[2]
+      const napoli  = teams[3]
+      
       realm.create('Match', {
         id: uuid(),
         round: rounds[0],
         group: groups[0],
         start: '2019/08/24',
-        team_home: teams[0],
-        team_away: teams[1],
+        team_home: palermo,
+        team_away: bari,
         goals_home: 1,
         goals_away: 1,
       })
@@ -111,14 +126,35 @@ test('Various DB Tests', function (t) {
         round: rounds[0],
         group: groups[0],
         start: '2019/08/24',
-        team_home: teams[2],
-        team_away: teams[3],
+        team_home: lecce,
+        team_away: napoli,
         goals_home: 0,
         goals_away: 3,
       })
+      realm.create('Match', {
+        id: uuid(),
+        round: rounds[1],
+        group: groups[0],
+        start: '2019/08/31',
+        team_home: napoli,
+        team_away: palermo,
+        goals_home: 2,
+        goals_away: 0,
+      })
+      realm.create('Match', {
+        id: uuid(),
+        round: rounds[1],
+        group: groups[0],
+        start: '2019/08/31',
+        team_home: bari,
+        team_away: lecce,
+        goals_home: 2,
+        goals_away: 2,
+      })
 
-      // Update round with matches
-      rounds[0].matches = matches
+      // Update rounds with matches
+      rounds[0].matches = [matches[0], matches[1]]
+      rounds[1].matches = [matches[2], matches[3]]
       
       // END populate DB
           
@@ -127,14 +163,16 @@ test('Various DB Tests', function (t) {
       t.ok(teams.length, 'should have teams')
       t.ok(leagues.filtered('name = "Serie A"').length, 'should find "Serie A" in leagues')
       t.equal(groups[0].teams.length, 4, 'group should have 4 teams')
-      t.equal(rounds[0].matches.length, 2, 'round should have 2 matches')
+      t.equal(rounds[0].matches.length, 2, 'round 1 should have 2 matches')
+      t.equal(rounds[1].matches.length, 2, 'round 2 should have 2 matches')
 
       // Test team points and standings
       const standings = matches
         .reduce(api.standingsReducer, [])
         .sort(api.standingsSorter)
-
+      console.log(standings)
       t.equal(standings[0].name, 'Napoli', '"Napoli" should be first')
+      t.equal(standings[2].name, 'Lecce', '"Lecce" should be second')
     })
 
     realm.close()
