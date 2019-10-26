@@ -49,11 +49,11 @@ const standingsSorter = (a, b) => {
 const calculateCup = ({ competition, rounds, matches, groups }) => {
   console.log(matches)
   return groups.reduce((standings, group) => {
+    console.log(standings[group.name])
     standings[group.name] = matches
-        // .filter(match => match.group && match.group.name === group.name)
+        .filter(match => match.group && match.group.name === group.name)
         .reduce(standingsReducer, [])
         .sort(standingsSorter)
-    // console.log(standings[group.name])
     return standings
   }, {})
 }
