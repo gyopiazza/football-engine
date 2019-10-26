@@ -250,7 +250,7 @@ test('Various DB Tests', function (t) {
       t.equal(rounds[1].matches.length, 2, 'round 2 should have 2 matches')
             
       const standings = matches
-        .filtered('competition.key = "seriea.2019"')
+        .filtered('group.competition.key = "seriea.2019"')
         .reduce(api.standingsReducer, [])
         .sort(api.standingsSorter)
 
@@ -261,7 +261,7 @@ test('Various DB Tests', function (t) {
       
       // START Test Coppa Italia
       const cupMatches = matches
-        .filtered('competition.key = "coppaitalia.2019"')
+        .filtered('group.competition.key = "coppaitalia.2019"')
         .reduce(api.calculateMatches, [])
 
       console.log(cupMatches)

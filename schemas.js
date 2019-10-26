@@ -117,7 +117,6 @@ module.exports.Match = {
   primaryKey: 'id',
   properties: {
     id: 'string',
-    competition: 'Competition',
     group: 'Group',
     round: 'Round',
     start: 'date',
