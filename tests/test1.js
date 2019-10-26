@@ -207,7 +207,7 @@ test('Various DB Tests', function (t) {
       })
       const coppaItalia_round2 = realm.create('Round', {
         id: uuid(),
-        num: 1,
+        num: 2,
         name: 'Final',
         knockout: true,
         competition: coppaItalia_competition,
@@ -236,6 +236,9 @@ test('Various DB Tests', function (t) {
         goals_away: 4,
       })
       
+      coppaItalia_round1.matches = [coppaItalia_match1, coppaItalia_match2]
+      coppaItalia_round2.matches = []
+      
       // END Competition: Coppa Italia
       
       // END populate DB
@@ -260,15 +263,18 @@ test('Various DB Tests', function (t) {
       // END Test Serie A
       
       // START Test Coppa Italia
+      const cupCompetition = realm.objectForPrimaryKey('Competition', 'coppaitalia.2019')
       const cupMatches = matches
         .filtered('group.competition.key = "coppaitalia.2019"')
       const cupGroups = groups
         .filtered('competition.key = "coppaitalia.2019"')
         // .reduce(api.calculateCup, [])
-      
-      
 
-      console.log(api.calculateCup(cupMatches, cupGroups))
+      console.log(api.calculateCup({
+        competition: cupCompetition,
+        matches: cupMatches,
+        groups: cupGroups
+      }))
 
       // END Test Coppa Italia
     })
