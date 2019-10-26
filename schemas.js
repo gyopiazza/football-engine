@@ -179,9 +179,9 @@ module.exports.Event = {
   properties: {
     id: 'string',
     name: 'string',
-    team: 'Team',
-    player: 'Player',
-    match: 'Match',
-    minute: 'float'
+    team: 'Team?',
+    player: 'Player?',
+    match: 'Match?',
+    minute: 'float?'
   }
 }
