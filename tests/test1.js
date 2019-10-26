@@ -323,18 +323,21 @@ test('Various DB Tests', function (t) {
         .filtered('competition.key = "coppaitalia.2019"')
         // .reduce(api.calculateCup, [])
       
-      const cupStandings = matches
-        .filtered('round.competition.key = "coppaitalia.2019" AND group.name = "Group B"')
-        .reduce(api.standingsReducer, [])
-        .sort(api.standingsSorter)
+      // const cupStandings = matches
+      //   .filtered('round.competition.key = "coppaitalia.2019" AND group.name = "Group A"')
+      //   .reduce(api.standingsReducer, [])
+      //   .sort(api.standingsSorter)
       
-      console.log(cupStandings)
-      // api.calculateCup({
-      //   competition: cupCompetition,
-      //   rounds: cupRounds,
-      //   matches: cupMatches,
-      //   groups: cupGroups
-      // })
+      // console.log(cupStandings)
+      
+      console.log(
+        api.calculateCup({
+          competition: cupCompetition,
+          rounds: cupRounds,
+          matches: cupMatches,
+          groups: cupGroups
+        })
+      )
 
       // END Test Coppa Italia
     })

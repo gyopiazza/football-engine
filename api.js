@@ -53,6 +53,7 @@ const calculateCup = ({ competition, rounds, matches, groups }) => {
     // console.log('====================')
     // console.log('====================')
     // console.log(matches.filter(match => match.group && match.group.name === group.name).reduce(standingsReducer, []))
+    standings[group.name] = standings[group.name] || []
     matches.filter(match => match.group && match.group.name === group.name).reduce(standingsReducer, [])
     standings[group.name] = matches
         .filter(match => match.group && match.group.name === group.name)
