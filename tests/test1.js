@@ -204,14 +204,22 @@ test('Various DB Tests', function (t) {
       const coppaItalia_round2 = realm.create('Round', {
         id: uuid(),
         num: 2,
-        name: 'Semifinals',
-        knockout: true,
+        name: 'Group Stage - Matchday 2',
+        knockout: false,
         competition: coppaItalia_competition,
         matches: []
       })
       const coppaItalia_round3 = realm.create('Round', {
         id: uuid(),
         num: 3,
+        name: 'Semifinals',
+        knockout: true,
+        competition: coppaItalia_competition,
+        matches: []
+      })
+      const coppaItalia_round4 = realm.create('Round', {
+        id: uuid(),
+        num: 4,
         name: 'Final',
         knockout: true,
         competition: coppaItalia_competition,
@@ -237,9 +245,29 @@ test('Various DB Tests', function (t) {
         goals_home: 0,
         goals_away: 4,
       })
+      const coppaItalia_match3 = realm.create('Match', {
+        id: uuid(),
+        group: coppaItalia_group1,
+        round: coppaItalia_round2,
+        start: '2019/08/03',
+        team_home: lecce,
+        team_away: palermo,
+        goals_home: 3,
+        goals_away: 0,
+      })
+      const coppaItalia_match4 = realm.create('Match', {
+        id: uuid(),
+        group: coppaItalia_group1,
+        round: coppaItalia_round2,
+        start: '2019/08/03',
+        team_home: napoli,
+        team_away: bari,
+        goals_home: 5,
+        goals_away: 1,
+      })
       
       coppaItalia_round1.matches = [coppaItalia_match1, coppaItalia_match2]
-      coppaItalia_round2.matches = []
+      coppaItalia_round2.matches = [coppaItalia_match3, coppaItalia_match4]
       
       // END Competition: Coppa Italia
       
