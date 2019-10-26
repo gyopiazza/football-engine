@@ -247,7 +247,7 @@ test('Various DB Tests', function (t) {
       
       // START Test Serie A
       const standings = matches
-        .filtered('group.competition.name = "Serie A"')
+        .filtered('round.competition.name = "Serie A"')
         .reduce(api.standingsReducer, [])
         .sort(api.standingsSorter)
 
