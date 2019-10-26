@@ -46,6 +46,7 @@ test('Various DB Tests', function (t) {
         
     realm.write(() => {
       // Populate DB
+
       realm.create('League', {
         id: uuid(),
         name: 'Serie A'
@@ -55,6 +56,8 @@ test('Various DB Tests', function (t) {
         key: '19/20',
         name: '2019/2020'
       })
+      
+      // Teams
       realm.create('Team', {
         id: uuid(),
         name: 'Palermo' // #0
@@ -71,6 +74,14 @@ test('Various DB Tests', function (t) {
         id: uuid(),
         name: 'Napoli' // #3
       })
+      
+      // Team references
+      const palermo = teams[0]
+      const bari = teams[1]
+      const lecce = teams[2]
+      const napoli  = teams[3]
+      
+      // Serie A
       realm.create('Competition', {
         id: uuid(),
         key: 'seriea.2019',
@@ -104,13 +115,8 @@ test('Various DB Tests', function (t) {
         competition: competitions[0],
         matches: []
       })
-      
-      // Team references
-      const palermo = teams[0]
-      const bari = teams[1]
-      const lecce = teams[2]
-      const napoli  = teams[3]
-      
+
+      // Matches      
       realm.create('Match', {
         id: uuid(),
         round: rounds[0],
@@ -170,11 +176,12 @@ test('Various DB Tests', function (t) {
       const standings = matches
         .reduce(api.standingsReducer, [])
         .sort(api.standingsSorter)
-      console.log(standings)
-      t.equal(standings[0].name, 'Napoli', '"Napoli" should be first')
-      t.equal(standings[2].name, 'Lecce', '"Lecce" should be second')
-    })
 
+      t.equal(standings[0].name, 'Napoli', '"Napoli" should be first')
+      t.equal(standings[2].name, 'Lecce', '"Lecce" should be third')
+    })
+    
+    // End tests
     realm.close()
     t.end()
   })

@@ -2,6 +2,12 @@ const pointsPerWin = 3
 const pointsPerDraw = 1
 const pointsPerLose = 0
 
+/**
+ * Update a team's points and goals
+ *
+ * @param Integer points The points to add
+ * @param Integer goals The goals to add
+ */
 const updateTeam = (standings, team, points = 0, goals = 0) => {
   let teamIndex = standings.findIndex(t => t.id === team.id)
   if (teamIndex > -1) {
