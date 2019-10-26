@@ -46,7 +46,7 @@ const standingsSorter = (a, b) => {
   return 0
 }
 
-const calculateMatches = (status, match) => {
+const calculateCup = (status, match) => {
   
   return status
 }
@@ -54,5 +54,5 @@ const calculateMatches = (status, match) => {
 module.exports = {
   standingsReducer,
   standingsSorter,
-  calculateMatches
+  calculateCup
 }
