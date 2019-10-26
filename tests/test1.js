@@ -283,17 +283,20 @@ test('Various DB Tests', function (t) {
       
       // START Test Coppa Italia
       const cupCompetition = realm.objectForPrimaryKey('Competition', 'coppaitalia.2019')
+      const cupRounds = rounds
+        .filtered('competition.key = "coppaitalia.2019"')
       const cupMatches = matches
-        .filtered('group.competition.key = "coppaitalia.2019"')
+        .filtered('round.competition.key = "coppaitalia.2019"')
       const cupGroups = groups
         .filtered('competition.key = "coppaitalia.2019"')
         // .reduce(api.calculateCup, [])
 
-      // console.log(api.calculateCup({
-      //   competition: cupCompetition,
-      //   matches: cupMatches,
-      //   groups: cupGroups
-      // }))
+      console.log(api.calculateCup({
+        competition: cupCompetition,
+        rounds: cupRounds,
+        matches: cupMatches,
+        groups: cupGroups
+      }))
 
       // END Test Coppa Italia
     })
