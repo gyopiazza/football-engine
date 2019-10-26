@@ -291,12 +291,12 @@ test('Various DB Tests', function (t) {
         .filtered('competition.key = "coppaitalia.2019"')
         // .reduce(api.calculateCup, [])
 
-      console.log(api.calculateCup({
+      api.calculateCup({
         competition: cupCompetition,
         rounds: cupRounds,
         matches: cupMatches,
         groups: cupGroups
-      }))
+      })
 
       // END Test Coppa Italia
     })
