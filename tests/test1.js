@@ -132,7 +132,7 @@ test('Various DB Tests', function (t) {
       // Test team points and standings
       const standings = matches
         .reduce(api.standingsReducer, [])
-        .sort(api.sortByPoints)
+        .sort(api.standingsSorter)
 
       t.equal(standings[0].name, 'Napoli', '"Napoli" should be first')
     })

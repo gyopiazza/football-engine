@@ -30,10 +30,15 @@ const standingsReducer = (standings, match) => {
     return standings
 }
 
-const sortByPoints = (a, b) => (a.points > b.points) ? -1 : 1
-const sortByPoints = (a, b) => (a.points > b.points) ? -1 : 1
+const standingsSorter = (a, b) => {
+  if (a.points > b.points) return -1
+  if (a.points < b.points) return 1
+  if (a.goals > b.goals) return -1
+  if (a.goals < b.goals) return 1
+  return 0
+}
 
 module.exports = {
   standingsReducer,
-  sortByPoints
+  standingsSorter
 }
