@@ -2,14 +2,14 @@ const pointsPerWin = 3
 const pointsPerDraw = 1
 const pointsPerLose = 0
 
-const addPoints = (standings, teamName, points) => {
-  let teamIndex = standings.findIndex(team => team.name === teamName)
+const addPoints = (standings, team, points) => {
+  let teamIndex = standings.findIndex(t => t.id === team.id)
   if (teamIndex > -1) {
-    standings[teamIndex].points += points
+    standings[teamIndex].points += (team.points || 0) + points
   } else {
     standings.push({
-      name: teamName,
-      points: points
+      ...JSON.parse(JSON.stringify(team)), // TODO: Find a better way to convert realm obj to regular obj
+      points: (team.points || 0) + points
     })
   }
   return standings
@@ -18,18 +18,19 @@ const addPoints = (standings, teamName, points) => {
 const standingsReducer = (standings, match) => {
     // home wins
     if (match.goals_home > match.goals_away) {
-      standings = addPoints(standings, match.team_home.name, pointsPerWin)
+      standings = addPoints(standings, match.team_home, pointsPerWin)
     // teams draw
     } else if (match.goals_home === match.goals_away) {
-      standings = addPoints(standings, match.team_home.name, pointsPerDraw)
-      standings = addPoints(standings, match.team_away.name, pointsPerDraw)
+      standings = addPoints(standings, match.team_home, pointsPerDraw)
+      standings = addPoints(standings, match.team_away, pointsPerDraw)
     // away wins
     } else {
-      standings = addPoints(standings, match.team_away.name)
+      standings = addPoints(standings, match.team_away, pointsPerWin)
     }
     return standings
 }
 
+const sortByPoints = (a, b) => (a.points > b.points) ? -1 : 1
 const sortByPoints = (a, b) => (a.points > b.points) ? -1 : 1
 
 module.exports = {
