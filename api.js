@@ -46,6 +46,11 @@ const standingsSorter = (a, b) => {
   return 0
 }
 
+const cupReducer = (turns, match) => {
+  
+  return turns
+}
+
 module.exports = {
   standingsReducer,
   standingsSorter

@@ -201,7 +201,7 @@ test('Various DB Tests', function (t) {
         id: uuid(),
         num: 1,
         name: 'Semifinals',
-        knockout: false,
+        knockout: true,
         competition: coppaItalia_competition,
         matches: []
       })
@@ -209,7 +209,7 @@ test('Various DB Tests', function (t) {
         id: uuid(),
         num: 1,
         name: 'Final',
-        knockout: false,
+        knockout: true,
         competition: coppaItalia_competition,
         matches: []
       })
@@ -260,8 +260,11 @@ test('Various DB Tests', function (t) {
       // END Test Serie A
       
       // START Test Coppa Italia
+      const cupMatches = matches
+        .filtered('competition.key = "coppaitalia.2019"')
+        .reduce(api.cupReducer, [])
       
-      
+      console.log(cupMatches)
       
       // END Test Coppa Italia
     })
