@@ -64,27 +64,37 @@ test('Various DB Tests', function (t) {
       // Teams
       const palermo = realm.create('Team', {
         id: uuid(),
-        name: 'Palermo' // #0
+        name: 'Palermo'
       })
       const bari = realm.create('Team', {
         id: uuid(),
-        name: 'Bari' // #1
+        name: 'Bari'
       })
       const lecce = realm.create('Team', {
         id: uuid(),
-        name: 'Lecce' // #2
+        name: 'Lecce'
       })
       const napoli = realm.create('Team', {
         id: uuid(),
-        name: 'Napoli' // #3
+        name: 'Napoli'
       })
-      
-      // Team references
-      // const palermo = teams[0]
-      // const bari = teams[1]
-      // const lecce = teams[2]
-      // const napoli = teams[3]
-      
+      const roma = realm.create('Team', {
+        id: uuid(),
+        name: 'Roma'
+      })
+      const juventus = realm.create('Team', {
+        id: uuid(),
+        name: 'Juventus'
+      })
+      const milan = realm.create('Team', {
+        id: uuid(),
+        name: 'Milan'
+      })
+      const inter = realm.create('Team', {
+        id: uuid(),
+        name: 'Inter'
+      })
+            
       // Competition: Serie A
       const serieA_competition = realm.create('Competition', {
         id: uuid(),
@@ -174,14 +184,14 @@ test('Various DB Tests', function (t) {
         num: 1,
         name: 'Group A',
         competition: coppaItalia_competition,
-        teams: [palermo, lecce]
+        teams: [palermo, lecce, milan, inter]
       })
       const coppaItalia_group2 = realm.create('Group', {
         id: uuid(),
         num: 2,
         name: 'Group B',
         competition: coppaItalia_competition,
-        teams: [bari, napoli]
+        teams: [bari, napoli, juventus, roma]
       })
       const coppaItalia_round1 = realm.create('Round', {
         id: uuid(),
@@ -227,6 +237,16 @@ test('Various DB Tests', function (t) {
       })
       const coppaItalia_match2 = realm.create('Match', {
         id: uuid(),
+        group: coppaItalia_group1,
+        round: coppaItalia_round1,
+        start: '2019/08/03',
+        team_home: milan,
+        team_away: inter,
+        goals_home: 2,
+        goals_away: 2,
+      })
+      const coppaItalia_match3 = realm.create('Match', {
+        id: uuid(),
         group: coppaItalia_group2,
         round: coppaItalia_round1,
         start: '2019/08/03',
@@ -235,17 +255,27 @@ test('Various DB Tests', function (t) {
         goals_home: 0,
         goals_away: 4,
       })
-      const coppaItalia_match3 = realm.create('Match', {
+      const coppaItalia_match4 = realm.create('Match', {
+        id: uuid(),
+        group: coppaItalia_group2,
+        round: coppaItalia_round1,
+        start: '2019/08/03',
+        team_home: juventus,
+        team_away: roma,
+        goals_home: 0,
+        goals_away: 1,
+      })
+      const coppaItalia_match5 = realm.create('Match', {
         id: uuid(),
         group: coppaItalia_group1,
         round: coppaItalia_round2,
         start: '2019/08/03',
-        team_home: lecce,
+        team_home: milan,
         team_away: palermo,
         goals_home: 3,
         goals_away: 0,
       })
-      const coppaItalia_match4 = realm.create('Match', {
+      const coppaItalia_match6 = realm.create('Match', {
         id: uuid(),
         group: coppaItalia_group2,
         round: coppaItalia_round2,
@@ -256,8 +286,8 @@ test('Various DB Tests', function (t) {
         goals_away: 1,
       })
       
-      coppaItalia_round1.matches = [coppaItalia_match1, coppaItalia_match2]
-      coppaItalia_round2.matches = [coppaItalia_match3, coppaItalia_match4]
+      coppaItalia_round1.matches = [coppaItalia_match1, coppaItalia_match2, coppaItalia_match3, coppaItalia_match4]
+      coppaItalia_round2.matches = [coppaItalia_match5, coppaItalia_match6]
       
       // END Competition: Coppa Italia
       
@@ -271,13 +301,15 @@ test('Various DB Tests', function (t) {
       t.equal(rounds[0].matches.length, 2, 'round 1 should have 2 matches')
       t.equal(rounds[1].matches.length, 2, 'round 2 should have 2 matches')
             
-//       const standings = matches
-//         .filtered('round.competition.key = "seriea.2019"')
-//         .reduce(api.standingsReducer, [])
-//         .sort(api.standingsSorter)
+      const standings = matches
+        .filtered('round.competition.key = "seriea.2019"')
+        .reduce(api.standingsReducer, [])
+        .sort(api.standingsSorter)
 
-//       t.equal(standings[0].name, 'Napoli', '"Napoli" should be first')
-//       t.equal(standings[2].name, 'Lecce', '"Lecce" should be third')
+      t.equal(standings[0].name, 'Napoli', '"Napoli" should be first')
+      t.equal(standings[1].name, 'Bari', '"Bari" should be second')
+      t.equal(standings[2].name, 'Lecce', '"Lecce" should be third')
+      t.equal(standings[3].name, 'Palermo', '"Palermo" should be last')
       
       // END Test Serie A
       
@@ -290,13 +322,19 @@ test('Various DB Tests', function (t) {
       const cupGroups = groups
         .filtered('competition.key = "coppaitalia.2019"')
         // .reduce(api.calculateCup, [])
-
-      api.calculateCup({
-        competition: cupCompetition,
-        rounds: cupRounds,
-        matches: cupMatches,
-        groups: cupGroups
-      })
+      
+      const cupStandings = matches
+        .filtered('round.competition.key = "coppaitalia.2019" AND group.name = "Group A"')
+        .reduce(api.standingsReducer, [])
+        .sort(api.standingsSorter)
+      
+      console.log(cupStandings)
+      // api.calculateCup({
+      //   competition: cupCompetition,
+      //   rounds: cupRounds,
+      //   matches: cupMatches,
+      //   groups: cupGroups
+      // })
 
       // END Test Coppa Italia
     })
