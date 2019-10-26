@@ -227,7 +227,7 @@ test('Various DB Tests', function (t) {
       })
       const coppaItalia_match2 = realm.create('Match', {
         id: uuid(),
-        group: coppaItalia_group1,
+        group: coppaItalia_group2,
         round: coppaItalia_round1,
         start: '2019/08/03',
         team_home: bari,
@@ -247,7 +247,7 @@ test('Various DB Tests', function (t) {
       })
       const coppaItalia_match4 = realm.create('Match', {
         id: uuid(),
-        group: coppaItalia_group1,
+        group: coppaItalia_group2,
         round: coppaItalia_round2,
         start: '2019/08/03',
         team_home: napoli,

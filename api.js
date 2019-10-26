@@ -47,19 +47,14 @@ const standingsSorter = (a, b) => {
 }
 
 const calculateCup = ({ competition, rounds, matches, groups }) => {
-  groups.reduce((standings, group) => {
+  return groups.reduce((standings, group) => {
     standings[group.name] = standings[group.name] || {}
     standings[group.name] = matches
-        .filter(match => match.)
+        .filter(match => match.group && match.group.name === group.name)
         .reduce(standingsReducer, [])
         .sort(standingsSorter)
-    
+    return standings
   }, {})
-  const standings = matches
-        .reduce(standingsReducer, [])
-        .sort(standingsSorter)
-  
-  return status
 }
 
 module.exports = {
