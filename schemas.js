@@ -64,7 +64,6 @@ module.exports.Group = {
     num: 'float',
     name: 'string',
     competition: 'Competition',
-    // competition: {type: 'linkingObjects', objectType: 'Group', property: 'competition'},
     teams: 'Team[]'
   }
 }
@@ -118,8 +117,9 @@ module.exports.Match = {
   primaryKey: 'id',
   properties: {
     id: 'string',
-    round: 'Round',
+    competition: 'Competition',
     group: 'Group',
+    round: 'Round',
     start: 'date',
     team_home: 'Team',
     team_away: 'Team',
