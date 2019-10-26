@@ -133,7 +133,7 @@ test('Various DB Tests', function (t) {
       })
       const serieA_match2 = realm.create('Match', {
         id: uuid(),
-        round: rounds[0],
+        round: serieA_round1,
         group: serieA_group,
         start: '2019/08/24',
         team_home: lecce,
@@ -143,7 +143,7 @@ test('Various DB Tests', function (t) {
       })
       const serieA_match3 = realm.create('Match', {
         id: uuid(),
-        round: rounds[1],
+        round: serieA_round2,
         group: serieA_group,
         start: '2019/08/31',
         team_home: napoli,
@@ -153,7 +153,7 @@ test('Various DB Tests', function (t) {
       })
       const serieA_match4 = realm.create('Match', {
         id: uuid(),
-        round: rounds[1],
+        round: serieA_round2,
         group: serieA_group,
         start: '2019/08/31',
         team_home: bari,
@@ -163,28 +163,71 @@ test('Various DB Tests', function (t) {
       })
 
       // Update rounds with matches
-      rounds[0].matches = [matches[0], matches[1]]
-      rounds[1].matches = [matches[2], matches[3]]
+      serieA_round1.matches = [serieA_match1, serieA_match2]
+      serieA_round2.matches = [serieA_match3, serieA_match4]
       
       // END Competition: Serie A
       
       // Competition: Coppa Italia
-      realm.create('Competition', {
+      const coppaItalia_competition = realm.create('Competition', {
         id: uuid(),
         key: 'coppaitalia.2019',
         name: 'Coppa Italia 19/20',
-        league: leagues[1],
-        season: seasons[0],
+        league: coppaItalia,
+        season: season,
         start: '2019/08/03',
         end: '2020/05/24',
         teams: teams
       })
-      realm.create('Group', {
+      const coppaItalia_group1 = realm.create('Group', {
         id: uuid(),
         num: 1,
-        name: 'All Teams',
-        competition: competitions[0],
-        teams: teams
+        name: 'Group 1',
+        competition: coppaItalia_competition,
+        teams: [palermo, lecce]
+      })
+      const coppaItalia_group2 = realm.create('Group', {
+        id: uuid(),
+        num: 2,
+        name: 'Group 2',
+        competition: coppaItalia_competition,
+        teams: [bari, napoli]
+      })
+      const coppaItalia_round1 = realm.create('Round', {
+        id: uuid(),
+        num: 1,
+        name: 'Semifinals',
+        knockout: false,
+        competition: serieA_competition,
+        matches: []
+      })
+      const coppaItalia_round2 = realm.create('Round', {
+        id: uuid(),
+        num: 1,
+        name: 'Final',
+        knockout: false,
+        competition: serieA_competition,
+        matches: []
+      })
+      const coppaItalia_match1 = realm.create('Match', {
+        id: uuid(),
+        round: coppaItalia_round1,
+        group: coppaItalia_group1,
+        start: '2019/08/03',
+        team_home: palermo,
+        team_away: lecce,
+        goals_home: 1,
+        goals_away: 2,
+      })
+      const coppaItalia_match2 = realm.create('Match', {
+        id: uuid(),
+        round: coppaItalia_round1,
+        group: coppaItalia_group1,
+        start: '2019/08/03',
+        team_home: bari,
+        team_away: napoli,
+        goals_home: 0,
+        goals_away: 4,
       })
       
       // END populate DB
