@@ -117,13 +117,14 @@ module.exports.Match = {
   primaryKey: 'id',
   properties: {
     id: 'string',
-    group: 'Group',
+    group: 'Group?',
     round: 'Round',
     start: 'date',
     team_home: 'Team',
     team_away: 'Team',
     goals_home: 'float',
     goals_away: 'float',
+    played: { type: 'bool', default: false }
   }
 }
 
