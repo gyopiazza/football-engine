@@ -262,7 +262,7 @@ test('Various DB Tests', function (t) {
       // START Test Coppa Italia
       const cupMatches = matches
         .filtered('competition.key = "coppaitalia.2019"')
-        .reduce(api.cupReducer, [])
+        .reduce(api.calculateMatches, [])
       
       console.log(cupMatches)
       
