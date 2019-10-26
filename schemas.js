@@ -64,6 +64,7 @@ module.exports.Group = {
     num: 'float',
     name: 'string',
     competition: 'Competition',
+    // competition: {type: 'linkingObjects', objectType: 'Group', property: 'competition'},
     teams: 'Team[]'
   }
 }
