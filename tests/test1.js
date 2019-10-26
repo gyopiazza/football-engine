@@ -123,7 +123,6 @@ test('Various DB Tests', function (t) {
       // Matches      
       const serieA_match1 = realm.create('Match', {
         id: uuid(),
-        competition: serieA_competition,
         group: serieA_group,
         round: serieA_round1,
         start: '2019/08/24',
@@ -134,7 +133,6 @@ test('Various DB Tests', function (t) {
       })
       const serieA_match2 = realm.create('Match', {
         id: uuid(),
-        competition: serieA_competition,
         group: serieA_group,
         round: serieA_round1,
         start: '2019/08/24',
@@ -145,7 +143,6 @@ test('Various DB Tests', function (t) {
       })
       const serieA_match3 = realm.create('Match', {
         id: uuid(),
-        competition: serieA_competition,
         group: serieA_group,
         round: serieA_round2,
         start: '2019/08/31',
@@ -156,7 +153,6 @@ test('Various DB Tests', function (t) {
       })
       const serieA_match4 = realm.create('Match', {
         id: uuid(),
-        competition: serieA_competition,
         group: serieA_group,
         round: serieA_round2,
         start: '2019/08/31',
@@ -200,14 +196,22 @@ test('Various DB Tests', function (t) {
       const coppaItalia_round1 = realm.create('Round', {
         id: uuid(),
         num: 1,
-        name: 'Semifinals',
-        knockout: true,
+        name: 'Group Stage - Matchday 1',
+        knockout: false,
         competition: coppaItalia_competition,
         matches: []
       })
       const coppaItalia_round2 = realm.create('Round', {
         id: uuid(),
         num: 2,
+        name: 'Semifinals',
+        knockout: true,
+        competition: coppaItalia_competition,
+        matches: []
+      })
+      const coppaItalia_round3 = realm.create('Round', {
+        id: uuid(),
+        num: 3,
         name: 'Final',
         knockout: true,
         competition: coppaItalia_competition,
@@ -215,7 +219,6 @@ test('Various DB Tests', function (t) {
       })
       const coppaItalia_match1 = realm.create('Match', {
         id: uuid(),
-        competition: coppaItalia_competition,
         group: coppaItalia_group1,
         round: coppaItalia_round1,
         start: '2019/08/03',
@@ -226,7 +229,6 @@ test('Various DB Tests', function (t) {
       })
       const coppaItalia_match2 = realm.create('Match', {
         id: uuid(),
-        competition: coppaItalia_competition,
         group: coppaItalia_group1,
         round: coppaItalia_round1,
         start: '2019/08/03',
