@@ -68,8 +68,8 @@ const standingsSorter = (a, b) => {
   return 0
 }
 
-const calculateCup = ({ competition, phases, rounds, matches, groups }) => {
-  console.log(phases)
+const calculateCompetition = ({ competition, phases, rounds, matches, groups }) => {
+  console.log(competition.phases)
   return groups.reduce((standings, group) => {
     standings[group.name] = matches
         .filter(match => match.group && match.group.name === group.name)
@@ -85,6 +85,6 @@ const headToHeadFilter = (teamA, teamB) => match =>
 module.exports = {
   standingsReducer,
   standingsSorter,
-  calculateCup,
+  calculateCompetition,
   headToHeadFilter
 }

@@ -358,7 +358,7 @@ test('Various Tests', function (t) {
         .filtered('competition.key = "coppaitalia.2019"')
         // .reduce(api.calculateCup, [])
       
-      const cupStandings = api.calculateCup({
+      const cupStandings = api.calculateCompetition({
           competition: cupCompetition,
           phases: cupPhases,
           rounds: cupRounds,
