@@ -366,8 +366,8 @@ test('Various Tests', function (t) {
           groups: cupGroups
         })
      
-      t.equal(cupStandings['Group A'][0].name, 'Milan', '"Milan" should be first of "Group A"')
-      t.equal(cupStandings['Group B'][0].name, 'Napoli', '"Napoli" should be first of "Group B"')
+      // t.equal(cupStandings['Group A'][0].name, 'Milan', '"Milan" should be first of "Group A"')
+      // t.equal(cupStandings['Group B'][0].name, 'Napoli', '"Napoli" should be first of "Group B"')
       
       // console.log(cupStandings)
       
