@@ -39,7 +39,7 @@ module.exports.Competition = {
     start: 'date',
     end: 'date',
     teams: 'Team[]',
-    phases: 'Phase[]',
+    // phases: 'Phase[]?',
     // phases: { type: 'linkingObjects', objectType: 'Phase', property: 'competition' },
   }
 }
@@ -54,10 +54,10 @@ module.exports.Phase = {
     id: 'string',
     num: 'float',
     name: 'string',
-    type: 'string', // knockout, two-legs, tournament
+    type: 'string?', // knockout, two-legs, tournament
     competition: 'Competition',
     teams: 'Team[]',
-    groups: 'Group[]?',
+    // groups: 'Group[]?',
   }
 }
 
