@@ -56,6 +56,7 @@ module.exports.Phase = {
     competition: 'Competition',
     teams: 'Team[]',
     groups: 'Group[]',
+    type: 'string', // knockout, two-legs, tournament
   }
 }
 
