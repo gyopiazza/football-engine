@@ -33,19 +33,7 @@ test('Various Tests', function (t) {
   
   Realm.open({
     path: 'tests/test.realm',
-    schema: [
-      schemas.League,
-      schemas.Season,
-      schemas.Competition,
-      schemas.Group,
-      schemas.Phase,
-      schemas.Round,
-      schemas.Match,
-      schemas.Team,
-      schemas.Lineup,
-      schemas.Player,
-      schemas.Event,
-    ]
+    schema: [schemas.League, schemas.Season, schemas.Competition, schemas.Phase, schemas.Group, schemas.Round, schemas.Match, schemas.Team, schemas.Lineup, schemas.Player]
   })
   .then(realm => {
     const leagues = realm.objects("League")
@@ -197,17 +185,15 @@ test('Various Tests', function (t) {
         id: uuid(),
         num: 1,
         name: 'Group Stages',
-        type: 'tournament',
         competition: coppaItalia_competition,
         teams: [palermo, lecce, milan, inter, bari, napoli, juventus, roma],
-        // groups: []
+        groups: []
       })
       const coppaItalia_group1 = realm.create('Group', {
         id: uuid(),
         num: 1,
         name: 'Group A',
         competition: coppaItalia_competition,
-        phase: coppaItalia_phase1,
         teams: [palermo, lecce, milan, inter]
       })
       const coppaItalia_group2 = realm.create('Group', {
@@ -215,13 +201,10 @@ test('Various Tests', function (t) {
         num: 2,
         name: 'Group B',
         competition: coppaItalia_competition,
-        phase: coppaItalia_phase1,
         teams: [bari, napoli, juventus, roma]
       })
       
-      // coppaItalia_phase1.groups = [coppaItalia_group1, coppaItalia_group2]
-      coppaItalia_phase1.groups.push(coppaItalia_group1)
-      coppaItalia_phase1.groups.push(coppaItalia_group2)
+      coppaItalia_phase1.groups = [coppaItalia_group1, coppaItalia_group2]
       
       const coppaItalia_round1 = realm.create('Round', {
         id: uuid(),
@@ -375,19 +358,19 @@ test('Various Tests', function (t) {
         .filtered('competition.key = "coppaitalia.2019"')
         // .reduce(api.calculateCup, [])
       
-      // const cup = api.calculateCompetition({
-      //     competition: cupCompetition,
-      //     phases: cupPhases,
-      //     rounds: cupRounds,
-      //     matches: cupMatches,
-      //     groups: cupGroups
-      //   })
-     
-      // t.equal(cup['Group Stages']['Group A'][0].name, 'Milan', '"Milan" should be first of "Group A"')
-      // t.equal(cup['Group Stages']['Group B'][0].name, 'Napoli', '"Napoli" should be first of "Group B"')
+      const cupStandings = api.calculateCup({
+          competition: cupCompetition,
+          phases: cupPhases,
+          rounds: cupRounds,
+          matches: cupMatches,
+          groups: cupGroups
+        })
       
-      // const util = require('util')
-      // console.log(util.inspect(cup, false, null, true))
+     
+      t.equal(cupStandings['Group A'][0].name, 'Milan', '"Milan" should be first of "Group A"')
+      t.equal(cupStandings['Group B'][0].name, 'Napoli', '"Napoli" should be first of "Group B"')
+      
+      // console.log(cupStandings)
       
       // Calculate head-to-head position
       // const headToHead = cupMatches
