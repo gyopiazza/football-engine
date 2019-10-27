@@ -27,21 +27,20 @@ const updateTeam = (standings, team, points = 0, goals = 0) => {
 }
 
 const standingsReducer = (standings = [], match) => {
-    let newStandings = [...standings]
     // home wins
     if (match.goals_home > match.goals_away) {
-      newStandings = updateTeam(newStandings, match.team_home, pointsPerWin, match.goals_home)
-      newStandings = updateTeam(newStandings, match.team_away, 0, match.goals_away)
+      standings = updateTeam(standings, match.team_home, pointsPerWin, match.goals_home)
+      standings = updateTeam(standings, match.team_away, 0, match.goals_away)
     // draw
     } else if (match.goals_home === match.goals_away) {
-      newStandings = updateTeam(newStandings, match.team_home, pointsPerDraw, match.goals_home)
-      newStandings = updateTeam(newStandings, match.team_away, pointsPerDraw, match.goals_away)
+      standings = updateTeam(standings, match.team_home, pointsPerDraw, match.goals_home)
+      standings = updateTeam(standings, match.team_away, pointsPerDraw, match.goals_away)
     // away wins
     } else if (match.goals_away > match.goals_home) {
-      newStandings = updateTeam(newStandings, match.team_home, 0, match.goals_home)
-      newStandings = updateTeam(newStandings, match.team_away, pointsPerWin, match.goals_away)
+      standings = updateTeam(standings, match.team_home, 0, match.goals_home)
+      standings = updateTeam(standings, match.team_away, pointsPerWin, match.goals_away)
     }
-    return newStandings
+    return standings
 }
 
 const standingsSorter = (a, b) => {
@@ -53,25 +52,21 @@ const standingsSorter = (a, b) => {
 }
 
 const calculateCup = ({ competition, rounds, matches, groups }) => {
-  // console.log(matches)
   return groups.reduce((standings, group) => {
-    // console.log('====================')
-    // console.log('====================')
-    // console.log('====================')
-    // console.log(matches.filter(match => match.group && match.group.name === group.name).reduce(standingsReducer, []))
-    // standings[group.name] = standings[group.name] || group.teams.reduce((standings, team) => {
-    //   return updateTeam(standings, team)
-    // }, [])
     standings[group.name] = matches
         .filter(match => match.group && match.group.name === group.name)
-        .reduce(standingsReducer, standings[group.name])
+        .reduce(standingsReducer, [])
         .sort(standingsSorter)
     return standings
   }, {})
 }
 
+const headToHeadFilter = (teamA, teamB) => match =>
+  (match.team_home.name === teamA && match.team_away.name === teamB) || (match.team_home.name === teamB && match.team_away.name === teamA)
+
 module.exports = {
   standingsReducer,
   standingsSorter,
-  calculateCup
+  calculateCup,
+  headToHeadFilter
 }

@@ -355,12 +355,16 @@ test('Various DB Tests', function (t) {
       t.equal(cupStandings['Group A'][0].name, 'Milan', '"Milan" should be first of "Group A"')
       t.equal(cupStandings['Group B'][0].name, 'Napoli', '"Napoli" should be first of "Group B"')
       
+      // console.log(cupStandings)
+      
+      // Calculate head-to-head position
+      
       const headToHead = cupMatches
-        .filtered('(team_home.name ==[c] "Napoli" AND team_away.name ==[c] "Bari") OR (team_home.name ==[c] "Bari" AND team_away.name ==[c] "Napoli")')
+        .filter(api.headToHeadFilter('Napoli', 'Bari'))
+        // .filtered('(team_home.name ==[c] "Napoli" AND team_away.name ==[c] "Bari") OR (team_home.name ==[c] "Bari" AND team_away.name ==[c] "Napoli")')
         .reduce(api.standingsReducer, [])
         .sort(api.standingsSorter)
       console.log(headToHead)
-      // console.log(cupStandings)
       
       // END Test Coppa Italia
     })
