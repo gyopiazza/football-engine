@@ -46,13 +46,14 @@ const standingsReducer = (standings = [], match) => {
     return standings
 }
 
+// Points
 // Head-to-head records (results and points)
 // Goal difference of head-to-head games
 // Goal difference overall
 // Higher number of goals scored
 // Draw
 const standingsSorter = (a, b) => {
-  // Score
+  // Points
   if (a.points > b.points) return -1
   if (a.points < b.points) return 1
   // TODO: Add head-to-head rules here
@@ -68,8 +69,20 @@ const standingsSorter = (a, b) => {
   return 0
 }
 
-const calculateCompetition = ({ competition, phases, rounds, matches, groups }) => {
-  console.log(competition.phases)
+const calculateCup = ({ competition, phases, rounds, matches, groups }) => {
+  
+  
+  return phases.reduce((tables, phase) => {
+    tables[phase.name] = phase.groups.reduce((standings, group) => {
+      standings[group.name] = matches
+        .filter(match => match.group && match.group.name === group.name)
+        .reduce(standingsReducer, [])
+        .sort(standingsSorter)
+      return standings
+    })
+    return tables
+  }, {})
+  
   return groups.reduce((standings, group) => {
     standings[group.name] = matches
         .filter(match => match.group && match.group.name === group.name)
@@ -79,12 +92,12 @@ const calculateCompetition = ({ competition, phases, rounds, matches, groups }) 
   }, {})
 }
 
-const headToHeadFilter = (teamA, teamB) => match =>
-  (match.team_home.name === teamA && match.team_away.name === teamB) || (match.team_home.name === teamB && match.team_away.name === teamA)
+const headToHeadFilter = (a, b) => match =>
+  (match.team_home.name === a && match.team_away.name === b) || (match.team_home.name === b && match.team_away.name === a)
 
 module.exports = {
   standingsReducer,
   standingsSorter,
-  calculateCompetition,
+  calculateCup,
   headToHeadFilter
 }

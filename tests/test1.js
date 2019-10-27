@@ -358,19 +358,19 @@ test('Various Tests', function (t) {
         .filtered('competition.key = "coppaitalia.2019"')
         // .reduce(api.calculateCup, [])
       
-      const cupStandings = api.calculateCompetition({
-        competition: cupCompetition,
-        phases: cupPhases,
-        rounds: cupRounds,
-        matches: cupMatches,
-        groups: cupGroups
-      })     
-
+      const cupStandings = api.calculateCup({
+          competition: cupCompetition,
+          phases: cupPhases,
+          rounds: cupRounds,
+          matches: cupMatches,
+          groups: cupGroups
+        })
+     
       t.equal(cupStandings['Group A'][0].name, 'Milan', '"Milan" should be first of "Group A"')
       t.equal(cupStandings['Group B'][0].name, 'Napoli', '"Napoli" should be first of "Group B"')
-
+      
       // console.log(cupStandings)
-
+      
       // Calculate head-to-head position
       // const headToHead = cupMatches
       //   .filter(api.headToHeadFilter('Napoli', 'Bari'))
@@ -378,13 +378,15 @@ test('Various Tests', function (t) {
       //   .reduce(api.standingsReducer, [])
       //   .sort(api.standingsSorter)
       // console.log(headToHead)
-
+      
       // END Test Coppa Italia
     })
-
+    
     // End tests
     realm.close()
     t.end()
   })
   .catch(e => console.log(e))
+  
+  
 })
