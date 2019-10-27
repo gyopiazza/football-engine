@@ -54,7 +54,8 @@ module.exports.Phase = {
     num: 'float',
     name: 'string',
     competition: 'Competition',
-    teams: 'Team[]'
+    teams: 'Team[]',
+    groups: 'Group[]',
   }
 }
 
@@ -80,7 +81,8 @@ module.exports.Group = {
     num: 'float',
     name: 'string',
     competition: 'Competition',
-    teams: 'Team[]'
+    teams: 'Team[]',
+    matches: { type: 'linkingObjects', objectType: 'Match', property: 'group' }, // get the matches for this group
   }
 }
 

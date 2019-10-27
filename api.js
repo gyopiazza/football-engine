@@ -8,19 +8,19 @@ const pointsPerLose = 0
  * @param Integer points The points to add
  * @param Integer goals The goals to add
  */
-const updateTeam = (standings, team, points = 0, goals = 0) => {
+const updateTeam = (standings, team, points = 0, goals_scored = 0) => {
   // if (!standings) {
   //   standings = []
   // }
   let teamIndex = standings.findIndex(t => t.id === team.id)
   if (teamIndex > -1) {
     standings[teamIndex].points += (team.points || 0) + points
-    standings[teamIndex].goals += (team.goals || 0) + goals
+    standings[teamIndex].goals_scored += (team.goals_scored || 0) + goals_scored
   } else {
     standings.push({
       ...JSON.parse(JSON.stringify(team)), // TODO: Find a better way to convert realm obj to regular obj
       points: (team.points || 0) + points,
-      goals: (team.goals || 0) + goals,
+      goals_scored: (team.goals_scored || 0) + goals_scored,
     })
   }
   return standings
@@ -43,11 +43,17 @@ const standingsReducer = (standings = [], match) => {
     return standings
 }
 
+// Head-to-head records (results and points)
+// Goal difference of head-to-head games
+// Goal difference overall
+// Higher number of goals scored
+// Draw
 const standingsSorter = (a, b) => {
   if (a.points > b.points) return -1
   if (a.points < b.points) return 1
-  if (a.goals > b.goals) return -1
-  if (a.goals < b.goals) return 1
+  // TODO: Add head-to-head rules here
+  if (a.goals_scored > b.goals_scored) return -1
+  if (a.goals_scored < b.goals_scored) return 1
   return 0
 }
 

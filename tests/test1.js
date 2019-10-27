@@ -185,7 +185,8 @@ test('Various DB Tests', function (t) {
         num: 1,
         name: 'Group Stages',
         competition: coppaItalia_competition,
-        teams: [palermo, lecce, milan, inter]
+        teams: [palermo, lecce, milan, inter, bari, napoli, juventus, roma],
+        groups: []
       })
       const coppaItalia_group1 = realm.create('Group', {
         id: uuid(),
@@ -201,6 +202,9 @@ test('Various DB Tests', function (t) {
         competition: coppaItalia_competition,
         teams: [bari, napoli, juventus, roma]
       })
+      
+      coppaItalia_phase1.groups = [coppaItalia_group1, coppaItalia_group2]
+      
       const coppaItalia_round1 = realm.create('Round', {
         id: uuid(),
         num: 1,
