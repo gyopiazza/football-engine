@@ -9,6 +9,9 @@ const pointsPerLose = 0
  * @param Integer goals The goals to add
  */
 const updateTeam = (standings, team, points = 0, goals = 0) => {
+  // if (!standings) {
+  //   standings = []
+  // }
   let teamIndex = standings.findIndex(t => t.id === team.id)
   if (teamIndex > -1) {
     standings[teamIndex].points += (team.points || 0) + points
@@ -23,19 +26,22 @@ const updateTeam = (standings, team, points = 0, goals = 0) => {
   return standings
 }
 
-const standingsReducer = (standings, match) => {
+const standingsReducer = (standings = [], match) => {
+    let newStandings = [...standings]
     // home wins
     if (match.goals_home > match.goals_away) {
-      standings = updateTeam(standings, match.team_home, pointsPerWin, match.goals_home)
+      newStandings = updateTeam(newStandings, match.team_home, pointsPerWin, match.goals_home)
+      newStandings = updateTeam(newStandings, match.team_away, 0, match.goals_away)
     // draw
     } else if (match.goals_home === match.goals_away) {
-      standings = updateTeam(standings, match.team_home, pointsPerDraw, match.goals_home)
-      standings = updateTeam(standings, match.team_away, pointsPerDraw, match.goals_away)
+      newStandings = updateTeam(newStandings, match.team_home, pointsPerDraw, match.goals_home)
+      newStandings = updateTeam(newStandings, match.team_away, pointsPerDraw, match.goals_away)
     // away wins
     } else if (match.goals_away > match.goals_home) {
-      standings = updateTeam(standings, match.team_away, pointsPerWin, match.goals_away)
+      newStandings = updateTeam(newStandings, match.team_home, 0, match.goals_home)
+      newStandings = updateTeam(newStandings, match.team_away, pointsPerWin, match.goals_away)
     }
-    return standings
+    return newStandings
 }
 
 const standingsSorter = (a, b) => {
@@ -53,9 +59,9 @@ const calculateCup = ({ competition, rounds, matches, groups }) => {
     // console.log('====================')
     // console.log('====================')
     // console.log(matches.filter(match => match.group && match.group.name === group.name).reduce(standingsReducer, []))
-    standings[group.name] = standings[group.name] || group.teams.reduce((standings, team) => {
-      return updateTeam(standings, team)
-    }, [])
+    // standings[group.name] = standings[group.name] || group.teams.reduce((standings, team) => {
+    //   return updateTeam(standings, team)
+    // }, [])
     standings[group.name] = matches
         .filter(match => match.group && match.group.name === group.name)
         .reduce(standingsReducer, standings[group.name])
