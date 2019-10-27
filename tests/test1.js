@@ -43,7 +43,8 @@ test('Various Tests', function (t) {
       schemas.Match,
       schemas.Team,
       schemas.Lineup,
-      schemas.Player
+      schemas.Player,
+      schemas.Event,
     ]
   })
   .then(realm => {
@@ -199,13 +200,14 @@ test('Various Tests', function (t) {
         type: 'tournament',
         competition: coppaItalia_competition,
         teams: [palermo, lecce, milan, inter, bari, napoli, juventus, roma],
-        groups: []
+        // groups: []
       })
       const coppaItalia_group1 = realm.create('Group', {
         id: uuid(),
         num: 1,
         name: 'Group A',
         competition: coppaItalia_competition,
+        phase: coppaItalia_phase1,
         teams: [palermo, lecce, milan, inter]
       })
       const coppaItalia_group2 = realm.create('Group', {
@@ -213,6 +215,7 @@ test('Various Tests', function (t) {
         num: 2,
         name: 'Group B',
         competition: coppaItalia_competition,
+        phase: coppaItalia_phase1,
         teams: [bari, napoli, juventus, roma]
       })
       
@@ -383,8 +386,8 @@ test('Various Tests', function (t) {
       // t.equal(cup['Group Stages']['Group A'][0].name, 'Milan', '"Milan" should be first of "Group A"')
       // t.equal(cup['Group Stages']['Group B'][0].name, 'Napoli', '"Napoli" should be first of "Group B"')
       
-      const util = require('util')
-      console.log(util.inspect(cup, false, null, true))
+      // const util = require('util')
+      // console.log(util.inspect(cup, false, null, true))
       
       // Calculate head-to-head position
       // const headToHead = cupMatches
