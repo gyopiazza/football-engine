@@ -21,7 +21,7 @@ files.forEach(file => fs.existsSync(file)
     : fs.unlinkSync(file)
   : null)
 
-test('Various DB Tests', function (t) {
+test('Various Tests', function (t) {
 //     t.plan(2)
 
 //     t.equal(typeof Date.now, 'function')
@@ -33,12 +33,13 @@ test('Various DB Tests', function (t) {
   
   Realm.open({
     path: 'tests/test.realm',
-    schema: [schemas.League, schemas.Season, schemas.Competition, schemas.Group, schemas.Round, schemas.Match, schemas.Team, schemas.Lineup, schemas.Player]
+    schema: [schemas.League, schemas.Season, schemas.Competition, schemas.Phase, schemas.Group, schemas.Round, schemas.Match, schemas.Team, schemas.Lineup, schemas.Player]
   })
   .then(realm => {
     const leagues = realm.objects("League")
     const seasons = realm.objects("Season")
     const competitions = realm.objects("Competition")
+    const phases = realm.objects("Phase")
     const groups = realm.objects("Group")
     const rounds = realm.objects("Round")
     const matches = realm.objects("Match")
@@ -340,8 +341,8 @@ test('Various DB Tests', function (t) {
 
       t.equal(standings[0].name, 'Napoli', '"Napoli" should be first')
       t.equal(standings[1].name, 'Bari', '"Bari" should be second')
-      t.equal(standings[2].name, 'Lecce', '"Lecce" should be third')
-      t.equal(standings[3].name, 'Palermo', '"Palermo" should be last')
+      t.equal(standings[2].name, 'Palermo', '"Palermo" should be third')
+      t.equal(standings[3].name, 'Lecce', '"Lecce" should be last')
       
       // END Test Serie A
       
@@ -351,6 +352,8 @@ test('Various DB Tests', function (t) {
         .filtered('competition.key = "coppaitalia.2019"')
       const cupMatches = matches
         .filtered('round.competition.key = "coppaitalia.2019"')
+      const cupPhases = phases
+        .filtered('competition.key = "coppaitalia.2019"')
       const cupGroups = groups
         .filtered('competition.key = "coppaitalia.2019"')
         // .reduce(api.calculateCup, [])
