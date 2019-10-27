@@ -53,10 +53,10 @@ module.exports.Phase = {
     id: 'string',
     num: 'float',
     name: 'string',
+    type: 'string', // knockout, two-legs, tournament
     competition: 'Competition',
     teams: 'Team[]',
     groups: 'Group[]',
-    type: 'string', // knockout, two-legs, tournament
   }
 }
 

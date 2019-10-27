@@ -185,6 +185,7 @@ test('Various Tests', function (t) {
         id: uuid(),
         num: 1,
         name: 'Group Stages',
+        type: 'tournament',
         competition: coppaItalia_competition,
         teams: [palermo, lecce, milan, inter, bari, napoli, juventus, roma],
         groups: []
