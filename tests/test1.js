@@ -106,7 +106,8 @@ test('Various DB Tests', function (t) {
         end: '2020/05/24',
         teams: teams
       })
-
+      
+      // Rounds
       const serieA_round1 = realm.create('Round', {
         id: uuid(),
         num: 1,
@@ -265,29 +266,49 @@ test('Various DB Tests', function (t) {
         goals_home: 0,
         goals_away: 1,
       })
-      const coppaItalia_match5 = realm.create('Match', {
-        id: uuid(),
-        group: coppaItalia_group1,
-        round: coppaItalia_round2,
-        start: '2019/08/03',
-        team_home: milan,
-        team_away: palermo,
-        goals_home: 3,
-        goals_away: 0,
-      })
-      const coppaItalia_match6 = realm.create('Match', {
-        id: uuid(),
-        group: coppaItalia_group2,
-        round: coppaItalia_round2,
-        start: '2019/08/03',
-        team_home: napoli,
-        team_away: bari,
-        goals_home: 5,
-        goals_away: 1,
-      })
+      // const coppaItalia_match5 = realm.create('Match', {
+      //   id: uuid(),
+      //   group: coppaItalia_group1,
+      //   round: coppaItalia_round2,
+      //   start: '2019/08/03',
+      //   team_home: milan,
+      //   team_away: palermo,
+      //   goals_home: 3,
+      //   goals_away: 0,
+      // })
+      // const coppaItalia_match6 = realm.create('Match', {
+      //   id: uuid(),
+      //   group: coppaItalia_group1,
+      //   round: coppaItalia_round2,
+      //   start: '2019/08/03',
+      //   team_home: inter,
+      //   team_away: lecce,
+      //   goals_home: 1,
+      //   goals_away: 0,
+      // })
+      // const coppaItalia_match7 = realm.create('Match', {
+      //   id: uuid(),
+      //   group: coppaItalia_group2,
+      //   round: coppaItalia_round2,
+      //   start: '2019/08/03',
+      //   team_home: napoli,
+      //   team_away: juventus,
+      //   goals_home: 3,
+      //   goals_away: 1,
+      // })
+      // const coppaItalia_match8 = realm.create('Match', {
+      //   id: uuid(),
+      //   group: coppaItalia_group2,
+      //   round: coppaItalia_round2,
+      //   start: '2019/08/03',
+      //   team_home: roma,
+      //   team_away: bari,
+      //   goals_home: 1,
+      //   goals_away: 0,
+      // })
       
       coppaItalia_round1.matches = [coppaItalia_match1, coppaItalia_match2, coppaItalia_match3, coppaItalia_match4]
-      // coppaItalia_round2.matches = [coppaItalia_match5, coppaItalia_match6]
+      // coppaItalia_round2.matches = [coppaItalia_match5, coppaItalia_match6, coppaItalia_match7, coppaItalia_match8]
       
       // END Competition: Coppa Italia
       
@@ -334,7 +355,8 @@ test('Various DB Tests', function (t) {
       t.equal(cupStandings['Group A'][0].name, 'Milan', '"Milan" should be first of "Group A"')
       t.equal(cupStandings['Group B'][0].name, 'Napoli', '"Napoli" should be first of "Group B"')
       
-
+      console.log(cupStandings)
+      
       // END Test Coppa Italia
     })
     
