@@ -69,26 +69,17 @@ const standingsSorter = (a, b) => {
   return 0
 }
 
-const calculateCup = ({ competition, phases, rounds, matches, groups }) => {
-  
-  
+// TODO: Accept only the "competition" and extract the phases from there
+const calculateCompetition = ({ competition, phases, rounds, matches, groups }) => {
   return phases.reduce((tables, phase) => {
     tables[phase.name] = phase.groups.reduce((standings, group) => {
-      standings[group.name] = matches
-        .filter(match => match.group && match.group.name === group.name)
+      standings[group.name] = group.matches
+        // .filter(match => match.group && match.group.name === group.name)
         .reduce(standingsReducer, [])
         .sort(standingsSorter)
       return standings
-    })
+    }, {})
     return tables
-  }, {})
-  
-  return groups.reduce((standings, group) => {
-    standings[group.name] = matches
-        .filter(match => match.group && match.group.name === group.name)
-        .reduce(standingsReducer, [])
-        .sort(standingsSorter)
-    return standings
   }, {})
 }
 
@@ -98,6 +89,6 @@ const headToHeadFilter = (a, b) => match =>
 module.exports = {
   standingsReducer,
   standingsSorter,
-  calculateCup,
+  calculateCompetition,
   headToHeadFilter
 }
