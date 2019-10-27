@@ -261,6 +261,7 @@ test('Various Tests', function (t) {
       })
       const coppaItalia_match3 = realm.create('Match', {
         id: uuid(),
+        phase: coppaItalia_phase1,
         group: coppaItalia_group2,
         round: coppaItalia_round1,
         start: '2019/08/03',
@@ -271,6 +272,7 @@ test('Various Tests', function (t) {
       })
       const coppaItalia_match4 = realm.create('Match', {
         id: uuid(),
+        phase: coppaItalia_phase1,
         group: coppaItalia_group2,
         round: coppaItalia_round1,
         start: '2019/08/03',
@@ -281,6 +283,7 @@ test('Various Tests', function (t) {
       })
       const coppaItalia_match5 = realm.create('Match', {
         id: uuid(),
+        phase: coppaItalia_phase1,
         group: coppaItalia_group1,
         round: coppaItalia_round2,
         start: '2019/08/03',
@@ -291,6 +294,7 @@ test('Various Tests', function (t) {
       })
       const coppaItalia_match6 = realm.create('Match', {
         id: uuid(),
+        phase: coppaItalia_phase1,
         group: coppaItalia_group1,
         round: coppaItalia_round2,
         start: '2019/08/03',
@@ -301,6 +305,7 @@ test('Various Tests', function (t) {
       })
       const coppaItalia_match7 = realm.create('Match', {
         id: uuid(),
+        phase: coppaItalia_phase1,
         group: coppaItalia_group2,
         round: coppaItalia_round2,
         start: '2019/08/03',
@@ -311,6 +316,7 @@ test('Various Tests', function (t) {
       })
       const coppaItalia_match8 = realm.create('Match', {
         id: uuid(),
+        phase: coppaItalia_phase1,
         group: coppaItalia_group2,
         round: coppaItalia_round2,
         start: '2019/08/03',
