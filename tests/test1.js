@@ -33,7 +33,18 @@ test('Various Tests', function (t) {
   
   Realm.open({
     path: 'tests/test.realm',
-    schema: [schemas.League, schemas.Season, schemas.Competition, schemas.Group, schemas.Phase, schemas.Round, schemas.Match, schemas.Team, schemas.Lineup, schemas.Player]
+    schema: [
+      schemas.League,
+      schemas.Season,
+      schemas.Competition,
+      schemas.Group,
+      schemas.Phase,
+      schemas.Round,
+      schemas.Match,
+      schemas.Team,
+      schemas.Lineup,
+      schemas.Player
+    ]
   })
   .then(realm => {
     const leagues = realm.objects("League")
@@ -205,7 +216,9 @@ test('Various Tests', function (t) {
         teams: [bari, napoli, juventus, roma]
       })
       
-      coppaItalia_phase1.groups = [coppaItalia_group1, coppaItalia_group2]
+      // coppaItalia_phase1.groups = [coppaItalia_group1, coppaItalia_group2]
+      coppaItalia_phase1.groups.push(coppaItalia_group1)
+      coppaItalia_phase1.groups.push(coppaItalia_group2)
       
       const coppaItalia_round1 = realm.create('Round', {
         id: uuid(),
