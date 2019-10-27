@@ -69,20 +69,30 @@ const standingsSorter = (a, b) => {
   return 0
 }
 
+const processMatches = matches => matches
+  // .filter(match => match.group && match.group.name === group.name)
+  .reduce(standingsReducer, [])
+  .sort(standingsSorter)
+
 // TODO: Accept only the "competition" and extract the phases from there
 const calculateCompetition = ({ competition, phases, rounds, matches, groups }) => {
   
   if (competition.phases && competition.phases.length) {
     return competition.phases.reduce((tables, phase) => {
-      tables[phase.name] = phase.groups.reduce((standings, group) => {
-        standings[group.name] = group.matches
-          // .filter(match => match.group && match.group.name === group.name)
-          .reduce(standingsReducer, [])
-          .sort(standingsSorter)
-        return standings
-      }, {})
+      if (phase.groups && phase.groups.length) {
+        tables[phase.name] = phase.groups.reduce((standings, group) => {
+          standings[group.name] = processMatches(group.matches)
+          return standings
+        }, {})
+      } else {
+        tables[phase.name] = processMatches(phase.matches)
+      }
       return tables
     }, {})
+  } else if (competition.rounds && competition.rounds.length) {
+    return processMatches(competition.rounds.reduce((tables, round) => {
+      return [...tables, round.matches]
+    }, []))
   }
 }
 
