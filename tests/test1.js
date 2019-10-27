@@ -33,7 +33,7 @@ test('Various Tests', function (t) {
   
   Realm.open({
     path: 'tests/test.realm',
-    schema: [schemas.League, schemas.Season, schemas.Competition, schemas.Phase, schemas.Group, schemas.Round, schemas.Match, schemas.Team, schemas.Lineup, schemas.Player]
+    schema: [schemas.League, schemas.Season, schemas.Competition, schemas.Group, schemas.Phase, schemas.Round, schemas.Match, schemas.Team, schemas.Lineup, schemas.Player]
   })
   .then(realm => {
     const leagues = realm.objects("League")

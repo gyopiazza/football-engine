@@ -39,7 +39,8 @@ module.exports.Competition = {
     start: 'date',
     end: 'date',
     teams: 'Team[]',
-    phases: { type: 'linkingObjects', objectType: 'Phase', property: 'competition' },
+    phases: 'Phase[]',
+    // phases: { type: 'linkingObjects', objectType: 'Phase', property: 'competition' },
   }
 }
 
