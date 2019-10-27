@@ -180,6 +180,13 @@ test('Various DB Tests', function (t) {
         end: '2020/05/24',
         teams: teams
       })
+      const coppaItalia_phase1 = realm.create('Phase', {
+        id: uuid(),
+        num: 1,
+        name: 'Group Stages',
+        competition: coppaItalia_competition,
+        teams: [palermo, lecce, milan, inter]
+      })
       const coppaItalia_group1 = realm.create('Group', {
         id: uuid(),
         num: 1,
@@ -197,7 +204,7 @@ test('Various DB Tests', function (t) {
       const coppaItalia_round1 = realm.create('Round', {
         id: uuid(),
         num: 1,
-        name: 'Group Stage - Matchday 1',
+        name: 'Matchday 1',
         knockout: false,
         competition: coppaItalia_competition,
         matches: []
@@ -205,7 +212,7 @@ test('Various DB Tests', function (t) {
       const coppaItalia_round2 = realm.create('Round', {
         id: uuid(),
         num: 2,
-        name: 'Group Stage - Matchday 2',
+        name: 'Matchday 2',
         knockout: false,
         competition: coppaItalia_competition,
         matches: []

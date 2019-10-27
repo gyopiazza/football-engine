@@ -38,6 +38,22 @@ module.exports.Competition = {
     season: 'Season',
     start: 'date',
     end: 'date',
+    teams: 'Team[]',
+    phases: { type: 'linkingObjects', objectType: 'Phase', property: 'competition' },
+  }
+}
+
+/*
+Phases
+*/
+module.exports.Phase = {
+  name: 'Phase',
+  primaryKey: 'id',
+  properties: {
+    id: 'string',
+    num: 'float',
+    name: 'string',
+    competition: 'Competition',
     teams: 'Team[]'
   }
 }
