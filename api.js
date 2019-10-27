@@ -70,7 +70,6 @@ const standingsSorter = (a, b) => {
 }
 
 const processMatches = matches => matches
-  // .filter(match => match.group && match.group.name === group.name)
   .reduce(standingsReducer, [])
   .sort(standingsSorter)
 
@@ -95,7 +94,12 @@ const calculateCompetition = (competition) => {
   } else if (competition.rounds && competition.rounds.length) {
     return processMatches(competition.rounds.reduce((tables, round) => {
       return tables.concat(round.matches)
+      
     }, []))
+    
+    // const matches = []
+    // competition.rounds.forEach(round => round.matches.forEach(match => matches.push(match)))
+    // return processMatches(matches)
   }
 }
 
