@@ -355,9 +355,9 @@ test('Various DB Tests', function (t) {
       t.equal(cupStandings['Group A'][0].name, 'Milan', '"Milan" should be first of "Group A"')
       t.equal(cupStandings['Group B'][0].name, 'Napoli', '"Napoli" should be first of "Group B"')
       
-      const cupMatches = matches
-        .filtered('round.competition.key = "coppaitalia.2019"')
-      console.log(cupStandings)
+      const headToHead = matches
+        .filtered('(team_home.name ==[c] "Napoli" AND team_away.name ==[c] "Roma") OR (team_home.name ==[c] "Roma" AND team_away.name ==[c] "Napoli")')
+      console.log(headToHead)
       // console.log(cupStandings)
       
       // END Test Coppa Italia
