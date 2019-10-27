@@ -73,7 +73,6 @@ const standingsSorter = (a, b) => {
 const calculateCompetition = ({ competition, phases, rounds, matches, groups }) => {
   
   if (competition.phases && competition.phases.length) {
-    console.log(competition.phases)
     return competition.phases.reduce((tables, phase) => {
       tables[phase.name] = phase.groups.reduce((standings, group) => {
         standings[group.name] = group.matches

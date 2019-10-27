@@ -113,7 +113,6 @@ test('Various Tests', function (t) {
         id: uuid(),
         num: 1,
         name: 'Matchday 1',
-        knockout: false,
         competition: serieA_competition,
         matches: []
       })
@@ -121,7 +120,6 @@ test('Various Tests', function (t) {
         id: uuid(),
         num: 1,
         name: 'Matchday 2',
-        knockout: false,
         competition: serieA_competition,
         matches: []
       })
@@ -165,8 +163,8 @@ test('Various Tests', function (t) {
       })
 
       // Update rounds with matches
-      serieA_round1.matches = [serieA_match1, serieA_match2]
-      serieA_round2.matches = [serieA_match3, serieA_match4]
+      // serieA_round1.matches = [serieA_match1, serieA_match2]
+      // serieA_round2.matches = [serieA_match3, serieA_match4]
       
       // END Competition: Serie A
       
@@ -187,14 +185,14 @@ test('Various Tests', function (t) {
         name: 'Group Stages',
         type: 'tournament',
         competition: coppaItalia_competition,
-        teams: [palermo, lecce, milan, inter, bari, napoli, juventus, roma],
-        groups: []
+        teams: [palermo, lecce, milan, inter, bari, napoli, juventus, roma]
       })
       const coppaItalia_group1 = realm.create('Group', {
         id: uuid(),
         num: 1,
         name: 'Group A',
         competition: coppaItalia_competition,
+        phase: coppaItalia_phase1,
         teams: [palermo, lecce, milan, inter]
       })
       const coppaItalia_group2 = realm.create('Group', {
@@ -202,16 +200,14 @@ test('Various Tests', function (t) {
         num: 2,
         name: 'Group B',
         competition: coppaItalia_competition,
+        phase: coppaItalia_phase1,
         teams: [bari, napoli, juventus, roma]
       })
-      
-      coppaItalia_phase1.groups = [coppaItalia_group1, coppaItalia_group2]
       
       const coppaItalia_round1 = realm.create('Round', {
         id: uuid(),
         num: 1,
         name: 'Matchday 1',
-        knockout: false,
         competition: coppaItalia_competition,
         matches: []
       })
@@ -219,7 +215,6 @@ test('Various Tests', function (t) {
         id: uuid(),
         num: 2,
         name: 'Matchday 2',
-        knockout: false,
         competition: coppaItalia_competition,
         matches: []
       })
@@ -227,7 +222,6 @@ test('Various Tests', function (t) {
         id: uuid(),
         num: 3,
         name: 'Semifinals',
-        knockout: true,
         competition: coppaItalia_competition,
         matches: []
       })
@@ -235,7 +229,6 @@ test('Various Tests', function (t) {
         id: uuid(),
         num: 4,
         name: 'Final',
-        knockout: true,
         competition: coppaItalia_competition,
         matches: []
       })
@@ -325,10 +318,7 @@ test('Various Tests', function (t) {
         goals_home: 1,
         goals_away: 0,
       })
-      
-      coppaItalia_round1.matches = [coppaItalia_match1, coppaItalia_match2, coppaItalia_match3, coppaItalia_match4]
-      coppaItalia_round2.matches = [coppaItalia_match5, coppaItalia_match6, coppaItalia_match7, coppaItalia_match8]
-      
+            
       // END Competition: Coppa Italia
       
       // END populate DB

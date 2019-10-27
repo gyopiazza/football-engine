@@ -40,6 +40,8 @@ module.exports.Competition = {
     end: 'date',
     teams: 'Team[]',
     phases: { type: 'linkingObjects', objectType: 'Phase', property: 'competition' },
+    groups: { type: 'linkingObjects', objectType: 'Group', property: 'competition' },
+    rounds: { type: 'linkingObjects', objectType: 'Round', property: 'competition' },
   }
 }
 
@@ -56,7 +58,8 @@ module.exports.Phase = {
     type: 'string', // knockout, two-legs, tournament
     competition: 'Competition',
     teams: 'Team[]',
-    groups: 'Group[]',
+    // groups: 'Group[]',
+    groups: { type: 'linkingObjects', objectType: 'Group', property: 'phase' },
     matches: { type: 'linkingObjects', objectType: 'Match', property: 'phase' }, // get the matches for this group
   }
 }
@@ -84,6 +87,7 @@ module.exports.Group = {
     name: 'string',
     competition: 'Competition',
     teams: 'Team[]',
+    phase: 'Phase',
     matches: { type: 'linkingObjects', objectType: 'Match', property: 'group' }, // get the matches for this group
   }
 }
@@ -109,9 +113,8 @@ module.exports.Round = {
     id: 'string',
     num: 'float',
     name: 'string',
-    knockout: { type: 'bool', default: false },
     competition: 'Competition',
-    matches: 'Match[]'
+    matches: { type: 'linkingObjects', objectType: 'Match', property: 'round' },
   }
 }
 
