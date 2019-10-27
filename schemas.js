@@ -58,7 +58,6 @@ module.exports.Phase = {
     type: 'string', // knockout, two-legs, tournament
     competition: 'Competition',
     teams: 'Team[]',
-    // groups: 'Group[]',
     groups: { type: 'linkingObjects', objectType: 'Group', property: 'phase' },
     matches: { type: 'linkingObjects', objectType: 'Match', property: 'phase' }, // get the matches for this group
   }
@@ -140,7 +139,7 @@ module.exports.Match = {
   primaryKey: 'id',
   properties: {
     id: 'string',
-    phase: 'Phase',
+    phase: 'Phase?',
     group: 'Group?',
     round: 'Round',
     start: 'date',

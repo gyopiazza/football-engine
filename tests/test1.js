@@ -179,20 +179,20 @@ test('Various Tests', function (t) {
         end: '2020/05/24',
         teams: teams
       })
-      const coppaItalia_phase1 = realm.create('Phase', {
-        id: uuid(),
-        num: 1,
-        name: 'Group Stages',
-        type: 'tournament',
-        competition: coppaItalia_competition,
-        teams: [palermo, lecce, milan, inter, bari, napoli, juventus, roma]
-      })
+      // const coppaItalia_phase1 = realm.create('Phase', {
+      //   id: uuid(),
+      //   num: 1,
+      //   name: 'Group Stages',
+      //   type: 'tournament',
+      //   competition: coppaItalia_competition,
+      //   teams: teams
+      // })
       const coppaItalia_group1 = realm.create('Group', {
         id: uuid(),
         num: 1,
         name: 'Group A',
         competition: coppaItalia_competition,
-        phase: coppaItalia_phase1,
+        // phase: coppaItalia_phase1,
         teams: [palermo, lecce, milan, inter]
       })
       const coppaItalia_group2 = realm.create('Group', {
@@ -200,7 +200,7 @@ test('Various Tests', function (t) {
         num: 2,
         name: 'Group B',
         competition: coppaItalia_competition,
-        phase: coppaItalia_phase1,
+        // phase: coppaItalia_phase1,
         teams: [bari, napoli, juventus, roma]
       })
       
@@ -254,7 +254,7 @@ test('Various Tests', function (t) {
       })
       const coppaItalia_match3 = realm.create('Match', {
         id: uuid(),
-        phase: coppaItalia_phase1,
+        // phase: coppaItalia_phase1,
         group: coppaItalia_group2,
         round: coppaItalia_round1,
         start: '2019/08/03',
@@ -265,7 +265,7 @@ test('Various Tests', function (t) {
       })
       const coppaItalia_match4 = realm.create('Match', {
         id: uuid(),
-        phase: coppaItalia_phase1,
+        // phase: coppaItalia_phase1,
         group: coppaItalia_group2,
         round: coppaItalia_round1,
         start: '2019/08/03',
@@ -276,7 +276,7 @@ test('Various Tests', function (t) {
       })
       const coppaItalia_match5 = realm.create('Match', {
         id: uuid(),
-        phase: coppaItalia_phase1,
+        // phase: coppaItalia_phase1,
         group: coppaItalia_group1,
         round: coppaItalia_round2,
         start: '2019/08/03',
@@ -287,7 +287,7 @@ test('Various Tests', function (t) {
       })
       const coppaItalia_match6 = realm.create('Match', {
         id: uuid(),
-        phase: coppaItalia_phase1,
+        // phase: coppaItalia_phase1,
         group: coppaItalia_group1,
         round: coppaItalia_round2,
         start: '2019/08/03',
@@ -298,7 +298,7 @@ test('Various Tests', function (t) {
       })
       const coppaItalia_match7 = realm.create('Match', {
         id: uuid(),
-        phase: coppaItalia_phase1,
+        // phase: coppaItalia_phase1,
         group: coppaItalia_group2,
         round: coppaItalia_round2,
         start: '2019/08/03',
@@ -309,7 +309,7 @@ test('Various Tests', function (t) {
       })
       const coppaItalia_match8 = realm.create('Match', {
         id: uuid(),
-        phase: coppaItalia_phase1,
+        // phase: coppaItalia_phase1,
         group: coppaItalia_group2,
         round: coppaItalia_round2,
         start: '2019/08/03',
@@ -345,23 +345,17 @@ test('Various Tests', function (t) {
       
       // START Test Coppa Italia
       const cupCompetition = realm.objectForPrimaryKey('Competition', 'coppaitalia.2019')
-      const cupRounds = rounds
-        .filtered('competition.key = "coppaitalia.2019"')
-      const cupMatches = matches
-        .filtered('round.competition.key = "coppaitalia.2019"')
-      const cupPhases = phases
-        .filtered('competition.key = "coppaitalia.2019"')
-      const cupGroups = groups
-        .filtered('competition.key = "coppaitalia.2019"')
+      // const cupRounds = rounds
+      //   .filtered('competition.key = "coppaitalia.2019"')
+      // const cupMatches = matches
+      //   .filtered('round.competition.key = "coppaitalia.2019"')
+      // const cupPhases = phases
+      //   .filtered('competition.key = "coppaitalia.2019"')
+      // const cupGroups = groups
+      //   .filtered('competition.key = "coppaitalia.2019"')
         // .reduce(api.calculateCup, [])
       
-      const cup = api.calculateCompetition({
-          competition: cupCompetition,
-          phases: cupPhases,
-          rounds: cupRounds,
-          matches: cupMatches,
-          groups: cupGroups
-        })
+      const cup = api.calculateCompetition(cupCompetition)
      
       // t.equal(cup['Group Stages']['Group A'][0].name, 'Milan', '"Milan" should be first of "Group A"')
       // t.equal(cup['Group Stages']['Group B'][0].name, 'Napoli', '"Napoli" should be first of "Group B"')

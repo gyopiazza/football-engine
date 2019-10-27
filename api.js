@@ -75,23 +75,26 @@ const processMatches = matches => matches
   .sort(standingsSorter)
 
 // TODO: Accept only the "competition" and extract the phases from there
-const calculateCompetition = ({ competition, phases, rounds, matches, groups }) => {
-  
+const calculateCompetition = (competition) => {
+  // Competition has phases
   if (competition.phases && competition.phases.length) {
     return competition.phases.reduce((tables, phase) => {
+      // Phase has groups
       if (phase.groups && phase.groups.length) {
         tables[phase.name] = phase.groups.reduce((standings, group) => {
           standings[group.name] = processMatches(group.matches)
           return standings
         }, {})
+      // Phase doesn't have groups
       } else {
         tables[phase.name] = processMatches(phase.matches)
       }
       return tables
     }, {})
+  // Competition doesn't have phases
   } else if (competition.rounds && competition.rounds.length) {
     return processMatches(competition.rounds.reduce((tables, round) => {
-      return [...tables, round.matches]
+      return tables.concat(round.matches)
     }, []))
   }
 }
