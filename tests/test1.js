@@ -360,6 +360,7 @@ test('Various Tests', function (t) {
       
       const cupStandings = api.calculateCup({
           competition: cupCompetition,
+          phases: cupPhases,
           rounds: cupRounds,
           matches: cupMatches,
           groups: cupGroups
@@ -372,13 +373,12 @@ test('Various Tests', function (t) {
       // console.log(cupStandings)
       
       // Calculate head-to-head position
-      
-      const headToHead = cupMatches
-        .filter(api.headToHeadFilter('Napoli', 'Bari'))
-        // .filtered('(team_home.name ==[c] "Napoli" AND team_away.name ==[c] "Bari") OR (team_home.name ==[c] "Bari" AND team_away.name ==[c] "Napoli")')
-        .reduce(api.standingsReducer, [])
-        .sort(api.standingsSorter)
-      console.log(headToHead)
+      // const headToHead = cupMatches
+      //   .filter(api.headToHeadFilter('Napoli', 'Bari'))
+      //   // .filtered('(team_home.name ==[c] "Napoli" AND team_away.name ==[c] "Bari") OR (team_home.name ==[c] "Bari" AND team_away.name ==[c] "Napoli")')
+      //   .reduce(api.standingsReducer, [])
+      //   .sort(api.standingsSorter)
+      // console.log(headToHead)
       
       // END Test Coppa Italia
     })
