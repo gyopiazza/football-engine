@@ -185,6 +185,7 @@ test('Various Tests', function (t) {
         id: uuid(),
         num: 1,
         name: 'Group Stages',
+        type: 'tournament',
         competition: coppaItalia_competition,
         teams: [palermo, lecce, milan, inter, bari, napoli, juventus, roma],
         groups: []
@@ -358,19 +359,20 @@ test('Various Tests', function (t) {
         .filtered('competition.key = "coppaitalia.2019"')
         // .reduce(api.calculateCup, [])
       
-      const cupStandings = api.calculateCompetition({
-        competition: cupCompetition,
-        phases: cupPhases,
-        rounds: cupRounds,
-        matches: cupMatches,
-        groups: cupGroups
-      })     
-
-      t.equal(cupStandings['Group A'][0].name, 'Milan', '"Milan" should be first of "Group A"')
-      t.equal(cupStandings['Group B'][0].name, 'Napoli', '"Napoli" should be first of "Group B"')
-
-      // console.log(cupStandings)
-
+      const cup = api.calculateCompetition({
+          competition: cupCompetition,
+          phases: cupPhases,
+          rounds: cupRounds,
+          matches: cupMatches,
+          groups: cupGroups
+        })
+     
+      // t.equal(cup['Group Stages']['Group A'][0].name, 'Milan', '"Milan" should be first of "Group A"')
+      // t.equal(cup['Group Stages']['Group B'][0].name, 'Napoli', '"Napoli" should be first of "Group B"')
+      
+      const util = require('util')
+      console.log(util.inspect(cup, false, null, true))
+      
       // Calculate head-to-head position
       // const headToHead = cupMatches
       //   .filter(api.headToHeadFilter('Napoli', 'Bari'))
@@ -378,13 +380,15 @@ test('Various Tests', function (t) {
       //   .reduce(api.standingsReducer, [])
       //   .sort(api.standingsSorter)
       // console.log(headToHead)
-
+      
       // END Test Coppa Italia
     })
-
+    
     // End tests
     realm.close()
     t.end()
   })
   .catch(e => console.log(e))
+  
+  
 })
