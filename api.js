@@ -91,15 +91,10 @@ const calculateCompetition = (competition) => {
       return tables
     }, {})
   // Competition doesn't have phases
-  } else if (competition.rounds && competition.rounds.length) {
-    return processMatches(competition.rounds.reduce((tables, round) => {
-      return tables.concat(round.matches)
-      
-    }, []))
-    
-    // const matches = []
-    // competition.rounds.forEach(round => round.matches.forEach(match => matches.push(match)))
-    // return processMatches(matches)
+  } else if (competition.rounds && competition.rounds.length) {    
+    const matches = []
+    competition.rounds.forEach(round => round.matches.forEach(match => matches.push(match)))
+    return processMatches(matches)
   }
 }
 
