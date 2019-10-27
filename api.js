@@ -71,6 +71,8 @@ const standingsSorter = (a, b) => {
 
 // TODO: Accept only the "competition" and extract the phases from there
 const calculateCompetition = ({ competition, phases, rounds, matches, groups }) => {
+  
+  
   return phases.reduce((tables, phase) => {
     tables[phase.name] = phase.groups.reduce((standings, group) => {
       standings[group.name] = group.matches
