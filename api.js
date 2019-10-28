@@ -8,7 +8,7 @@ const pointsPerLose = 0
  * @param Integer points The points to add
  * @param Integer goals The goals to add
  */
-const updateTeam = (standings, team, points = 0, goals = 0, goals_conceded = 0) => {
+const updateStandings = (standings, team, points = 0, goals = 0, goals_conceded = 0) => {
   let teamIndex = standings.findIndex(t => t.id === team.id)
   if (teamIndex > -1) {
     standings[teamIndex].points += (team.points || 0) + points
@@ -29,16 +29,16 @@ const updateTeam = (standings, team, points = 0, goals = 0, goals_conceded = 0) 
 const standingsReducer = (standings = [], match) => {
     // home wins
     if (match.goals_home > match.goals_away) {
-      standings = updateTeam(standings, match.team_home, pointsPerWin, match.goals_home, match.goals_away)
-      standings = updateTeam(standings, match.team_away, 0, match.goals_away, match.goals_home)
+      standings = updateStandings(standings, match.team_home, pointsPerWin, match.goals_home, match.goals_away)
+      standings = updateStandings(standings, match.team_away, 0, match.goals_away, match.goals_home)
     // draw
     } else if (match.goals_home === match.goals_away) {
-      standings = updateTeam(standings, match.team_home, pointsPerDraw, match.goals_home, match.goals_away)
-      standings = updateTeam(standings, match.team_away, pointsPerDraw, match.goals_away, match.goals_home)
+      standings = updateStandings(standings, match.team_home, pointsPerDraw, match.goals_home, match.goals_away)
+      standings = updateStandings(standings, match.team_away, pointsPerDraw, match.goals_away, match.goals_home)
     // away wins
     } else if (match.goals_away > match.goals_home) {
-      standings = updateTeam(standings, match.team_home, 0, match.goals_home, match.goals_away)
-      standings = updateTeam(standings, match.team_away, pointsPerWin, match.goals_away, match.goals_home)
+      standings = updateStandings(standings, match.team_home, 0, match.goals_home, match.goals_away)
+      standings = updateStandings(standings, match.team_away, pointsPerWin, match.goals_away, match.goals_home)
     }
     return standings
 }
@@ -88,7 +88,7 @@ const calculateCompetition = (competition) => {
       return tables
     }, {})
   // Competition doesn't have phases
-  } else if (competition.rounds && competition.rounds.length) {    
+  } else if (competition.rounds && competition.rounds.length) {
     const matches = []
     competition.rounds.forEach(round => round.matches.forEach(match => matches.push(match)))
     return processMatches(matches)
