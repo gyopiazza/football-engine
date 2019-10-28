@@ -5,7 +5,7 @@ const hyperid = require('hyperid')
 const uuid = hyperid(true)
 const schemas = require('../schemas')
 const api = require('../api')
-const seed = require('./data/seed')
+const seed = require('../mock/seed')
 
 // Start with a fresh DB
 const files = [
@@ -44,15 +44,22 @@ test('Various Tests', function (t) {
     const rounds = realm.objects("Round")
     const matches = realm.objects("Match")
     const teams = realm.objects("Team")
-    
-    seed(realm, () => {
-      console.log(teams.length)
-    })
 
+    seed(realm)
+
+    t.ok(leagues.length, 'should have leagues')
+    t.ok(teams.length, 'should have teams')
     
     
+//     const standings = matches
+//       .filtered('round.competition.key = "seriea.2019"')
+//       .reduce(api.standingsReducer, [])
+//       .sort(api.standingsSorter)
     
-    
+//     t.equal(standings[0].name, 'Napoli', '"Napoli" should be first')
+//     t.equal(standings[1].name, 'Bari', '"Bari" should be second')
+//     t.equal(standings[2].name, 'Palermo', '"Palermo" should be third')
+//     t.equal(standings[3].name, 'Lecce', '"Lecce" should be last')
     
     
     
@@ -371,8 +378,8 @@ test('Various Tests', function (t) {
 //       // t.equal(cup['Group Stages']['Group A'][0].name, 'Milan', '"Milan" should be first of "Group A"')
 //       // t.equal(cup['Group Stages']['Group B'][0].name, 'Napoli', '"Napoli" should be first of "Group B"')
       
-//       const util = require('util')
-//       console.log(util.inspect(cup, false, null, true))
+//       // const util = require('util')
+//       // console.log(util.inspect(cup, false, null, true))
       
 //       // Calculate head-to-head position
 //       // const headToHead = cupMatches
