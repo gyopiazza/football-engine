@@ -5,7 +5,7 @@ const hyperid = require('hyperid')
 const uuid = hyperid(true)
 const schemas = require('../schemas')
 const api = require('../api')
-
+const seed = require('./data/seed')
 
 // Start with a fresh DB
 const files = [
@@ -44,7 +44,9 @@ test('Various Tests', function (t) {
     const rounds = realm.objects("Round")
     const matches = realm.objects("Match")
     const teams = realm.objects("Team")
-        
+    
+    seed(realm)
+
     realm.write(() => {
       // Populate DB
 
