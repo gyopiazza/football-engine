@@ -9,9 +9,6 @@ const pointsPerLose = 0
  * @param Integer goals The goals to add
  */
 const updateTeam = (standings, team, points = 0, goals = 0, goals_conceded = 0) => {
-  // if (!standings) {
-  //   standings = []
-  // }
   let teamIndex = standings.findIndex(t => t.id === team.id)
   if (teamIndex > -1) {
     standings[teamIndex].points += (team.points || 0) + points
