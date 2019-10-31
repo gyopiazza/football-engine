@@ -3,9 +3,14 @@ const serieAMatches = require('./data/seriea-2017-18.json')
 
 const homeAway = serieAMatches.rounds.reduce((result, round) => {
   round.matches.forEach(match => {
-    result[match.team1.name] = result[match.team1.name] !== undefined
-      ? result[match.team1.name] + 1
-      : 0
+    result[match.team1.name] = result[match.team1.name] || { home: 0, away: 0 }
+    result[match.team1.name].home = result[match.team1.name].home + 1
+    result[match.team2.name] = result[match.team2.name] || { home: 0, away: 0 }
+    result[match.team2.name].away = result[match.team2.name].away + 1
+    
+    // result[match.team1.name] = result[match.team1.name] !== undefined
+    //   ? result[match.team1.name] + 1
+    //   : 0
   })
   return result
 }, {})
