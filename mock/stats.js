@@ -15,6 +15,7 @@ const homeAway = serieAMatches.rounds.reduce((result, round) => {
   return result
 }, {})
 
+console.log('Rounds', serieAMatches.rounds.length)
 console.log(homeAway)
 console.log(serieAClubs.clubs.map(team => {
   return team.name
