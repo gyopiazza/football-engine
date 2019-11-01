@@ -37,7 +37,7 @@ test('Various Tests', function (t) {
   })
   .then(realm => {
     // Seed the test database with mock data
-    seed(realm)
+    const { serieA_league, coppaItalia_league, season, serieA_competition } = seed(realm)
     
     const leagues = realm.objects("League")
     const seasons = realm.objects("Season")
@@ -74,6 +74,36 @@ test('Various Tests', function (t) {
         homeAwayCount[team.name].home === homeAwayReferenceValues.home && homeAwayCount[team.name].away === homeAwayReferenceValues.away,
         true,
         team.name + ': correct amount of home-away matches')
+    })
+    
+    schedule.forEach((round, index) => {
+      const serieA_round1 = realm.create('Round', {
+        id: uuid(),
+        num: 1,
+        name: 'Matchday 1',
+        competition: serieA_competition,
+        matches: []
+      })
+    })
+    
+    // Rounds
+    const serieA_round1 = realm.create('Round', {
+      id: uuid(),
+      num: 1,
+      name: 'Matchday 1',
+      competition: serieA_competition,
+      matches: []
+    })
+
+    // Matches      
+    const serieA_match1 = realm.create('Match', {
+      id: uuid(),
+      round: serieA_round1,
+      start: '2019/08/24',
+      team_home: palermo,
+      team_away: bari,
+      goals_home: 1,
+      goals_away: 1,
     })
     
     // schedule.forEach(round => round.forEach(match => {
