@@ -36,6 +36,9 @@ test('Various Tests', function (t) {
     schema: [schemas.League, schemas.Season, schemas.Competition, schemas.Phase, schemas.Group, schemas.Round, schemas.Match, schemas.Team, schemas.Lineup, schemas.Player]
   })
   .then(realm => {
+    // Seed the test database with mock data
+    seed(realm)
+    
     const leagues = realm.objects("League")
     const seasons = realm.objects("Season")
     const competitions = realm.objects("Competition")
@@ -44,8 +47,6 @@ test('Various Tests', function (t) {
     const rounds = realm.objects("Round")
     const matches = realm.objects("Match")
     const teams = realm.objects("Team")
-
-    seed(realm)
 
     t.ok(leagues.length, 'should have leagues')
     t.ok(teams.length, 'should have teams')
