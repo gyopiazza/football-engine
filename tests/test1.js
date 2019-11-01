@@ -50,7 +50,22 @@ test('Various Tests', function (t) {
     t.ok(leagues.length, 'should have leagues')
     t.ok(teams.length, 'should have teams')
     
-    const schedule = api.generateSchedule(teams)
+    const schedule = api.generateSchedule(teams, { shuffle: false })
+  
+    t.equal(schedule.length, teams.length - 1, 'the schedule should have a correct number of rounds')
+    
+    console.log(schedule.map(round => round.map(match => match[0].name + ' vs ' + match[1].name)))
+    
+    const homeAwayTest = schedule.reduce((result, round) => {
+      round.forEach(match => {
+        result[match[0]] = result[match[0]] || { home: 0, away: 0 }
+        result[match[0]].home = result[match[0]].home + 1
+        result[match[1]] = result[match[1]] || { home: 0, away: 0 }
+        result[match[1]].away = result[match[1]].away + 1
+      })
+      return result
+    }, {})
+    
 //     const standings = matches
 //       .filtered('round.competition.key = "seriea.2019"')
 //       .reduce(api.standingsReducer, [])

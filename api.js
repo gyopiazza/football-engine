@@ -172,28 +172,29 @@ function rotate(/*array*/ items) {
  *     one of these elements as null to signify a bye for the other actual team
  *     element in the matchup array
  */
-function generateSchedule(teams, { twolegs, rounds, shuffle = true }) {
-  const halfTeamCount = Math.round(teams.length / 2)
+function generateSchedule(teams, { twolegs = false, rounds, shuffle = true } = {}) {
+  let _teams = [...teams]
+  const halfTeamCount = Math.round(_teams.length / 2)
   let schedule = []
 
   // Account for odd number of teams by adding a bye
-  if (teams.length % 2 === 1) {
-    teams.push(null)
+  if (_teams.length % 2 === 1) {
+    _teams.push(null)
   }
   
   if (shuffle) {
-    teams = shuffleArray(teams);
+    _teams = shuffleArray(_teams);
   }
   
   // Rounds are the number of teams minus one
-  rounds = rounds || teams.length - 1;
+  rounds = rounds || _teams.length - 1;
   
   for (let round = 0; round < rounds; round++) {
-    teams.map((team, key) => {
+    _teams.map((team, key) => {
       if (key >= halfTeamCount) return
 
       const team1 = team;
-      const team2 = teams[key + halfTeamCount];
+      const team2 = _teams[key + halfTeamCount];
 
       // Home-away swapping
       const match = round % 2 === 0 ? [team1, team2] : [team2, team1];
@@ -201,7 +202,7 @@ function generateSchedule(teams, { twolegs, rounds, shuffle = true }) {
       schedule[round] = schedule[round] || []
       schedule[round].push(match)
     })
-    teams = rotate(teams);
+    _teams = rotate(_teams);
   }
   
   if (twolegs) {
