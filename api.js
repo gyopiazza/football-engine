@@ -98,9 +98,122 @@ const calculateCompetition = (competition) => {
 const headToHeadFilter = (a, b) => match =>
   (match.team_home.name === a && match.team_away.name === b) || (match.team_home.name === b && match.team_away.name === a)
 
+function shuffleArray(array) {
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+/**
+ * Rotate array items according to the round-robin algorithm
+ *
+ * @param array $items
+ * @return void
+ */
+function rotate(/*array*/ items) {
+  let itemCount = items.length;
+  if (itemCount < 3) {
+    return;
+  }
+  var lastIndex = itemCount - 1;
+  /**
+   * Though not technically part of the round-robin algorithm, odd-even
+   * factor differentiation included to have intuitive behavior for arrays
+   * with an odd number of elements
+   */
+  var factor = itemCount % 2 === 0 ? itemCount / 2 : itemCount / 2 + 1;
+  var topRightIndex = factor - 1;
+  var topRightItem = items[topRightIndex];
+  var bottomLeftIndex = factor;
+  var bottomLeftItem = items[bottomLeftIndex];
+  for (let i = topRightIndex; i > 0; i--) {
+    items[i] = items[i - 1]
+  }
+  for (let i = bottomLeftIndex; i < lastIndex; i++) {
+    items[i] = items[i + 1]
+  }
+  items[1] = bottomLeftItem;
+  items[lastIndex] = topRightItem;
+  return items;
+}
+
+/**
+ * Generate a round-robin schedule from an array of teams
+ *
+ * @param array $teams An array of teams which may be any valid type
+ *
+ * @param int $rounds The number of rounds, will default to the number of
+ *     rounds required for each contestant to meet all other contestants
+ *
+ * @param bool $shuffle Whether to shuffle the teams before generating the
+ *     schedule, default is true
+ *
+ * @param int $seed Seed to use for shuffling if shuffle is enabled, if no seed
+ *     will use random_int with PHP_INT_MIN and PHP_INT_MAX is no seed is
+ *     provided
+ *
+ * @return array An array of rounds, in the format of $round => $matchups,
+ *     where each matchup has only two elements with the two teams as elements
+ *     [0] and [1] or for a $teams array with an odd element count, may have
+ *     one of these elements as null to signify a bye for the other actual team
+ *     element in the matchup array
+ */
+function schedule(/*array*/ teams, /*bool*/ twolegs, /*int*/ rounds, /*bool*/ shuffle = true) {
+  const halfTeamCount = Math.round(teams.length / 2)
+  let schedule = []
+
+  //Account for odd number of teams by adding a bye
+  if (teams.length % 2 === 1) {
+    teams.push(null)
+  }
+  
+  if (shuffle) {
+    teams = shuffleArray(teams);
+  }
+
+  rounds = rounds || teams.length - 1;
+  
+  for (let round = 0; round < rounds; round++) {    
+    teams.map((team, key) => {
+      if (key >= halfTeamCount) {
+        return;
+      }
+      var team1 = team;
+      var team2 = teams[key + halfTeamCount];
+
+      //Home-away swapping
+      var match = round % 2 === 0 ? [team1, team2] : [team2, team1];
+      schedule[round] = schedule[round] || []
+      schedule[round].push(match)
+    })
+    teams = rotate(teams);
+  }
+  
+  if (twolegs) {
+    schedule = schedule.concat(schedule.map(round => round.map(match => [match[1], match[0]])))
+  }
+  
+  return schedule;
+}
+
 module.exports = {
   standingsReducer,
   standingsSorter,
   calculateCompetition,
-  headToHeadFilter
+  headToHeadFilter,
+  schedule
 }
