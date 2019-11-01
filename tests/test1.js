@@ -1,3 +1,4 @@
+const util = require('util')
 const fs = require('fs')
 const test = require('tape')
 const Realm = require("realm")
@@ -6,6 +7,10 @@ const uuid = hyperid(true)
 const schemas = require('../schemas')
 const api = require('../api')
 const seed = require('../mock/seed')
+
+function log() {
+  console.log(util.inspect([...arguments], false, null, true))
+}
 
 // Start with a fresh DB
 const files = [
@@ -68,7 +73,7 @@ test('Various Tests', function (t) {
     t.ok(Object.keys(homeAwayCount).length, 'should have home-away count')
     
     const homeAwayReferenceValues = homeAwayCount[Object.keys(homeAwayCount)[0]]
-    // console.log(homeAwayCount)
+    
     teams.map(team => {
       t.equal(
         homeAwayCount[team.name].home === homeAwayReferenceValues.home && homeAwayCount[team.name].away === homeAwayReferenceValues.away,
@@ -76,35 +81,33 @@ test('Various Tests', function (t) {
         team.name + ': correct amount of home-away matches')
     })
     
-    schedule.forEach((round, index) => {
-      const serieA_round1 = realm.create('Round', {
-        id: uuid(),
-        num: 1,
-        name: 'Matchday 1',
-        competition: serieA_competition,
-        matches: []
+    realm.write(() => {
+      schedule.forEach((round, index) => {
+        const r = realm.create('Round', {
+          id: uuid(),
+          num: index + 1,
+          name: 'Matchday ' + (index + 1),
+          competition: serieA_competition,
+          matches: []
+        })
+
+        round.forEach((match, index) => {
+          const m = realm.create('Match', {
+            id: uuid(),
+            round: r,
+            start: '2019/08/24',
+            team_home: match[0],
+            team_away: match[1],
+            goals_home: 0,
+            goals_away: 0,
+          })
+        })
+
+        log(r)
       })
     })
     
-    // Rounds
-    const serieA_round1 = realm.create('Round', {
-      id: uuid(),
-      num: 1,
-      name: 'Matchday 1',
-      competition: serieA_competition,
-      matches: []
-    })
-
-    // Matches      
-    const serieA_match1 = realm.create('Match', {
-      id: uuid(),
-      round: serieA_round1,
-      start: '2019/08/24',
-      team_home: palermo,
-      team_away: bari,
-      goals_home: 1,
-      goals_away: 1,
-    })
+    // console.log(serieA_competition)
     
     // schedule.forEach(round => round.forEach(match => {
     //   match[0].name + ' vs ' + match[1].name
