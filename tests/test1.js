@@ -50,16 +50,16 @@ test('Various Tests', function (t) {
     t.ok(leagues.length, 'should have leagues')
     t.ok(teams.length, 'should have teams')
     
-    const schedule = api.generateSchedule(teams, { shuffle: false })
+    const schedule = api.generateSchedule(teams, { twolegs: true, shuffle: false })
   
-    t.equal(schedule.length, teams.length - 1, 'the schedule should have a correct number of rounds')
+    t.equal(schedule.length, teams.length * 2 - 2, 'the schedule should have a correct number of rounds')
         
     const homeAwayCount = schedule.reduce((result, round) => {
       round.forEach(match => {
-        result[match[0]] = result[match[0]] || { home: 0, away: 0 }
-        result[match[0]].home = result[match[0]].home + 1
-        result[match[1]] = result[match[1]] || { home: 0, away: 0 }
-        result[match[1]].away = result[match[1]].away + 1
+        result[match[0].name] = result[match[0].name] || { home: 0, away: 0 }
+        result[match[0].name].home = result[match[0].name].home + 1
+        result[match[1].name] = result[match[1].name] || { home: 0, away: 0 }
+        result[match[1].name].away = result[match[1].name].away + 1
       })
       return result
     }, {})
@@ -67,11 +67,12 @@ test('Various Tests', function (t) {
     t.ok(Object.keys(homeAwayCount).length, 'should have home-away count')
     
     const homeAwayReferenceValues = homeAwayCount[Object.keys(homeAwayCount)[0]]
-    
-    teams.forEach(team => {
-      t.ok(homeAwayCount[team.name], 'team should have entry in home-away count')
-      t.equal(homeAwayCount[team.name].home, homeAwayReferenceValues.home, team.name + ': incorrect amount of home matches')
-      t.equal(homeAwayCount[team.name].away, homeAwayReferenceValues.away, team.name + ': incorrect amount of away matches')
+    // console.log(homeAwayCount)
+    teams.map(team => {
+      t.equal(
+        homeAwayCount[team.name].home === homeAwayReferenceValues.home && homeAwayCount[team.name].away === homeAwayReferenceValues.away,
+        true,
+        team.name + ': correct amount of home-away matches')
     })
     
     // schedule.forEach(round => round.forEach(match => {
