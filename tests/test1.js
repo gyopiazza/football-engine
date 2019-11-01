@@ -50,7 +50,7 @@ test('Various Tests', function (t) {
     t.ok(leagues.length, 'should have leagues')
     t.ok(teams.length, 'should have teams')
     
-    
+    const schedule = api.generateSchedule(teams)
 //     const standings = matches
 //       .filtered('round.competition.key = "seriea.2019"')
 //       .reduce(api.standingsReducer, [])

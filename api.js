@@ -129,17 +129,17 @@ function rotate(/*array*/ items) {
   if (itemCount < 3) {
     return;
   }
-  var lastIndex = itemCount - 1;
+  const lastIndex = itemCount - 1;
   /**
    * Though not technically part of the round-robin algorithm, odd-even
    * factor differentiation included to have intuitive behavior for arrays
    * with an odd number of elements
    */
-  var factor = itemCount % 2 === 0 ? itemCount / 2 : itemCount / 2 + 1;
-  var topRightIndex = factor - 1;
-  var topRightItem = items[topRightIndex];
-  var bottomLeftIndex = factor;
-  var bottomLeftItem = items[bottomLeftIndex];
+  const factor = itemCount % 2 === 0 ? itemCount / 2 : itemCount / 2 + 1;
+  const topRightIndex = factor - 1;
+  const topRightItem = items[topRightIndex];
+  const bottomLeftIndex = factor;
+  const bottomLeftItem = items[bottomLeftIndex];
   for (let i = topRightIndex; i > 0; i--) {
     items[i] = items[i - 1]
   }
@@ -172,11 +172,11 @@ function rotate(/*array*/ items) {
  *     one of these elements as null to signify a bye for the other actual team
  *     element in the matchup array
  */
-function schedule(/*array*/ teams, /*bool*/ twolegs, /*int*/ rounds, /*bool*/ shuffle = true) {
+function generateSchedule(teams, { twolegs, rounds, shuffle = true }) {
   const halfTeamCount = Math.round(teams.length / 2)
   let schedule = []
 
-  //Account for odd number of teams by adding a bye
+  // Account for odd number of teams by adding a bye
   if (teams.length % 2 === 1) {
     teams.push(null)
   }
@@ -184,19 +184,20 @@ function schedule(/*array*/ teams, /*bool*/ twolegs, /*int*/ rounds, /*bool*/ sh
   if (shuffle) {
     teams = shuffleArray(teams);
   }
-
+  
+  // Rounds are the number of teams minus one
   rounds = rounds || teams.length - 1;
   
-  for (let round = 0; round < rounds; round++) {    
+  for (let round = 0; round < rounds; round++) {
     teams.map((team, key) => {
-      if (key >= halfTeamCount) {
-        return;
-      }
-      var team1 = team;
-      var team2 = teams[key + halfTeamCount];
+      if (key >= halfTeamCount) return
 
-      //Home-away swapping
-      var match = round % 2 === 0 ? [team1, team2] : [team2, team1];
+      const team1 = team;
+      const team2 = teams[key + halfTeamCount];
+
+      // Home-away swapping
+      const match = round % 2 === 0 ? [team1, team2] : [team2, team1];
+
       schedule[round] = schedule[round] || []
       schedule[round].push(match)
     })
@@ -215,5 +216,5 @@ module.exports = {
   standingsSorter,
   calculateCompetition,
   headToHeadFilter,
-  schedule
+  generateSchedule
 }
