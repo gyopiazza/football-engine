@@ -81,8 +81,8 @@ test('Various Tests', function (t) {
         team.name + ': correct amount of home-away matches')
     })
     
-    realm.write(() => {
-      schedule.forEach((round, index) => {
+    async function saveRound(round, index) {
+      realm.write(() => {
         const r = realm.create('Round', {
           id: uuid(),
           num: index + 1,
@@ -102,10 +102,44 @@ test('Various Tests', function (t) {
             goals_away: 0,
           })
         })
-
-        log(r)
       })
-    })
+      
+      await new Promise(resolve => setTimeout(resolve, 25))
+    }
+    
+    async function loopRounds(schedule) {
+      for (let i = 0; i < schedule.length; i++) {
+        await saveRound(schedule[i], i)
+      }
+    }
+    
+    loopRounds(schedule)
+        
+//     realm.write(() => {
+//       schedule.forEach((round, index) => {
+//         const r = realm.create('Round', {
+//           id: uuid(),
+//           num: index + 1,
+//           name: 'Matchday ' + (index + 1),
+//           competition: serieA_competition,
+//           matches: []
+//         })
+
+//         round.forEach((match, index) => {
+//           const m = realm.create('Match', {
+//             id: uuid(),
+//             round: r,
+//             start: '2019/08/24',
+//             team_home: match[0],
+//             team_away: match[1],
+//             goals_home: 0,
+//             goals_away: 0,
+//           })
+//         })
+
+//         log(r)
+//       })
+//     })
     
     // console.log(serieA_competition)
     
@@ -463,7 +497,7 @@ test('Various Tests', function (t) {
     
     
     // End tests
-    realm.close()
+    // realm.close()
     t.end()
   })
   .catch(e => console.log(e))
