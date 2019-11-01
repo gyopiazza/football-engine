@@ -53,10 +53,8 @@ test('Various Tests', function (t) {
     const schedule = api.generateSchedule(teams, { shuffle: false })
   
     t.equal(schedule.length, teams.length - 1, 'the schedule should have a correct number of rounds')
-    
-    console.log(schedule.map(round => round.map(match => match[0].name + ' vs ' + match[1].name)))
-    
-    const homeAwayTest = schedule.reduce((result, round) => {
+        
+    const homeAwayCount = schedule.reduce((result, round) => {
       round.forEach(match => {
         result[match[0]] = result[match[0]] || { home: 0, away: 0 }
         result[match[0]].home = result[match[0]].home + 1
@@ -65,6 +63,20 @@ test('Various Tests', function (t) {
       })
       return result
     }, {})
+    
+    t.ok(Object.keys(homeAwayCount).length, 'should have home-away count')
+    
+    const homeAwayReferenceValues = homeAwayCount[Object.keys(homeAwayCount)[0]]
+    
+    teams.forEach(team => {
+      t.ok(homeAwayCount[team.name], 'team should have entry in home-away count')
+      t.equal(homeAwayCount[team.name].home, homeAwayReferenceValues.home, team.name + ': incorrect amount of home matches')
+      t.equal(homeAwayCount[team.name].away, homeAwayReferenceValues.away, team.name + ': incorrect amount of away matches')
+    })
+    
+    // schedule.forEach(round => round.forEach(match => {
+    //   match[0].name + ' vs ' + match[1].name
+    // }))
     
 //     const standings = matches
 //       .filtered('round.competition.key = "seriea.2019"')
