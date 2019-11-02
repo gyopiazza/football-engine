@@ -85,6 +85,7 @@ test('Various Tests', function (t) {
     let recordsCount = 0
     
     function saveRound(round, index) {
+      let records = 0
       // realm.write(() => {
         realm.beginTransaction()
         const r = realm.create('Round', {
@@ -124,17 +125,20 @@ test('Various Tests', function (t) {
       for (let i = 0; i < schedule.length; i++) {
         await saveRound(schedule[i], i)
       }
+      
+      realm.close()
+      t.end()
     }
     
-    // loopRounds(schedule)
+    loopRounds(schedule)
     
-    for (let i = 0; i < schedule.length; i++) {
-      saveRound(schedule[i], i)
-       // queue.push(done => {
-       //   saveRound(schedule[i], i)
-       //   done()
-       // })
-    }
+    // for (let i = 0; i < schedule.length; i++) {
+    //   saveRound(schedule[i], i)
+    //    // queue.push(done => {
+    //    //   saveRound(schedule[i], i)
+    //    //   done()
+    //    // })
+    // }
         
     
     console.log('records count', recordsCount)
@@ -525,7 +529,7 @@ test('Various Tests', function (t) {
     
     // End tests
     // realm.close()
-    t.end()
+    // t.end()
   })
   .catch(e => console.log(e))
   
