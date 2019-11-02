@@ -56,6 +56,62 @@ const seed = realm => {
 //         end: '2020/05/24',
 //         teams: teams
 //       })
+    
+    
+    // Rounds & Matches
+    
+    function saveRound(round, index) {
+      // realm.write(() => {
+        realm.beginTransaction()
+        const r = realm.create('Round', {
+          id: uuid(),
+          num: index + 1,
+          name: 'Matchday ' + (index + 1),
+          competition: serieA_competition,
+          matches: []
+        })
+        
+        round.forEach(match => {
+          const m = realm.create('Match', {
+            id: uuid(),
+            round: r,
+            start: '2019/08/24',
+            team_home: match[0],
+            team_away: match[1],
+            goals_home: 0,
+            goals_away: 0,
+          })
+        })
+        realm.commitTransaction()
+      // })
+    }
+    
+    for (let i = 0; i < schedule.length; i++) {
+      saveRound(schedule[i], i)
+    }
+    
+    data.serieA_rounds = serieAMatches.rounds.map(round => {
+      realm.beginTransaction()
+        const r = realm.create('Round', {
+          id: uuid(),
+          num: round.name,
+          name: 'Matchday ' + (index + 1),
+          competition: serieA_competition,
+          matches: []
+        })
+      
+        round.matches.forEach(match => {
+          const m = realm.create('Match', {
+            id: uuid(),
+            round: r,
+            start: match.date,
+            team_home: team1,
+            team_away: match[1],
+            goals_home: 0,
+            goals_away: 0,
+          })
+        })
+    })
   })
   
   return data
