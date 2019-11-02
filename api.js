@@ -122,9 +122,9 @@ function shuffleArray(array) {
  * Rotate array items according to the round-robin algorithm
  *
  * @param array $items
- * @return void
+ * @return array
  */
-function rotate(/*array*/ items) {
+function rotate(items) {
   let itemCount = items.length;
   if (itemCount < 3) {
     return;
@@ -236,7 +236,6 @@ function queue(concurrency = 1) {
       running < concurrency ? runTask(task) : enqueueTask(task),
   }
 }
-
 
 module.exports = {
   standingsReducer,
