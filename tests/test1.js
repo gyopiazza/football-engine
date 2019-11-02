@@ -7,6 +7,7 @@ const uuid = hyperid(true)
 const schemas = require('../schemas')
 const api = require('../api')
 const seed = require('../mock/seed')
+const queue = api.queue(2)
 
 function log() {
   console.log(util.inspect([...arguments], false, null, true))
@@ -104,8 +105,11 @@ test('Various Tests', function (t) {
         })
       })
       
-      await new Promise(resolve => setTimeout(resolve, 25))
+      // await new Promise(resolve => setTimeout(resolve, 25))
     }
+    
+    
+    
     
     async function loopRounds(schedule) {
       for (let i = 0; i < schedule.length; i++) {
@@ -113,8 +117,21 @@ test('Various Tests', function (t) {
       }
     }
     
-    loopRounds(schedule)
+    // loopRounds(schedule)
+    
+    for (let i = 0; i < schedule.length; i++) {
+       queue.push(done => {
+         saveRound(schedule[i], i)
+         done()
+       })
+    }
         
+    
+    
+    
+    
+    
+    
 //     realm.write(() => {
 //       schedule.forEach((round, index) => {
 //         const r = realm.create('Round', {
