@@ -7,7 +7,7 @@ const uuid = hyperid(true)
 const schemas = require('../schemas')
 const api = require('../api')
 const seed = require('../mock/seed')
-const queue = api.queue(10)
+const queue = api.queue(2)
 
 function log() {
   console.log(util.inspect([...arguments], false, null, true))
@@ -82,8 +82,10 @@ test('Various Tests', function (t) {
         team.name + ': correct amount of home-away matches')
     })
     
+    let recordsCount = 0
+    
     function saveRound(round, index) {
-      realm.write(() => {
+      // realm.write(() => {
         const r = realm.create('Round', {
           id: uuid(),
           num: index + 1,
@@ -91,6 +93,8 @@ test('Various Tests', function (t) {
           competition: serieA_competition,
           matches: []
         })
+        
+        recordsCount++
 
         round.forEach((match, index) => {
           const m = realm.create('Match', {
@@ -102,8 +106,11 @@ test('Various Tests', function (t) {
             goals_home: 0,
             goals_away: 0,
           })
+          
+          recordsCount++
         })
-      })
+        // setImmediate(saveRound)
+      // })
       
       // await new Promise(resolve => setTimeout(resolve, 25))
     }
@@ -120,14 +127,17 @@ test('Various Tests', function (t) {
     // loopRounds(schedule)
     
     for (let i = 0; i < schedule.length; i++) {
+      // saveRound(schedule[i], i)
        queue.push(done => {
+         realm.beginTransaction()
          saveRound(schedule[i], i)
+         realm.commitTransaction()
          done()
        })
     }
         
     
-    
+    console.log('records count', recordsCount)
     
     
     
