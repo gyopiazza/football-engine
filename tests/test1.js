@@ -125,7 +125,7 @@ test('Various Tests', function (t) {
       t.end()
     }
     
-    // loopRounds(schedule)
+    loopRounds(schedule)
     
     
     
