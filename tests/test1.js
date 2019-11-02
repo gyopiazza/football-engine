@@ -7,7 +7,7 @@ const uuid = hyperid(true)
 const schemas = require('../schemas')
 const api = require('../api')
 const seed = require('../mock/seed')
-const queue = api.queue(2)
+const queue = api.queue(10)
 
 function log() {
   console.log(util.inspect([...arguments], false, null, true))
@@ -82,7 +82,7 @@ test('Various Tests', function (t) {
         team.name + ': correct amount of home-away matches')
     })
     
-    async function saveRound(round, index) {
+    function saveRound(round, index) {
       realm.write(() => {
         const r = realm.create('Round', {
           id: uuid(),
