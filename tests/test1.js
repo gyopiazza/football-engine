@@ -7,7 +7,7 @@ const uuid = hyperid(true)
 const schemas = require('../schemas')
 const api = require('../api')
 const seed = require('../mock/seed')
-const queue = api.queue(2)
+const queue = api.queue(50)
 
 function log() {
   console.log(util.inspect([...arguments], false, null, true))
@@ -86,6 +86,7 @@ test('Various Tests', function (t) {
     
     function saveRound(round, index) {
       // realm.write(() => {
+        realm.beginTransaction()
         const r = realm.create('Round', {
           id: uuid(),
           num: index + 1,
@@ -109,6 +110,7 @@ test('Various Tests', function (t) {
           
           recordsCount++
         })
+        realm.commitTransaction()
         // setImmediate(saveRound)
       // })
       
@@ -127,13 +129,11 @@ test('Various Tests', function (t) {
     // loopRounds(schedule)
     
     for (let i = 0; i < schedule.length; i++) {
-      // saveRound(schedule[i], i)
-       queue.push(done => {
-         realm.beginTransaction()
-         saveRound(schedule[i], i)
-         realm.commitTransaction()
-         done()
-       })
+      saveRound(schedule[i], i)
+       // queue.push(done => {
+       //   saveRound(schedule[i], i)
+       //   done()
+       // })
     }
         
     
