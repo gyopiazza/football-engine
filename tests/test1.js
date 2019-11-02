@@ -42,7 +42,7 @@ test('Various Tests', function (t) {
   })
   .then(realm => {
     // Seed the test database with mock data
-    const { serieA_league, coppaItalia_league, season, serieA_competition } = seed(realm)
+    const { serieA_league, coppaItalia_league, season, serieA_competition, serieA_matches } = seed(realm)
     
     const leagues = realm.objects("League")
     const seasons = realm.objects("Season")
@@ -52,14 +52,10 @@ test('Various Tests', function (t) {
     const rounds = realm.objects("Round")
     const matches = realm.objects("Match")
     const teams = realm.objects("Team")
-
-    t.ok(leagues.length, 'should have leagues')
-    t.ok(teams.length, 'should have teams')
-    
-    const schedule = api.generateSchedule(teams, { twolegs: true, shuffle: false })
   
-    t.equal(schedule.length, teams.length * 2 - 2, 'the schedule should have a correct number of rounds')
-        
+    // Generate schedule
+    const schedule = api.generateSchedule(teams, { twolegs: true, shuffle: false })
+    // Count home and away matches for each team
     const homeAwayCount = schedule.reduce((result, round) => {
       round.forEach(match => {
         result[match[0].name] = result[match[0].name] || { home: 0, away: 0 }
@@ -69,21 +65,26 @@ test('Various Tests', function (t) {
       })
       return result
     }, {})
-    
-    t.ok(Object.keys(homeAwayCount).length, 'should have home-away count')
-    
+    // Get the first result as reference
     const homeAwayReferenceValues = homeAwayCount[Object.keys(homeAwayCount)[0]]
     
+    t.ok(leagues.length, 'should have leagues')
+    t.ok(teams.length, 'should have teams')
+    t.equal(schedule.length, teams.length * 2 - 2, 'the schedule should have a correct number of rounds')
+    t.ok(Object.keys(homeAwayCount).length, 'should have home-away count')
+    
+    // Check that each team has the same amount of home-away matches
     teams.map(team => {
       t.equal(
         homeAwayCount[team.name].home === homeAwayReferenceValues.home && homeAwayCount[team.name].away === homeAwayReferenceValues.away,
         true,
-        team.name + ': correct amount of home-away matches')
+        team.name + ': number of home-away matches')
     })
+  
     
     
+    // Store the round+matches to the DB
     function saveRound(round, index) {
-      let records = 0
       // realm.write(() => {
         realm.beginTransaction()
         const r = realm.create('Round', {
@@ -94,9 +95,7 @@ test('Various Tests', function (t) {
           matches: []
         })
         
-        records++
-
-        round.forEach((match, index) => {
+        round.forEach(match => {
           const m = realm.create('Match', {
             id: uuid(),
             round: r,
@@ -106,43 +105,31 @@ test('Various Tests', function (t) {
             goals_home: 0,
             goals_away: 0,
           })
-          
-          records++
         })
         realm.commitTransaction()
-        // setImmediate(saveRound)
       // })
-      return records
-      // await new Promise(resolve => setTimeout(resolve, 25))
     }
     
-    
-    
-    
     function loopRounds(schedule) {
-      let totalRecords = 0
       for (let i = 0; i < schedule.length; i++) {
-        totalRecords += saveRound(schedule[i], i)
+        saveRound(schedule[i], i)
       }
-      console.log('totalRecords', totalRecords)
       console.log('matches', matches.length)
       realm.close()
       t.end()
     }
     
-    loopRounds(schedule)
+    // loopRounds(schedule)
     
-    // for (let i = 0; i < schedule.length; i++) {
-    //   saveRound(schedule[i], i)
-    //    // queue.push(done => {
-    //    //   saveRound(schedule[i], i)
-    //    //   done()
-    //    // })
-    // }
-        
     
-    // console.log('records count', recordsCount)
     
+    
+    
+    
+    
+    
+    
+   
     
     
     
@@ -525,13 +512,12 @@ test('Various Tests', function (t) {
     
     
     
-    
-    
     // End tests
     // realm.close()
     // t.end()
   })
-  .catch(e => console.log(e))
-  
-  
+  .catch(e => {
+    console.log(e)
+    t.end()
+  })
 })
