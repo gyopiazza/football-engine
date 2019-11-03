@@ -87,8 +87,8 @@ const seed = realm => {
         start: match.date,
         team_home: getTeamByName(match.team1.name),
         team_away: getTeamByName(match.team2.name),
-        goals_home: 0,
-        goals_away: 0,
+        goals_home: match.score1,
+        goals_away: match.score2,
       })
     })
     realm.commitTransaction()

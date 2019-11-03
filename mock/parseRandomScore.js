@@ -6,8 +6,8 @@ const data = {
   name: serieA.name,
   rounds: serieA.rounds.map(round => {
     round.matches = round.matches.map(match => {
-      match.score1 = Math.floor(Math.random() * Math.floor(5))
-      match.score2 = Math.floor(Math.random() * Math.floor(5))
+      match.score1 = Math.floor(Math.random() * Math.floor(4))
+      match.score2 = Math.floor(Math.random() * Math.floor(4))
       return match
     })
     return round
