@@ -215,11 +215,13 @@ function generateSchedule(teams, { twolegs = false, rounds, shuffle = true } = {
 /**
  * Queue
  */
-function queue(concurrency = 1) {
+function queue(concurrency = 1, fill = 0) {
   let running = 0
   const taskQueue = []
-
-  const runTask = (task) => {
+  let timer
+  
+  const runTask = task => {
+    if (fill && taskQueue.length < fill)
     running++
     task(_ => {
       running--
