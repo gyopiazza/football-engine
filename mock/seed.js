@@ -65,43 +65,71 @@ const seed = realm => {
     
     // Rounds & Matches
     
-    function saveRound(round, index) {
-      // realm.write(() => {
-        realm.beginTransaction()
-        const r = realm.create('Round', {
-          id: uuid(),
-          num: index + 1,
-          name: 'Matchday ' + (index + 1),
-          competition: data.serieA_competition,
-          matches: []
-        })
+//     function saveRound(round, index) {
+//       // realm.write(() => {
+//         realm.beginTransaction()
+//         const r = realm.create('Round', {
+//           id: uuid(),
+//           num: index + 1,
+//           name: 'Matchday ' + (index + 1),
+//           competition: data.serieA_competition,
+//           matches: []
+//         })
         
-        round.forEach(match => {
-          const m = realm.create('Match', {
-            id: uuid(),
-            round: r,
-            start: '2019/08/24',
-            team_home: match[0],
-            team_away: match[1],
-            goals_home: 0,
-            goals_away: 0,
-          })
-        })
-        realm.commitTransaction()
-      // })
+//         round.forEach(match => {
+//           const m = realm.create('Match', {
+//             id: uuid(),
+//             round: r,
+//             start: '2019/08/24',
+//             team_home: match[0],
+//             team_away: match[1],
+//             goals_home: 0,
+//             goals_away: 0,
+//           })
+//         })
+//         realm.commitTransaction()
+//       // })
+//     }
+    
+    // for (let i = 0; i < schedule.length; i++) {
+    //   saveRound(schedule[i], i)
+    // }
+    
+    // "rounds": [
+    // {
+    //   "name": "1^ Giornata",
+    //   "matches": [
+    //     {
+    //       "date": "2017-08-19",
+    //       "team1": {
+    //         "key": "juventus",
+    //         "name": "Juventus",
+    //         "code": "JUV"
+    //       },
+    //       "team2": {
+    //         "key": "cagliari",
+    //         "name": "Cagliari",
+    //         "code": "CAG"
+    //       },
+    //       "score1": null,
+    //       "score2": null
+    //     },
+    
+    
+    const teamsCache = {}
+    function getTeamByName(teamName) {
+      return teamsCache[teamName.toLowerCase()] || teams.filtered('name ==[c] $0', teamName)
     }
     
-    for (let i = 0; i < schedule.length; i++) {
-      saveRound(schedule[i], i)
-    }
-    
-    data.serieA_rounds = serieAMatches.rounds.map(round => {
+    // console.log(getTeamByName('Napoli'))
+        
+    data.serieA_rounds = serieAMatches.rounds.map((round, index) => {
       realm.beginTransaction()
         const r = realm.create('Round', {
           id: uuid(),
-          num: round.name,
-          name: 'Matchday ' + (index + 1),
-          competition: serieA_competition,
+          num: index,
+          name: round.name,
+          competition: data.serieA_competition,
           matches: []
         })
       
@@ -110,8 +138,8 @@ const seed = realm => {
             id: uuid(),
             round: r,
             start: match.date,
-            team_home: team1,
-            team_away: match[1],
+            team_home: match.team1.name,
+            team_away: match.team2.name,
             goals_home: 0,
             goals_away: 0,
           })
@@ -121,6 +149,7 @@ const seed = realm => {
       
         realm.commitTransaction()
     })
+    
   })
   
   return data
