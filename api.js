@@ -221,7 +221,7 @@ function queue(concurrency = 1, fill = 0) {
   let timer
   
   const runTask = task => {
-    if (fill && taskQueue.length < fill)
+    // if (fill && taskQueue.length < fill)
     running++
     task(_ => {
       running--
