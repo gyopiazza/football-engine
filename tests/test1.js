@@ -80,96 +80,15 @@ test('Various Tests', function (t) {
         true,
         team.name + ': number of home-away matches')
     })
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    // Store the round+matches to the DB
-    function saveRound(round, index) {
-      // realm.write(() => {
-        realm.beginTransaction()
-        const r = realm.create('Round', {
-          id: uuid(),
-          num: index + 1,
-          name: 'Matchday ' + (index + 1),
-          competition: serieA_competition,
-          matches: []
-        })
-        
-        round.forEach(match => {
-          const m = realm.create('Match', {
-            id: uuid(),
-            round: r,
-            start: '2019/08/24',
-            team_home: match[0],
-            team_away: match[1],
-            goals_home: 0,
-            goals_away: 0,
-          })
-        })
-        realm.commitTransaction()
-      // })
-    }
-    
-    function loopRounds(schedule) {
-      for (let i = 0; i < schedule.length; i++) {
-        saveRound(schedule[i], i)
-      }
-      console.log('matches', matches.length)
-      realm.close()
-      t.end()
-    }
-    
-    // loopRounds(schedule)
     
     
     console.log('matches', matches.length)
     
     
-    
-    
-    
-    
-   
-    
-    
-    
-//     realm.write(() => {
-//       schedule.forEach((round, index) => {
-//         const r = realm.create('Round', {
-//           id: uuid(),
-//           num: index + 1,
-//           name: 'Matchday ' + (index + 1),
-//           competition: serieA_competition,
-//           matches: []
-//         })
 
-//         round.forEach((match, index) => {
-//           const m = realm.create('Match', {
-//             id: uuid(),
-//             round: r,
-//             start: '2019/08/24',
-//             team_home: match[0],
-//             team_away: match[1],
-//             goals_home: 0,
-//             goals_away: 0,
-//           })
-//         })
-
-//         log(r)
-//       })
-//     })
     
-    // console.log(serieA_competition)
     
-    // schedule.forEach(round => round.forEach(match => {
-    //   match[0].name + ' vs ' + match[1].name
-    // }))
+    
     
 //     const standings = matches
 //       .filtered('round.competition.key = "seriea.2019"')
@@ -519,8 +438,8 @@ test('Various Tests', function (t) {
     
     
     // End tests
-    // realm.close()
-    // t.end()
+    realm.close()
+    t.end()
   })
   .catch(e => {
     console.log(e)
