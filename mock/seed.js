@@ -5,9 +5,9 @@ const serieAMatches = require('./data/seriea-2017-18.json')
 
 const seed = realm => {
   const data = {}
+  const teams = realm.objects("Team")
   
   realm.write(() => {
-    const teams = realm.objects("Team")
     
     // Teams
     data.serieA_teams = serieAClubs.clubs.map(team => {
@@ -59,7 +59,7 @@ const seed = realm => {
 //       })
     
     
-    
+    })
     
     
     
@@ -118,13 +118,15 @@ const seed = realm => {
     
     const teamsCache = {}
     function getTeamByName(teamName) {
-      return teamsCache[teamName.toLowerCase()] || teams.filtered('name ==[c] $0', teamName)
+      teamsCache[teamName.toLowerCase()] =
+        teamsCache[teamName.toLowerCase()] || teams.filtered('name ==[c] $0', teamName)[0]
+      return teamsCache[teamName.toLowerCase()]
     }
     
     // console.log(getTeamByName('Napoli'))
         
     data.serieA_rounds = serieAMatches.rounds.map((round, index) => {
-      realm.beginTransaction()
+      // realm.beginTransaction()
         const r = realm.create('Round', {
           id: uuid(),
           num: index,
@@ -132,26 +134,26 @@ const seed = realm => {
           competition: data.serieA_competition,
           matches: []
         })
+        
+        console.log('round', r)
       
         const matches = round.matches.forEach(match => {
-          return realm.create('Match', {
+          r.matches.push(realm.create('Match', {
             id: uuid(),
             round: r,
             start: match.date,
-            team_home: match.team1.name,
-            team_away: match.team2.name,
+            team_home: getTeamByName(match.team1.name),
+            team_away: getTeamByName(match.team2.name),
             goals_home: 0,
             goals_away: 0,
-          })
+          }))
         })
         
-        r.matches = matches
+        // r.matches = matches
       
-        realm.commitTransaction()
+        // realm.commitTransaction()
     })
-    
-  })
-  
+      
   return data
 }
 
