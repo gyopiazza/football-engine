@@ -126,7 +126,7 @@ const seed = realm => {
     // console.log(getTeamByName('Napoli'))
         
     data.serieA_rounds = serieAMatches.rounds.map((round, index) => {
-      // realm.beginTransaction()
+      realm.beginTransaction()
         const r = realm.create('Round', {
           id: uuid(),
           num: index,
@@ -135,23 +135,23 @@ const seed = realm => {
           matches: []
         })
         
-        console.log('round', r)
+        // console.log('round', r)
       
-        const matches = round.matches.forEach(match => {
-          r.matches.push(realm.create('Match', {
+        const matches = round.matches.map(match => {
+          return realm.create('Match', {
             id: uuid(),
             round: r,
             start: match.date,
-            team_home: getTeamByName(match.team1.name),
-            team_away: getTeamByName(match.team2.name),
+            team_home: teams[0],
+            team_away: teams[1],
             goals_home: 0,
             goals_away: 0,
-          }))
+          })
         })
         
-        // r.matches = matches
+        r.matches = matches
       
-        // realm.commitTransaction()
+        realm.commitTransaction()
     })
       
   return data
