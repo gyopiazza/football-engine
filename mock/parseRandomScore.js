@@ -1,3 +1,5 @@
+// Load the data from seriea-2017-18.json and generates random scores into seriea-rounds.json
+
 const fs = require('fs')
 const serieA = require('./data/seriea-2017-18.json')
 

@@ -52,8 +52,14 @@ test('Various Tests', function (t) {
     const rounds = realm.objects("Round")
     const matches = realm.objects("Match")
     const teams = realm.objects("Team")
-  
-    // Generate schedule
+    
+    // Generate the standings for the current data
+    const standings = matches
+      .filtered('round.competition.key = "seriea.2017"')
+      .reduce(api.standingsReducer, [])
+      .sort(api.standingsSorter)
+    
+    // Generate new schedule
     const schedule = api.generateSchedule(teams, { twolegs: true, shuffle: false })
     // Count home and away matches for each team
     const homeAwayCount = schedule.reduce((result, round) => {
@@ -68,6 +74,8 @@ test('Various Tests', function (t) {
     // Get the first result as reference
     const homeAwayReferenceValues = homeAwayCount[Object.keys(homeAwayCount)[0]]
     
+    // Tests...
+    
     t.ok(leagues.length, 'should have leagues')
     t.ok(teams.length, 'should have teams')
     t.equal(schedule.length, teams.length * 2 - 2, 'the schedule should have a correct number of rounds')
@@ -81,20 +89,10 @@ test('Various Tests', function (t) {
         team.name + ': number of home-away matches')
     })
     
+    t.equal(standings[0].name, 'Juventus', 'standings: first team is correct')
     
-    // Stats
-    console.log('matches', matches.length)
-    const standings = matches
-      .filtered('round.competition.key = "seriea.2017"')
-      .reduce(api.standingsReducer, [])
-      .sort(api.standingsSorter)
-    
-    log(standings)
-    
-    // console.log(competitions)
-
-    
-    
+    console.log('=========')
+    console.log(standings)
     
     
 //     const standings = matches
