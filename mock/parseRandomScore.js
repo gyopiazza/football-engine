@@ -1,15 +1,20 @@
 const fs = require('fs')
-const rounds = require('./data/mock/data/seriea-2017-18.json')
+const serieA = require('./data/seriea-2017-18.json')
 
 
-const data = rounds.map(round => {
-  round.matches = round.matches.map(match => {
-    
+const data = {
+  name: serieA.name,
+  rounds: serieA.rounds.map(round => {
+    round.matches = round.matches.map(match => {
+      match.score1 = Math.floor(Math.random() * Math.floor(5))
+      match.score2 = Math.floor(Math.random() * Math.floor(5))
+      return match
+    })
+    return round
   })
-  return round
-})
+}
 
-fs.writeFile('mock/seriea-rounds.json', data, (err) => {
+fs.writeFile('mock/data/seriea-rounds.json', JSON.stringify(data, null, 2), (err) => {
     if (err) throw err;
-    console.log('Data written to file');
+    console.log('Created: mock/data/seriea-rounds.json');
 });

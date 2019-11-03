@@ -82,9 +82,16 @@ test('Various Tests', function (t) {
     })
     
     
+    // Stats
     console.log('matches', matches.length)
+    const standings = matches
+      .filtered('round.competition.key = "seriea.2017"')
+      .reduce(api.standingsReducer, [])
+      .sort(api.standingsSorter)
     
+    log(standings)
     
+    // console.log(competitions)
 
     
     

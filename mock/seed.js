@@ -1,7 +1,8 @@
 const hyperid = require('hyperid')
 const uuid = hyperid(true)
 const serieAClubs = require('./data/seriea-clubs-2017-18.json')
-const serieAMatches = require('./data/seriea-2017-18.json')
+// const serieAMatches = require('./data/seriea-2017-18.json')
+const serieAMatches = require('./data/seriea-rounds.json')
 
 const seed = realm => {
   const data = {}
