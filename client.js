@@ -7,7 +7,12 @@ const Log = (() => {
 })()
 
 const test = (state, payload) => {
-  return [state * 2, Log(payload)]
+  // return [state * 2, Log(payload)]
+  return [state * 2, [test2, payload]]
+}
+
+const test2 = (state, payload) => {
+  return state * 2
 }
 
 app({
