@@ -7,9 +7,23 @@
   "description": "A simple Node app built on Express, instantly up and running.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "build": "webpack",
+    "start": "webpack && node index.js",
     "test": "tape tests/**/*.js | tap-spec",
     "reset-db": "rm default.realm.lock && rm default.realm.note && rm default.realm && rm -rf default.realm.management"
+  },
+  "babel": {
+    "presets": [
+      "@babel/env"
+    ],
+    "plugins": [
+      [
+        "@babel/transform-react-jsx",
+        {
+          "pragma": "h"
+        }
+      ]
+    ]
   },
   "dependencies": {
     "express": "^4.16.4",
