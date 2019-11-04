@@ -7,33 +7,36 @@ const Log = (() => {
 })()
 
 // Actions
-const loadStories = (state, payload) => [
+const loadCompetitions = (state, payload) => [
   state,
-  getStoriesFx(payload)
-  // [getStories, payload]
+  getCompetitionsFx(payload) // Call a proxy-function
+  // [getCompetitions, payload]
 ]
 
-const setStories = (state, payload) => {
-  console.log('setStories', payload)
+const setCompetitions = (state, payload) => {
+  console.log('setCompetitions', payload)
   return {
     ...state,
-    data: payload.data
+    data: payload
   }
 }
 
 // Effects
-const getStoriesFx = payload => {
-  console.log('getStoriesFx', payload)
+const getCompetitionsFx = payload => {
+  console.log('getCompetitionsFx', payload)
   return [
-    getStories,
+    getCompetitions,
     payload
   ]
 }
 
 // Side effects
-const getStories = (dispatch, payload) => {
-  console.log('getStories', payload)
-  setTimeout(() => dispatch(setStories, {data: 'ok'}), 1000)
+const getCompetitions = (dispatch, payload) => {
+  console.log('getCompetitions', payload)
+  fetch('/api')
+    .then(response => response.json())
+    .then(response => dispatch(setCompetitions, response))
+  // setTimeout(() => dispatch(setCompetitions, {data: 'ok'}), 1000)
 }
 
 
@@ -44,7 +47,7 @@ app({
   view: state =>
     h("main", {}, [
       h("h1", {}, JSON.stringify(state)),
-      h("button", { onClick: [loadStories, {test: true}] }, "load"),
+      h("button", { onClick: [loadCompetitions, {test: true}] }, "load"),
     ]),
   node: document.getElementById("app")
 })

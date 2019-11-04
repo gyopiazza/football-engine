@@ -2,11 +2,10 @@
 // where your node app starts
 
 // init project
+const Realm = require("realm");
 const express = require("express");
 const app = express();
-
-// we've started you off with Express,
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
+const schemas = require('./schemas')
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
@@ -17,7 +16,16 @@ app.get("/", function(req, res) {
 });
 
 app.get("/api", function(req, res) {
-  res.send({ hello: 'world' });
+  Realm.open({
+    // path: 'db/main.realm',
+    path: 'tests/test.realm',
+    schema: [schemas.League, schemas.Season, schemas.Competition, schemas.Phase, schemas.Group, schemas.Round, schemas.Match, schemas.Team, schemas.Lineup, schemas.Player]
+  })
+  .then(realm => {
+    res.send({
+       teams: realm.objects("Team")
+    });
+  })
 });
 
 // listen for requests :)
