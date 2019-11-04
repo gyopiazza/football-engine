@@ -12,12 +12,12 @@ const app = express();
 app.use(express.static("public"));
 
 // http://expressjs.com/en/starter/basic-routing.html
-app.get("/", function(request, response) {
-  response.sendFile(__dirname + "/views/index.html");
+app.get("/", function(req, res) {
+  res.sendFile(__dirname + "/views/index.html");
 });
 
-app.get("/api", function(request, response) {
-  response.sendFile(__dirname + "/views/index.html");
+app.get("/api", function(req, res) {
+  res.send({ hello: 'world' });
 });
 
 // listen for requests :)
