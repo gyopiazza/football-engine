@@ -6,35 +6,45 @@ const Log = (() => {
   return message => [effectFn, { message }]
 })()
 
-const test = (state, payload) => {
-  // return [state * 2, Log(payload)]
-  return [state, multiplyFx(payload)]
-}
-
-
+// Actions
 const loadStories = (state, payload) => [
   state,
   getStoriesFx(payload)
+  // [getStories, payload]
 ]
 
-const getStoriesFx = payload => [
-  getStories,
-  payload
-]
+const setStories = (state, payload) => {
+  console.log('setStories', payload)
+  return {
+    ...state,
+    data: payload.data
+  }
+}
 
-const getStories = (payload, dispatch) => {
-  setTimeout(() => dispatch(, 1000)
+// Effects
+const getStoriesFx = payload => {
+  console.log('getStoriesFx', payload)
+  return [
+    getStories,
+    payload
+  ]
+}
+
+// Side effects
+const getStories = (dispatch, payload) => {
+  console.log('getStories', payload)
+  setTimeout(() => dispatch(setStories, {data: 'ok'}), 1000)
 }
 
 
 app({
-  init: 0,
+  init: {
+    data: ''
+  },
   view: state =>
     h("main", {}, [
-      h("h1", {}, state),
-      h("button", { onClick: state => state - 1 }, "-"),
-      h("button", { onClick: state => state + 1 }, "+"),
-      h("button", { onClick: [test, {test: true}] }, "load")
+      h("h1", {}, JSON.stringify(state)),
+      h("button", { onClick: [loadStories, {test: true}] }, "load"),
     ]),
   node: document.getElementById("app")
 })
