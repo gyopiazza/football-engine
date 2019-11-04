@@ -5,9 +5,9 @@
   "name": "hello-express",
   "version": "0.0.1",
   "description": "A simple Node app built on Express, instantly up and running.",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node index.js",
     "test": "tape tests/**/*.js | tap-spec",
     "reset-db": "rm default.realm.lock && rm default.realm.note && rm default.realm && rm -rf default.realm.management"
   },
@@ -15,8 +15,16 @@
     "express": "^4.16.4",
     "hyperid": "^2.0.2",
     "tape": "^4.11.0",
-    "realm": "^3.2.0",
-    "tap-spec": "^5.0.0"
+    "realm": "^3.3.0",
+    "tap-spec": "^5.0.0",
+    "webpack": "^4.40.0",
+    "webpack-cli": "^3.3.10",
+    "hyperapp": "^2.0.2",
+    "babel-loader": "^8.0.5",
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/register": "^7.6.2",
+    "@babel/plugin-transform-react-jsx": "^7.2.0"
   },
   "engines": {
     "node": "10.x"
