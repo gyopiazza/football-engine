@@ -45,32 +45,47 @@ const getData = (dispatch, payload) => {
 }
 
 // Components
-function App(props) {
+function App(state) {
   return <main>
-    <h1></h1>
+    <button onclick={[loadData, { test: true }]}>load</button>
+    <h1>Schemas</h1>
+    <ul>
+      {Object.keys(state.schemas).map(schema => 
+        <li onclick={[setSelectedSchema, state.schemas[schema]]}>
+          {state.selectedSchema.name === schema ? '-> ' + schema : schema}
+        </li>)}
+    </ul>
+    {state.selectedSchema && <EditSchema selectedSchema={state.selectedSchema} />}
+    <hr/>
+    <pre>{JSON.stringify(state, null, 2)}</pre>
   </main>
 }
 
-function EditSchema(props) {
+function EditSchema({ selectedSchema }) {
   return <div>
-    <h1>Edit {props.selectedSchema}</h1>
+    <h1>Edit {selectedSchema.name}</h1>
+    <form>
+      <fieldset>
+        {Object.keys(selectedSchema.properties).map(prop => )}
+      </fieldset>
+    </form>
   </div>
 }
 
 app({
   init: {
+    selectedSchema: {},
     schemas: [],
-    selectedSchema: '',
     teams: []
   },
-  view: state =>
-    h("main", {}, [
-      h("h1", null, 'Schemas'),
-      h("ul", null, Object.keys(state.schemas)
-        .map(schema => h("li", { onClick: [setSelectedSchema, schema] },
-                         state.selectedSchema === schema ? '-> ' + schema : schema))),
-      h("button", { onClick: [loadData, {test: true}] }, "load"),
-      h("pre", {}, JSON.stringify(state, null, 2)),
-    ]),
+  view: state => App(state),
+    // h("main", {}, [
+    //   h("h1", null, 'Schemas'),
+    //   h("ul", null, Object.keys(state.schemas)
+    //     .map(schema => h("li", { onClick: [setSelectedSchema, schema] },
+    //                      state.selectedSchema === schema ? '-> ' + schema : schema))),
+    //   h("button", { onClick: [loadData, {test: true}] }, "load"),
+    //   h("pre", {}, JSON.stringify(state, null, 2)),
+    // ]),
   node: document.getElementById("app")
 })
