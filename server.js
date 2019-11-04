@@ -23,7 +23,8 @@ app.get("/api", function(req, res) {
   })
   .then(realm => {
     res.send({
-       teams: realm.objects("Team")
+      schemas,
+      teams: realm.objects("Team")
     });
   })
 });

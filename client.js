@@ -7,47 +7,50 @@ const Log = (() => {
 })()
 
 // Actions
-const loadCompetitions = (state, payload) => [
+const loadData = (state, payload) => [
   state,
-  getCompetitionsFx(payload) // Call a proxy-function
-  // [getCompetitions, payload]
+  getDataFx(payload) // Call a proxy-function
+  // [getData, payload]
 ]
 
-const setCompetitions = (state, payload) => {
-  console.log('setCompetitions', payload)
+const setData = (state, payload) => {
+  console.log('setData', payload)
   return {
     ...state,
-    data: payload
+    schemas: payload.schemas,
+    teams: payload.teams
   }
 }
 
 // Effects
-const getCompetitionsFx = payload => {
-  console.log('getCompetitionsFx', payload)
+const getDataFx = payload => {
+  console.log('getDataFx', payload)
   return [
-    getCompetitions,
+    getData,
     payload
   ]
 }
 
 // Side effects
-const getCompetitions = (dispatch, payload) => {
-  console.log('getCompetitions', payload)
+const getData = (dispatch, payload) => {
+  console.log('getData', payload)
   fetch('/api')
     .then(response => response.json())
-    .then(response => dispatch(setCompetitions, response))
-  // setTimeout(() => dispatch(setCompetitions, {data: 'ok'}), 1000)
+    .then(response => dispatch(setData, response))
 }
 
 
 app({
   init: {
-    data: ''
+    schemas: [],
+    teams: []
   },
   view: state =>
     h("main", {}, [
-      h("h1", {}, JSON.stringify(state)),
-      h("button", { onClick: [loadCompetitions, {test: true}] }, "load"),
+      h("h1", null, 'Schemas'),
+      h("ul", null, Object.keys(state.schemas).map(schema => h("li", null, schema))),
+      h("button", { onClick: [loadData, {test: true}] }, "load"),
+      h("pre", {}, JSON.stringify(state, null, 2)),
     ]),
   node: document.getElementById("app")
 })
