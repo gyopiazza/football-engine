@@ -7,6 +7,11 @@ const Log = (() => {
 })()
 
 // Actions
+const setSelectedSchema = (state, schema) => ({
+  ...state,
+  selectedSchema: schema
+})
+
 const loadData = (state, payload) => [
   state,
   getDataFx(payload) // Call a proxy-function
@@ -39,16 +44,31 @@ const getData = (dispatch, payload) => {
     .then(response => dispatch(setData, response))
 }
 
+// Components
+function App(props) {
+  return <main>
+    <h1></h1>
+  </main>
+}
+
+function EditSchema(props) {
+  return <div>
+    <h1>Edit {props.selectedSchema}</h1>
+  </div>
+}
 
 app({
   init: {
     schemas: [],
+    selectedSchema: '',
     teams: []
   },
   view: state =>
     h("main", {}, [
       h("h1", null, 'Schemas'),
-      h("ul", null, Object.keys(state.schemas).map(schema => h("li", null, schema))),
+      h("ul", null, Object.keys(state.schemas)
+        .map(schema => h("li", { onClick: [setSelectedSchema, schema] },
+                         state.selectedSchema === schema ? '-> ' + schema : schema))),
       h("button", { onClick: [loadData, {test: true}] }, "load"),
       h("pre", {}, JSON.stringify(state, null, 2)),
     ]),
