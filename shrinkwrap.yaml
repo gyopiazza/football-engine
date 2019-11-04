@@ -6,6 +6,7 @@ dependencies:
   babel-loader: 8.0.6
   express: 4.17.1
   hyperapp: 2.0.3
+  hyperapp-fx: 1.0.0
   hyperid: 2.0.2
   realm: 3.3.0
   tap-spec: 5.0.0
@@ -2723,6 +2724,12 @@ packages:
       node: '>= 4.5.0'
     resolution:
       integrity: sha512-OmvfoQ53WLjtA9HeYP9RNrWMJzzAz1JGaSFr1nijg0PVR1JaD/xbJq1mdEIIlxGpXp9eSe/O2LgU9DJmTPd0Eg==
+  /hyperapp-fx/1.0.0:
+    dev: false
+    peerDependencies:
+      hyperapp: ^1.2.9
+    resolution:
+      integrity: sha512-x40jvPVqpeojNpOWcTr5saOcr12w/I9GEgt66BUJQz5HO46+1AlREUjIGxSH7T0zFjlLTpg79NsqKAzEGDXmaw==
   /hyperapp/2.0.3:
     dev: false
     resolution:
@@ -5370,6 +5377,7 @@ specifiers:
   babel-loader: ^8.0.5
   express: ^4.16.4
   hyperapp: ^2.0.2
+  hyperapp-fx: ^1.0.0
   hyperid: ^2.0.2
   realm: ^3.3.0
   tap-spec: ^5.0.0
