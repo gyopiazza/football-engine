@@ -110,7 +110,8 @@ function Form({ selectedSchema, selectedRecord = {} }) {
 
 function Field({ id, type, value }) {
   // const field = typeof type === 'string' ? { type } : type
-  const primitive = ['bool','int','float','double','string','data','date']
+  const primitives = ['bool','int','float','double','string','data','date']
+  const isPrimitive = primitives.indexOf(type) > -1
 
   return <div>
     <input type="text" placeholder={id + ' ' + type} value={value} />
