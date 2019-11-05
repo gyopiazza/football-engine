@@ -55,20 +55,26 @@ function App(state) {
           {state.selectedSchema.name === schema ? '-> ' + schema : schema}
         </li>)}
     </ul>
-    {state.selectedSchema.name && <EditSchema selectedSchema={state.selectedSchema} />}
+    {state.selectedSchema.name && <EditSchema selectedSchema={state.selectedSchema} records={state.records[state.selectedSchema.name] || []} />}
     <hr/>
     <pre>{JSON.stringify(state, null, 2)}</pre>
   </main>
 }
 
 function EditSchema({ selectedSchema }) {
-  return <div>
-    <h1>Edit {selectedSchema.name}</h1>
-    <form>
-      <fieldset>       
-        {Object.keys(selectedSchema.properties).map(prop => <Field id={prop} type={selectedSchema.properties[prop]} />)}
-      </fieldset>
-    </form>
+  return <div style={{ display: 'flex' }}>
+    <div>
+      <h2>Edit {selectedSchema.name} Schema</h2>
+      <form>
+        <fieldset>       
+          {Object.keys(selectedSchema.properties).map(prop => <Field id={prop} type={selectedSchema.properties[prop]} />)}
+        </fieldset>
+      </form>
+    </div>
+    <div>
+      <h2>Edit {selectedSchema.name} Records</h2>
+      
+    </div>
   </div>
 }
 
