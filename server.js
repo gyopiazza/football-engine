@@ -25,7 +25,7 @@ app.get("/api", function(req, res) {
     res.send({
       schemas,
       records: {
-        team: realm.objects("Team")
+        team: realm.objects("Team").slice(0, 20)
       }
     });
   })

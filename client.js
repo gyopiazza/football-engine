@@ -46,6 +46,7 @@ const getData = (dispatch, payload) => {
 
 // Components
 function App(state) {
+  console.log((state.selectedSchema.name || '').toLowerCase(), state.records[(state.selectedSchema.name || '').toLowerCase()])
   return <main>
     <button onclick={[loadData, { test: true }]}>load</button>
     <h1>Schemas</h1>
@@ -55,7 +56,7 @@ function App(state) {
           {state.selectedSchema.name === schema ? '-> ' + schema : schema}
         </li>)}
     </ul>
-    {state.selectedSchema.name && <EditSchema selectedSchema={state.selectedSchema} records={state.records[state.selectedSchema.name] || []} />}
+    {state.selectedSchema.name && <EditSchema selectedSchema={state.selectedSchema} records={state.records[(state.selectedSchema.name || '').toLowerCase()] || []} />}
     <hr/>
     <pre>{JSON.stringify(state, null, 2)}</pre>
   </main>
