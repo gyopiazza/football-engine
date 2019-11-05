@@ -7,6 +7,12 @@ const Log = (() => {
 })()
 
 // Actions
+const cancelEditing = state => ({
+  ...state,
+  selectedSchema: {},
+  selectedRecord: {}
+})
+
 const setSelectedSchema = (state, schema) => ({
   ...state,
   selectedSchema: schema
@@ -74,7 +80,7 @@ function EditSchema({ selectedSchema, records }) {
     </div>
     <div>
       <h2>Edit {selectedSchema.name} Records</h2>
-      {records.map(record => <div>{record.name}</div>)}
+      {records.map(record => <div onclick={[setSelectedRecord, record]}>{record.name}</div>)}
     </div>
   </div>
 }
@@ -90,6 +96,7 @@ function Field({ id, type }) {
 app({
   init: {
     selectedSchema: {},
+    selectedRecord: {},
     schemas: [],
     records: {}
   },
