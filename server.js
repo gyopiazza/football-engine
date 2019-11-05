@@ -15,6 +15,36 @@ app.get("/", function(req, res) {
   res.sendFile(__dirname + "/views/index.html");
 });
 
+// "League",
+//         "season": "Season",
+//         "start": "date",
+//         "end": "date",
+//         "teams": "Team[]",
+//         "phases": {
+//           "type": "linkingObjects",
+//           "objectType": "Phase",
+//           "property": "competition"
+//         },
+//         "groups": {
+//           "type": "linkingObjects",
+//           "objectType": "Group",
+//           "property": "competition"
+//         },
+//         "rounds": {
+//           "type": "linkingObjects",
+//           "objectType": "Round",
+//           "property": "competition"
+//         }
+
+function competitionMapper(item) {
+  return {
+    ...item,
+    phases: [],
+    groups: [],
+    rounds: [],
+  }
+}
+
 app.get("/api", function(req, res) {
   Realm.open({
     // path: 'db/main.realm',
@@ -27,11 +57,11 @@ app.get("/api", function(req, res) {
     res.send({
       schemas,
       records: {
-        competition: realm.objects("Competition").slice(start, limit),
+        competition: realm.objects("Competition").slice(start, limit).map(competitionMapper),
         // league: realm.objects("League").slice(start, limit),
         // match: realm.objects("Match").slice(start, limit),
         // season: realm.objects("Season").slice(start, limit),
-        // team: realm.objects("Team").slice(start, limit),
+        team: realm.objects("Team").slice(start, limit),
       }
     });
   })

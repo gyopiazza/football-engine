@@ -77,7 +77,7 @@ function App(state) {
 function EditSchema({ selectedSchema, records }) {
   return <div style={{ display: 'flex' }}>
     <div>
-      <h2>Edit {selectedSchema.name} Schema</h2>
+      <h2>{selectedSchema.name} Schema</h2>
       <form>
         <fieldset>       
           {Object.keys(selectedSchema.properties).map(prop => <Field id={prop} type={selectedSchema.properties[prop]} />)}
@@ -85,7 +85,7 @@ function EditSchema({ selectedSchema, records }) {
       </form>
     </div>
     <div>
-      <h2>Edit {selectedSchema.name} Records</h2>
+      <h2>Records: {selectedSchema.name}</h2>
       {records.map(record => <div onclick={[setSelectedRecord, record]}>{record.name}</div>)}
     </div>
   </div>
