@@ -95,7 +95,7 @@ function EditSchema({ selectedSchema, selectedRecord, records }) {
 
 function EditRecord({ selectedSchema, selectedRecord }) {
   return <div>
-    <h2>Edit {selectedRecord.name} Record</h2>
+    <h2>Edit "{selectedRecord.name}" Record</h2>
     <Form selectedSchema={selectedSchema} selectedRecord={selectedRecord} />
   </div>
 }

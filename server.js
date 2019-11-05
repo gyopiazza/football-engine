@@ -41,7 +41,7 @@ function competitionMapper(item) {
     ...item,
     phases: [],
     groups: [],
-    rounds: [],
+    rounds: item.rounds.map(round => ({ id: round.id, name: round.name })),
   }
 }
 
