@@ -22,13 +22,20 @@ app.get("/api", function(req, res) {
     schema: [schemas.League, schemas.Season, schemas.Competition, schemas.Phase, schemas.Group, schemas.Round, schemas.Match, schemas.Team, schemas.Lineup, schemas.Player]
   })
   .then(realm => {
+    const start = 0
+    const limit = 20
     res.send({
       schemas,
       records: {
-        team: realm.objects("Team").slice(0, 20)
+        competition: realm.objects("Competition").slice(start, limit),
+        // league: realm.objects("League").slice(start, limit),
+        // match: realm.objects("Match").slice(start, limit),
+        // season: realm.objects("Season").slice(start, limit),
+        // team: realm.objects("Team").slice(start, limit),
       }
     });
   })
+  .catch(e => console.log(e))
 });
 
 // listen for requests :)

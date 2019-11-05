@@ -18,6 +18,11 @@ const setSelectedSchema = (state, schema) => ({
   selectedSchema: schema
 })
 
+const setSelectedRecord = (state, record) => ({
+  ...state,
+  selectedRecord: record
+})
+
 const loadData = (state, payload) => [
   state,
   getDataFx(payload) // Call a proxy-function
@@ -54,7 +59,8 @@ const getData = (dispatch, payload) => {
 function App(state) {
   console.log((state.selectedSchema.name || '').toLowerCase(), state.records[(state.selectedSchema.name || '').toLowerCase()])
   return <main>
-    <button onclick={[loadData, { test: true }]}>load</button>
+    <button onclick={[loadData, { test: true }]}>load</button> 
+    {(state.selectedSchema.name || state.selectedRecord.id) && <button onclick={cancelEditing}>cancel editing</button>}
     <h1>Schemas</h1>
     <ul>
       {Object.keys(state.schemas).map(schema => 
