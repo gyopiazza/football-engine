@@ -68,14 +68,15 @@ function App(state) {
           {state.selectedSchema.name === schema ? '-> ' + schema : schema}
         </li>)}
     </ul>
-    {state.selectedSchema.name && <EditSchema selectedSchema={state.selectedSchema} records={state.records[(state.selectedSchema.name || '').toLowerCase()] || []} />}
+    {state.selectedSchema.name && !state.selectedRecord.id && <EditSchema selectedSchema={state.selectedSchema} selectedRecord={state.selectedRecord} records={state.records[(state.selectedSchema.name || '').toLowerCase()] || []} />}
     <hr/>
     <pre>{JSON.stringify(state, null, 2)}</pre>
   </main>
 }
 
-function EditSchema({ selectedSchema, records }) {
+function EditSchema({ selectedSchema, selectedRecord, records }) {
   return <div style={{ display: 'flex' }}>
+    <pre>{JSON.stringify(selectedRecord)}</pre>
     <div>
       <h2>{selectedSchema.name} Schema</h2>
       <form>
@@ -84,10 +85,19 @@ function EditSchema({ selectedSchema, records }) {
         </fieldset>
       </form>
     </div>
-    <div>
-      <h2>Records: {selectedSchema.name}</h2>
-      {records.map(record => <div onclick={[setSelectedRecord, record]}>{record.name}</div>)}
-    </div>
+    {!selectedRecord.id && <div>
+      <h2>{selectedSchema.name} Records</h2>
+      {records.map(record => <div onclick={[setSelectedRecord, record]}>
+        {selectedRecord.id === record.id ? '-> ' + record.name : record.name}
+      </div>)}
+    </div>}
+    {selectedRecord.id && <EditRecord selectedSchema={selectedSchema} selectedRecord={selectedRecord} />}
+  </div>
+}
+
+function EditRecord({ selectedSchema, selectedRecord }) {
+  return <div style={{ display: 'flex' }}>
+    <h2>{selectedRecord.name} Record</h2>
   </div>
 }
 
