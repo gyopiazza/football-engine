@@ -39,8 +39,8 @@ app.get("/", function(req, res) {
 function competitionMapper(item) {
   return {
     ...item,
-    phases: [],
-    groups: [],
+    phases: item.rounds.map(round => ({ id: round.id, name: round.name })),
+    groups: item.rounds.map(round => ({ id: round.id, name: round.name })),
     rounds: item.rounds.map(round => ({ id: round.id, name: round.name })),
   }
 }

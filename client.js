@@ -110,7 +110,8 @@ function Form({ selectedSchema, selectedRecord = {} }) {
 
 function Field({ id, type, value }) {
   // const field = typeof type === 'string' ? { type } : type
-  
+  const primitive = ['bool','int','float','double','string','data','date']
+
   return <div>
     <input type="text" placeholder={id + ' ' + type} value={value} />
   </div>
@@ -124,13 +125,5 @@ app({
     records: {}
   },
   view: state => App(state),
-    // h("main", {}, [
-    //   h("h1", null, 'Schemas'),
-    //   h("ul", null, Object.keys(state.schemas)
-    //     .map(schema => h("li", { onClick: [setSelectedSchema, schema] },
-    //                      state.selectedSchema === schema ? '-> ' + schema : schema))),
-    //   h("button", { onClick: [loadData, {test: true}] }, "load"),
-    //   h("pre", {}, JSON.stringify(state, null, 2)),
-    // ]),
   node: document.getElementById("app")
 })

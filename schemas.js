@@ -1,3 +1,11 @@
+// Types
+// bool properties map to JavaScript boolean values
+// int, float, and double properties map to JavaScript number values. Internally ‘int’ and ‘double’ are stored as 64 bits while float is stored with 32 bits.
+// string properties map to string
+// data properties map to ArrayBuffer
+// date properties map to Date
+
+
 /*
 Leagues
 */
