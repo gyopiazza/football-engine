@@ -23,7 +23,7 @@ const setData = (state, payload) => {
   return {
     ...state,
     schemas: payload.schemas,
-    teams: payload.teams
+    records: payload.records
   }
 }
 
@@ -61,7 +61,7 @@ function App(state) {
   </main>
 }
 
-function EditSchema({ selectedSchema }) {
+function EditSchema({ selectedSchema, records }) {
   return <div style={{ display: 'flex' }}>
     <div>
       <h2>Edit {selectedSchema.name} Schema</h2>
@@ -73,7 +73,8 @@ function EditSchema({ selectedSchema }) {
     </div>
     <div>
       <h2>Edit {selectedSchema.name} Records</h2>
-      
+      {records.map(record => <div>{record.name}</div>)}
+      <pre>{JSON.stringify(records)}</pre>
     </div>
   </div>
 }
@@ -90,7 +91,7 @@ app({
   init: {
     selectedSchema: {},
     schemas: [],
-    teams: []
+    records: {}
   },
   view: state => App(state),
     // h("main", {}, [
