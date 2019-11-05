@@ -75,7 +75,6 @@ function EditSchema({ selectedSchema, records }) {
     <div>
       <h2>Edit {selectedSchema.name} Records</h2>
       {records.map(record => <div>{record.name}</div>)}
-      <pre>{JSON.stringify(records)}</pre>
     </div>
   </div>
 }
