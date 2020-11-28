@@ -14,10 +14,10 @@ function log() {
 
 // Start with a fresh DB
 const files = [
-'tests/test.realm.lock',
-'tests/test.realm.note',
-'tests/test.realm',
-'tests/test.realm.management'
+  'tests/test.realm.lock',
+  'tests/test.realm.note',
+  'tests/test.realm',
+  'tests/test.realm.management'
 ]
 
 files.forEach(file => fs.existsSync(file)
