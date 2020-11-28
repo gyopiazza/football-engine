@@ -77,7 +77,7 @@ test('Various Tests', function (t) {
     const homeAwayCount = countHomeAwayMatches(schedule)
     // Get the first result as reference
     const homeAwayReferenceValues = homeAwayCount[Object.keys(homeAwayCount)[0]]
-    
+    console.log('schedule', schedule)
     // Tests...
     
     t.ok(leagues.length, 'should have leagues')
@@ -97,13 +97,6 @@ test('Various Tests', function (t) {
     
     // console.log('=========')
     // console.log(standings) 
-    
-    // let shuffledTeams = []
-    // for (let i = 0; i < teams.length; i++) {
-    //   shuffledTeams.push(teams[i])
-    // }
-    // shuffle(shuffledTeams)
-    // const homeAwayCount = countHomeAwayMatches(schedule)
     
     // End tests
     realm.close()

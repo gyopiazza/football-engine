@@ -24,10 +24,10 @@ const seed = realm => {
       name: 'Serie A'
     })
     
-    data.coppaItalia_league = realm.create('League', {
-      id: uuid(),
-      name: 'Coppa Italia'
-    })
+    // data.coppaItalia_league = realm.create('League', {
+    //   id: uuid(),
+    //   name: 'Coppa Italia'
+    // })
     
     // Seasons
     data.season = realm.create('Season', {
