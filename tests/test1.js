@@ -77,7 +77,7 @@ test('Various Tests', function (t) {
     const homeAwayCount = countHomeAwayMatches(schedule)
     // Get the first result as reference
     const homeAwayReferenceValues = homeAwayCount[Object.keys(homeAwayCount)[0]]
-    console.log('schedule', schedule)
+
     // Tests...
     
     t.ok(leagues.length, 'should have leagues')
