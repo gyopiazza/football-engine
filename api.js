@@ -211,6 +211,7 @@ function generateSchedule(teams, { twolegs = false, rounds, shuffle = true } = {
   return schedule;
 }
 
+// Move to some tests utilities
 const countHomeAwayMatches = schedule => schedule.reduce((result, round) => {
   round.forEach(match => {
     const teamHome = match[0]

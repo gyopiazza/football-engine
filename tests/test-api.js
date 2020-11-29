@@ -23,6 +23,12 @@ const mockSchedule = (teamsNum = 10, options = {}) => {
   // Get the first result as reference
   const homeAwayReferenceValues = homeAwayCount[Object.keys(homeAwayCount)[0]]
   
+  const matches = schedule.map(round => round.map(match => {
+    const home = match[0]
+    const away = match[1]
+    
+  }))
+  
   return {
     teams,
     schedule,
