@@ -15,11 +15,14 @@ const updateStandings = (standings, team, points = 0, goals = 0, goals_conceded 
     standings[teamIndex].goals += (team.goals || 0) + goals
     standings[teamIndex].goals_conceded += (team.goals_conceded || 0) + goals_conceded
   } else {
+    // TODO: Find a better way to convert realm obj to regular obj
+    let parsedTeam = JSON.parse(JSON.stringify(team)) || team
+    
     standings.push({
-      ...JSON.parse(JSON.stringify(team)), // TODO: Find a better way to convert realm obj to regular obj
-      points: (team.points || 0) + points,
-      goals: (team.goals || 0) + goals,
-      goals_conceded: (team.goals_conceded || 0) + goals_conceded,
+      ...parsedTeam,
+      points: (parsedTeam.points || 0) + points,
+      goals: (parsedTeam.goals || 0) + goals,
+      goals_conceded: (parsedTeam.goals_conceded || 0) + goals_conceded,
     })
   }
   return standings

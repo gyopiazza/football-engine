@@ -37,6 +37,7 @@ const mockSchedule = (teamsNum = 10, options = {}) => {
   return {
     teams,
     schedule,
+    matches,
     homeAwayCount,
     homeAwayReferenceValues
   }
@@ -90,6 +91,12 @@ test('API Tests', function (t) {
       true,
       team.name + ': number of home-away matches')
   })
+  
+  const standings = mock.matches
+      .reduce(api.standingsReducer, [])
+      .sort(api.standingsSorter)
+  
+  console.log(standings)
   
   t.end()
 })
