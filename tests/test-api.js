@@ -23,16 +23,19 @@ const mockSchedule = (teamsNum = 10, options = {}) => {
   // Get the first result as reference
   const homeAwayReferenceValues = homeAwayCount[Object.keys(homeAwayCount)[0]]
   
-  const matches = schedule.map(round => round.map(match => {
-    const home = match[0]
-    const away = match[1]
-    return {
-      team_home: home,
-      team_away: away,
-      goals_home: home.id > away.id ? 2 : 1,
-      goals_away: away.id > home.id ? 2 : 1,
-    }
-  }))
+  const matches = schedule.reduce((acc, round) => {
+    round.forEach(match => {
+      const home = match[0]
+      const away = match[1]
+      acc.push({
+        team_home: home,
+        team_away: away,
+        goals_home: home.id > away.id ? 2 : 1,
+        goals_away: away.id > home.id ? 2 : 1,
+      })
+    })
+    return acc
+  }, [])
   
   return {
     teams,
@@ -49,7 +52,7 @@ const mockSchedule = (teamsNum = 10, options = {}) => {
 
 test('API Tests', function (t) {
   
-  const mock = mockSchedule(11, { twolegs: true, shuffle: true })
+  const mock = mockSchedule(3, { twolegs: true, shuffle: true })
   
   // const teams = [
   //   { id: 1, name: 'Team 1' },
@@ -91,6 +94,8 @@ test('API Tests', function (t) {
       true,
       team.name + ': number of home-away matches')
   })
+  
+  // console.log(mock.matches)
   
   const standings = mock.matches
       .reduce(api.standingsReducer, [])
