@@ -202,7 +202,7 @@ function generateSchedule(teams, { twolegs = false, rounds, shuffle = true } = {
   }
   
   // Remove matches with just one team (for odd teams number)
-  schedule = schedule.map(round => round.filter(match => match[0] && match[1]))
+  // schedule = schedule.map(round => round.filter(match => match[0] && match[1]))
   
   if (twolegs) {
     schedule = schedule.concat(schedule.map(round => round.map(match => [match[1], match[0]])))

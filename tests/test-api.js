@@ -17,7 +17,10 @@ test('API Tests', function (t) {
     { id: 1, name: 'Team 1' },
     { id: 2, name: 'Team 2' },
     { id: 3, name: 'Team 3' },
-    // { id: 4, name: 'Team 4' },
+    { id: 4, name: 'Team 4' },
+    { id: 5, name: 'Team 5' },
+    { id: 6, name: 'Team 6' },
+    { id: 7, name: 'Team 7' },
   ]
   const compensate = teams.length % 2 ? 1 : 2
   
@@ -32,7 +35,8 @@ test('API Tests', function (t) {
   schedule.forEach((round, key) => {
     console.log('============')
     console.log('Round', key)
-    round.forEach(match => console.log(match[0].name, 'vs', match[1].name))
+    round.forEach(match => 
+      console.log(match[0] ? match[0].name : null, 'vs', match[1] ? match[1].name : null))
   })
   
   // t.equal(schedule.length, teams.length * 2 - compensate, 'the schedule should have a correct number of rounds')
