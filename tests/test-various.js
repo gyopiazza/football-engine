@@ -38,7 +38,7 @@ const countHomeAwayMatches = schedule => schedule.reduce((result, round) => {
   return result
 }, {})
 
-test('Various Tests', function (t) {
+test.skip('Various Tests', function (t) {
 //     t.plan(2)
 
 //     t.equal(typeof Date.now, 'function')
@@ -70,7 +70,7 @@ test('Various Tests', function (t) {
       .filtered('round.competition.key = "seriea.2017"')
       .reduce(api.standingsReducer, [])
       .sort(api.standingsSorter)
-    
+
     // Generate new schedule
     const schedule = api.generateSchedule(teams, { twolegs: true, shuffle: true })
     // Count home and away matches for each team

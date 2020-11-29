@@ -154,17 +154,13 @@ function rotate(items) {
 /**
  * Generate a round-robin schedule from an array of teams
  *
- * @param array $teams An array of teams which may be any valid type
+ * @param array teams An array of teams which may be any valid type
  *
- * @param int $rounds The number of rounds, will default to the number of
+ * @param int rounds The number of rounds, will default to the number of
  *     rounds required for each contestant to meet all other contestants
  *
- * @param bool $shuffle Whether to shuffle the teams before generating the
+ * @param bool shuffle Whether to shuffle the teams before generating the
  *     schedule, default is true
- *
- * @param int $seed Seed to use for shuffling if shuffle is enabled, if no seed
- *     will use random_int with PHP_INT_MIN and PHP_INT_MAX is no seed is
- *     provided
  *
  * @return array An array of rounds, in the format of $round => $matchups,
  *     where each matchup has only two elements with the two teams as elements
