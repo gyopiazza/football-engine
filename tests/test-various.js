@@ -28,7 +28,7 @@ files.forEach(file => fs.existsSync(file)
 
 //////////////////////////////////////////////////////
 
-test.skip('Various Tests', function (t) {
+test('Various Tests', function (t) {
 //     t.plan(2)
 
 //     t.equal(typeof Date.now, 'function')
