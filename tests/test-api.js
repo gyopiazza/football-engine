@@ -77,7 +77,7 @@ test('API Tests', function (t) {
   
   const standings = mock.matches
       .reduce(api.standingsReducer, [])
-      .sort(api.standingsSorter)
+      .sort(api.standingsSorter())
   
   //////////
   
@@ -155,7 +155,7 @@ test('API Tests', function (t) {
   
   const standings2 = matches
       .reduce(api.standingsReducer, [])
-      .sort(api.standingsSorter)
+      .sort(api.standingsSorter(matches))
   
   console.log(standings2)
   

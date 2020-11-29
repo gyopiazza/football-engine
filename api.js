@@ -49,21 +49,36 @@ const standingsReducer = (standings = [], match) => {
 // Goal difference overall
 // Higher number of goals scored
 // Draw
-const standingsSorter = (a, b) => {
-  // Points
-  if (a.points > b.points) return -1
-  if (a.points < b.points) return 1
-  // TODO: Add head-to-head rules here
-  // Goal difference overall
-  const diffA = a.goals - a.goals_conceded
-  const diffB = b.goals - b.goals_conceded
-  if (diffA > diffB) return -1
-  if (diffA < diffB) return 1
-  // Higher number of goals scored
-  if (a.goals > b.goals) return -1
-  if (a.goals < b.goals) return 1
-  // Draw
-  return 0
+const standingsSorter = matches => {
+  return (a, b) => {
+    // Points
+    if (a.points > b.points) return -1
+    if (a.points < b.points) return 1
+    // TODO: Add head-to-head rules here
+    const standings = matches
+      .filter(match => 
+        (match.team_home.id === a.id || match.team_away.id === a.id) &&
+        (match.team_home.id === b.id || match.team_away.id === b.id))
+      .reduce(standingsReducer)
+    if (standings.length) {
+      if (standings[0].id === a.id && standings[0].points > standings[1].points) return -1
+      if (standings[0].id === b.id && standings[0].points > standings[1].points) return 1
+    }
+    // if (standings.length && standings[0].points > standings[1].points) return -1
+    // if (standings.length && standings[0].points < standings[1].points) return 1
+    // TODO: Add goal difference head-to-head rules here
+    // ...
+    // Goal difference overall
+    const diffA = a.goals - a.goals_conceded
+    const diffB = b.goals - b.goals_conceded
+    if (diffA > diffB) return -1
+    if (diffA < diffB) return 1
+    // Higher number of goals scored
+    if (a.goals > b.goals) return -1
+    if (a.goals < b.goals) return 1
+    // Draw
+    return 0
+  }
 }
 
 const processMatches = matches => matches

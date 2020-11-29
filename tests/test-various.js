@@ -59,7 +59,7 @@ test.skip('Various Tests', function (t) {
     const standings = matches
       .filtered('round.competition.key = "seriea.2017"')
       .reduce(api.standingsReducer, [])
-      .sort(api.standingsSorter)
+      .sort(api.standingsSorter())
 
     // Generate new schedule
     const schedule = api.generateSchedule(teams, { twolegs: true, shuffle: true })
