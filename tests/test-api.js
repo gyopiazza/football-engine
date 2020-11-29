@@ -26,7 +26,12 @@ const mockSchedule = (teamsNum = 10, options = {}) => {
   const matches = schedule.map(round => round.map(match => {
     const home = match[0]
     const away = match[1]
-    
+    return {
+      team_home: home,
+      team_away: away,
+      goals_home: home.id > away.id ? 2 : 1,
+      goals_away: away.id > home.id ? 2 : 1,
+    }
   }))
   
   return {
