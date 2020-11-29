@@ -149,20 +149,5 @@ test('API Tests', function (t) {
   t.equal(standings2[3].id, 3, 'Correct fourth team head-to-head')  
   
   
-  // Count home and away matches for each team
-  const homeAwayCount = api.countHomeAwayMatches(matches)
-  // Get the first result as reference
-  const homeAwayReferenceValues = homeAwayCount[Object.keys(homeAwayCount)[0]]
-  const ham2 = mock.teams.reduce((acc, team) => {
-    return homeAwayCount[team.name].home === homeAwayReferenceValues.home &&
-           homeAwayCount[team.name].away === homeAwayReferenceValues.away
-      ? acc + 0
-      : acc + 1
-  }, 0)
-  
-  t.equal(ham2, 0, 'Correct number of home-away matches head-to-head')
-  
-  
-  
   t.end()
 })
