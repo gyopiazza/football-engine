@@ -30,8 +30,8 @@ const mockSchedule = (teamsNum = 10, options = {}) => {
       acc.push({
         team_home: home,
         team_away: away,
-        goals_home: home.id > away.id ? 2 : 1,
-        goals_away: away.id > home.id ? 2 : 1,
+        goals_home: home.id < away.id ? 2 : 1,
+        goals_away: away.id < home.id ? 2 : 1,
       })
     })
     return acc
@@ -52,37 +52,9 @@ const mockSchedule = (teamsNum = 10, options = {}) => {
 
 test('API Tests', function (t) {
   
-  const mock = mockSchedule(3, { twolegs: true, shuffle: true })
-  
-  // const teams = [
-  //   { id: 1, name: 'Team 1' },
-  //   { id: 2, name: 'Team 2' },
-  //   { id: 3, name: 'Team 3' },
-  //   { id: 4, name: 'Team 4' },
-  //   { id: 5, name: 'Team 5' },
-  //   // { id: 6, name: 'Team 6' },
-  //   // { id: 7, name: 'Team 7' },
-  // ]
+  const mock = mockSchedule(20, { twolegs: true, shuffle: true })
   const compensate = mock.teams.length % 2 ? 0 : 2
-  
-  // const schedule = api.generateSchedule(teams, { twolegs: true, shuffle: true })
-  // Count home and away matches for each team
-  // const homeAwayCount = api.countHomeAwayMatches(schedule)
-  // Get the first result as reference
-  // const homeAwayReferenceValues = homeAwayCount[Object.keys(homeAwayCount)[0]]
-  
-//   console.log('teams.length', mock.teams.length)
-//   console.log('rest', mock.teams.length % 2)
-//   console.log('compensate', compensate, mock.teams.length * 2 - compensate)
-//   console.log('schedule', mock.schedule.length)
-  
-//   mock.schedule.forEach((round, key) => {
-//     console.log('============')
-//     console.log('Round', key)
-//     round.forEach(match => 
-//       console.log(match[0] ? match[0].name : null, 'vs', match[1] ? match[1].name : null))
-//   })
-  
+    
   t.equal(mock.schedule.length, mock.teams.length * 2 - compensate, 'the schedule should have a correct number of rounds')
   t.ok(Object.keys(mock.homeAwayCount).length, 'should have home-away count')
   
@@ -94,6 +66,13 @@ test('API Tests', function (t) {
       true,
       team.name + ': number of home-away matches')
   })
+  mock.teams.reduce(team => {
+    return mock.homeAwayCount[team.name].home === mock.homeAwayReferenceValues.home &&
+           mock.homeAwayCount[team.name].away === mock.homeAwayReferenceValues.away
+      ? 0
+      : 1
+  }, 0)
+  
   
   // console.log(mock.matches)
   
@@ -101,7 +80,14 @@ test('API Tests', function (t) {
       .reduce(api.standingsReducer, [])
       .sort(api.standingsSorter)
   
-  console.log(standings)
+  //////////
+  
+  const teams = [
+    { id: 1, name: 'Team 1' },
+    { id: 2, name: 'Team 2' },
+    { id: 3, name: 'Team 3' },
+  ]
+  // console.log(standings)
   
   t.end()
 })
