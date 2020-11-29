@@ -58,37 +58,23 @@ test('API Tests', function (t) {
   t.equal(mock.schedule.length, mock.teams.length * 2 - compensate, 'the schedule should have a correct number of rounds')
   t.ok(Object.keys(mock.homeAwayCount).length, 'should have home-away count')
   
-  // Check that each team has the same amount of home-away matches
-  // mock.teams.map(team => {
-  //   t.equal(
-  //     mock.homeAwayCount[team.name].home === mock.homeAwayReferenceValues.home &&
-  //     mock.homeAwayCount[team.name].away === mock.homeAwayReferenceValues.away,
-  //     true,
-  //     team.name + ': number of home-away matches')
-  // })
-  
   const ham = mock.teams.reduce((acc, team) => {
     return mock.homeAwayCount[team.name].home === mock.homeAwayReferenceValues.home &&
            mock.homeAwayCount[team.name].away === mock.homeAwayReferenceValues.away
       ? acc + 0
       : acc + 1
   }, 0)
+  
   t.equal(ham, 0, 'Correct number of home-away matches')
   
   const standings = mock.matches
       .reduce(api.standingsReducer, [])
       .sort(api.standingsSorter())
   
+  t.equal(standings[0].id, 1, 'Correct first team')
+  
   //////////
-  
-  const teams = [
-    { id: 1, name: 'Team 1' }, // 9
-    { id: 2, name: 'Team 2' }, // 9
-    { id: 3, name: 'Team 3' }, // 3
-    { id: 4, name: 'Team 4' }, // 3
-    { id: 5, name: 'Team 5' }, //
-  ]
-  
+
   const matches = [
     {
       team_home: { id: 2, name: "Team 2" },
@@ -157,8 +143,26 @@ test('API Tests', function (t) {
       .reduce(api.standingsReducer, [])
       .sort(api.standingsSorter(matches))
   
-  console.log('====================================')
-  console.log(standings2)
+  t.equal(standings2[0].id, 2, 'Correct first team head-to-head')  
+  t.equal(standings2[1].id, 1, 'Correct second team head-to-head')  
+  t.equal(standings2[2].id, 4, 'Correct third team head-to-head')  
+  t.equal(standings2[3].id, 3, 'Correct fourth team head-to-head')  
+  
+  
+  // Count home and away matches for each team
+  const homeAwayCount = api.countHomeAwayMatches(matches)
+  // Get the first result as reference
+  const homeAwayReferenceValues = homeAwayCount[Object.keys(homeAwayCount)[0]]
+  const ham2 = mock.teams.reduce((acc, team) => {
+    return homeAwayCount[team.name].home === homeAwayReferenceValues.home &&
+           homeAwayCount[team.name].away === homeAwayReferenceValues.away
+      ? acc + 0
+      : acc + 1
+  }, 0)
+  
+  t.equal(ham2, 0, 'Correct number of home-away matches head-to-head')
+  
+  
   
   t.end()
 })
