@@ -28,16 +28,6 @@ files.forEach(file => fs.existsSync(file)
 
 //////////////////////////////////////////////////////
 
-const countHomeAwayMatches = schedule => schedule.reduce((result, round) => {
-  round.forEach(match => {
-    result[match[0].name] = result[match[0].name] || { home: 0, away: 0 }
-    result[match[0].name].home = result[match[0].name].home + 1
-    result[match[1].name] = result[match[1].name] || { home: 0, away: 0 }
-    result[match[1].name].away = result[match[1].name].away + 1
-  })
-  return result
-}, {})
-
 test.skip('Various Tests', function (t) {
 //     t.plan(2)
 
@@ -74,7 +64,7 @@ test.skip('Various Tests', function (t) {
     // Generate new schedule
     const schedule = api.generateSchedule(teams, { twolegs: true, shuffle: true })
     // Count home and away matches for each team
-    const homeAwayCount = countHomeAwayMatches(schedule)
+    const homeAwayCount = api.countHomeAwayMatches(schedule)
     // Get the first result as reference
     const homeAwayReferenceValues = homeAwayCount[Object.keys(homeAwayCount)[0]]
 

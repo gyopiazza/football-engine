@@ -208,6 +208,19 @@ function generateSchedule(teams, { twolegs = false, rounds, shuffle = true } = {
   return schedule;
 }
 
+const countHomeAwayMatches = schedule => schedule.reduce((result, round) => {
+  round.forEach(match => {
+    const teamHome = match[0]
+    const teamAway = match[1]
+    if (!teamHome || !teamAway) return
+    result[teamHome.name] = result[teamHome.name] || { home: 0, away: 0 }
+    result[teamHome.name].home = result[teamHome.name].home + 1
+    result[teamAway.name] = result[teamAway.name] || { home: 0, away: 0 }
+    result[teamAway.name].away = result[teamAway.name].away + 1
+  })
+  return result
+}, {})
+
 /**
  * Queue
  */
@@ -241,5 +254,6 @@ module.exports = {
   calculateCompetition,
   headToHeadFilter,
   generateSchedule,
+  countHomeAwayMatches,
   queue
 }
