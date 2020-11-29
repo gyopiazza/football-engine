@@ -157,6 +157,7 @@ test('API Tests', function (t) {
       .reduce(api.standingsReducer, [])
       .sort(api.standingsSorter(matches))
   
+  console.log('====================================')
   console.log(standings2)
   
   t.end()
