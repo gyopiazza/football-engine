@@ -57,16 +57,17 @@ const standingsSorter = matches => {
     // TODO: Add head-to-head rules here
     const standings = matches
       .filter(match => 
-        (match.team_home.id === a.id || match.team_away.id === a.id) &&
-        (match.team_home.id === b.id || match.team_away.id === b.id))
-      // .reduce(standingsReducer)
+        (match.team_home.id === a.id && match.team_away.id === b.id) ||
+        (match.team_home.id === b.id && match.team_away.id === a.id))
+      .reduce(standingsReducer, [])
+      .sort(standingsSorter(matches))
     console.log(standings)
     // console.log('a', standings[0].id === a.id && standings[0].points > standings[1].points)
     // console.log('b', standings[0].id === b.id && standings[0].points > standings[1].points)
-    // if (standings.length) {
-      // if (standings[0].id === a.id && standings[0].points > standings[1].points) return -1
-      // if (standings[0].id === b.id && standings[0].points > standings[1].points) return 1
-    // }
+    if (standings.length) {
+      if (standings[0].id === a.id && standings[0].points > standings[1].points) return -1
+      if (standings[0].id === b.id && standings[0].points > standings[1].points) return 1
+    }
     // TODO: Add goal difference head-to-head rules here
     // ...
     // Goal difference overall
