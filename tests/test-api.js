@@ -82,10 +82,11 @@ test('API Tests', function (t) {
   //////////
   
   const teams = [
-    { id: 1, name: 'Team 1' },
-    { id: 2, name: 'Team 2' },
-    { id: 3, name: 'Team 3' },
-    { id: 4, name: 'Team 4' },
+    { id: 1, name: 'Team 1' }, // 9
+    { id: 2, name: 'Team 2' }, // 9
+    { id: 3, name: 'Team 3' }, // 3
+    { id: 4, name: 'Team 4' }, // 3
+    { id: 5, name: 'Team 5' }, //
   ]
   
   const matches = [
@@ -99,7 +100,7 @@ test('API Tests', function (t) {
       team_home: { id: 3, name: "Team 3" },
       team_away: { id: 4, name: "Team 4" },
       goals_home: 1,
-      goals_away: 1
+      goals_away: 2
     },
     {
       team_home: { id: 2, name: "Team 2" },
@@ -113,18 +114,43 @@ test('API Tests', function (t) {
       goals_home: 2,
       goals_away: 1
     },
-    // {
-    //   team_home: { id: 4, name: "Team 4" },
-    //   team_away: { id: 2, name: "Team 2" },
-    //   goals_home: 1,
-    //   goals_away: 2
-    // },
-    // {
-    //   team_home: { id: 3, name: "Team 3" },
-    //   team_away: { id: 1, name: "Team 1" },
-    //   goals_home: 2,
-    //   goals_away: 1
-    // }
+    {
+      team_home: { id: 4, name: "Team 4" },
+      team_away: { id: 2, name: "Team 2" },
+      goals_home: 1,
+      goals_away: 2
+    },
+    {
+      team_home: { id: 3, name: "Team 3" },
+      team_away: { id: 1, name: "Team 1" },
+      goals_home: 1,
+      goals_away: 2
+    },
+    ///
+    {
+      team_home: { id: 5, name: "Team 5" },
+      team_away: { id: 1, name: "Team 1" },
+      goals_home: 1,
+      goals_away: 2
+    },
+    {
+      team_home: { id: 5, name: "Team 5" },
+      team_away: { id: 2, name: "Team 2" },
+      goals_home: 1,
+      goals_away: 2
+    },
+    {
+      team_home: { id: 5, name: "Team 5" },
+      team_away: { id: 3, name: "Team 3" },
+      goals_home: 1,
+      goals_away: 2
+    },
+    {
+      team_home: { id: 5, name: "Team 5" },
+      team_away: { id: 4, name: "Team 4" },
+      goals_home: 1,
+      goals_away: 2
+    },
   ];
   
   const standings2 = matches
