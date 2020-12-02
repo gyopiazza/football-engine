@@ -50,7 +50,7 @@ const mockSchedule = (teamsNum = 10, options = {}) => {
 //////////////////////////////////////////////////////
 
 
-test('API Tests', function (t) {
+test.skip('API Tests', function (t) {
 
   const mock = mockSchedule(3, { twolegs: true, shuffle: true })
   const compensate = mock.teams.length % 2 ? 0 : 2

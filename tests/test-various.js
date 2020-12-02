@@ -28,7 +28,7 @@ files.forEach(file => fs.existsSync(file)
 
 //////////////////////////////////////////////////////
 
-test.skip('Various Tests', function (t) {
+test('Various Tests', function (t) {
 //     t.plan(2)
 
 //     t.equal(typeof Date.now, 'function')
@@ -37,7 +37,7 @@ test.skip('Various Tests', function (t) {
 //     setTimeout(function () {
 //         t.equal(Date.now() - start, 100)
 //     }, 100)
-  
+
   Realm.open({
     path: 'tests/test.realm',
     schema: [schemas.League, schemas.Season, schemas.Competition, schemas.Phase, schemas.Group, schemas.Round, schemas.Match, schemas.Team, schemas.Lineup, schemas.Player]
@@ -45,7 +45,7 @@ test.skip('Various Tests', function (t) {
   .then(realm => {
     // Seed the test database with mock data
     const { serieA_league, coppaItalia_league, season, serieA_competition, serieA_matches } = seed(realm)
-    
+
     const leagues = realm.objects("League")
     const seasons = realm.objects("Season")
     const competitions = realm.objects("Competition")
@@ -54,12 +54,12 @@ test.skip('Various Tests', function (t) {
     const rounds = realm.objects("Round")
     const matches = realm.objects("Match")
     const teams = realm.objects("Team")
-    
+
     // Generate the standings for the current data
     const standings = matches
       .filtered('round.competition.key = "seriea.2017"')
       .reduce(api.standingsReducer, [])
-      .sort(api.standingsSorter())
+      .sort(api.standingsSorter(matches))
 
     // Generate new schedule
     const schedule = api.generateSchedule(teams, { twolegs: true, shuffle: true })
@@ -69,12 +69,12 @@ test.skip('Various Tests', function (t) {
     const homeAwayReferenceValues = homeAwayCount[Object.keys(homeAwayCount)[0]]
 
     // Tests...
-    
+
     t.ok(leagues.length, 'should have leagues')
     t.ok(teams.length, 'should have teams')
     t.equal(schedule.length, teams.length * 2 - 2, 'the schedule should have a correct number of rounds')
     t.ok(Object.keys(homeAwayCount).length, 'should have home-away count')
-    
+
     // Check that each team has the same amount of home-away matches
     teams.map(team => {
       t.equal(
@@ -82,12 +82,12 @@ test.skip('Various Tests', function (t) {
         true,
         team.name + ': number of home-away matches')
     })
-    
+
     t.equal(standings[0].name, 'Juventus', 'standings: first team is correct')
-    
+
     // console.log('=========')
-    // console.log(standings) 
-    
+    // console.log(standings)
+
     // End tests
     realm.close()
     t.end()

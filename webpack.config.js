@@ -3,7 +3,7 @@ module.exports = {
   entry: ['./client.js'],
   output: {
     filename: "bundle.js",
-    path: "/app/public"
+    path: "/Users/gyo/Works/playground/football-engine/public"
   },
   module: {
     rules: [

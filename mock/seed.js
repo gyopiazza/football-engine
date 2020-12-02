@@ -7,9 +7,9 @@ const serieAMatches = require('./data/seriea-rounds.json')
 const seed = realm => {
   const data = {}
   const teams = realm.objects("Team")
-  
+
   realm.write(() => {
-    
+
     // Teams
     data.serieA_teams = serieAClubs.clubs.map(team => {
       return realm.create('Team', {
@@ -17,25 +17,25 @@ const seed = realm => {
         name: team.name
       })
     })
-    
+
     // Leagues
     data.serieA_league = realm.create('League', {
       id: uuid(),
       name: 'Serie A'
     })
-    
+
     // data.coppaItalia_league = realm.create('League', {
     //   id: uuid(),
     //   name: 'Coppa Italia'
     // })
-    
+
     // Seasons
     data.season = realm.create('Season', {
       id: uuid(),
       key: '17/18',
       name: '2017/2018'
     })
-    
+
     // Competition: Serie A
     data.serieA_competition = realm.create('Competition', {
       id: uuid(),
@@ -59,10 +59,10 @@ const seed = realm => {
 //         teams: teams
 //       })
   })
-    
-  
+
+
   // Rounds & Matches
-  
+
   const teamsCache = {}
   function getTeamByName(teamName) {
     teamsCache[teamName.toLowerCase()] =

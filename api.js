@@ -50,20 +50,40 @@ const standingsReducer = (standings = [], match) => {
 // Higher number of goals scored
 // Draw
 const standingsSorter = matches => {
+  // console.log('matches', matches.length, matches);
   return (a, b) => {
     // Points
     if (a.points > b.points) return -1
     if (a.points < b.points) return 1
     // Head-to-head
-    const standings = matches
-      .filter(match => 
-        (match.team_home.id === a.id && match.team_away.id === b.id) ||
-        (match.team_home.id === b.id && match.team_away.id === a.id))
-      .reduce(standingsReducer, [])
-      .sort(standingsSorter(matches))
-    if (standings.length) {
-      if (standings[0].id === a.id && standings[0].points > standings[1].points) return -1
-      if (standings[0].id === b.id && standings[0].points > standings[1].points) return 1
+    const m = []
+    for (let i = 0; i < matches.length; i++) {
+      const match = matches[i];
+      if ((match.team_home.id === a.id && match.team_away.id === b.id) ||
+          (match.team_home.id === b.id && match.team_away.id === a.id)) {
+        m.push({
+          id: match.id,
+          team_home: { id: match.team_home.id, name: match.team_home.name },
+          team_away: { id: match.team_away.id, name: match.team_away.name },
+          goals_home: match.goals_home,
+          goals_away: match.goals_away,
+          played: match.played,
+        })
+      }
+    }
+    // console.log(m);
+    // // const standings = matches
+    // //   .filter(match =>
+    // //     (match.team_home.id === a.id && match.team_away.id === b.id) ||
+    // //     (match.team_home.id === b.id && match.team_away.id === a.id))
+    if (m.length) {
+      const standings = m
+        .reduce(standingsReducer, [])
+        .sort(standingsSorter(m))
+      if (standings.length) {
+        if (standings[0].id === a.id && standings[0].points > standings[1].points) return -1
+        if (standings[0].id === b.id && standings[0].points > standings[1].points) return 1
+      }
     }
     // TODO: Add goal difference head-to-head rules here
     // ...
@@ -191,14 +211,14 @@ function generateSchedule(teams, { twolegs = false, rounds, shuffle = true } = {
   if (_teams.length % 2 === 1) {
     _teams.push(null)
   }
-  
+
   if (shuffle) {
     _teams = shuffleArray(_teams);
   }
-  
+
   // Rounds are the number of teams minus one
   rounds = rounds || _teams.length - 1;
-  
+
   for (let round = 0; round < rounds; round++) {
     _teams.map((team, key) => {
       if (key >= halfTeamCount) return
@@ -214,14 +234,14 @@ function generateSchedule(teams, { twolegs = false, rounds, shuffle = true } = {
     })
     _teams = rotate(_teams);
   }
-  
+
   // Remove matches with just one team (for odd teams number)
   schedule = schedule.map(round => round.filter(match => match[0] && match[1]))
-  
+
   if (twolegs) {
     schedule = schedule.concat(schedule.map(round => round.map(match => [match[1], match[0]])))
   }
-  
+
   return schedule;
 }
 
@@ -246,7 +266,7 @@ function queue(concurrency = 1, fill = 0) {
   let running = 0
   const taskQueue = []
   let timer
-  
+
   const runTask = task => {
     // if (fill && taskQueue.length < fill)
     running++
