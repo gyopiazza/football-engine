@@ -1,5 +1,5 @@
 import { h, app } from "hyperapp"
-import { Http } from "hyperapp-fx"
+// import { Http } from "hyperapp-fx"
 
 const Log = (() => {
   const effectFn = (dispatch, opts) => console.log(opts.message)
@@ -62,11 +62,11 @@ const getData = (dispatch, payload) => {
 // Components
 function App(state) {
   return <main>
-    <button onclick={[loadData, { test: true }]}>load</button> 
+    <button onclick={[loadData, { test: true }]}>load</button>
     {(state.selectedSchema.name || state.selectedRecord.id) && <button onclick={cancelEditing}>cancel editing</button>}
     <h1>Schemas</h1>
     <ul>
-      {Object.keys(state.schemas).map(schema => 
+      {Object.keys(state.schemas).map(schema =>
         <li onclick={[setSelectedSchema, state.schemas[schema]]}>
           {state.selectedSchema.name === schema ? '-> ' + schema : schema}
         </li>)}
@@ -86,7 +86,7 @@ function EditSchema({ selectedSchema, selectedRecord, records }) {
     {!selectedRecord.id && <div>
       <h2>{selectedSchema.name} Records</h2>
       {records.map(record => <div onclick={[setSelectedRecord, record]}>
-        {selectedRecord.id === record.id ? '-> ' + record.name : record.name}
+        {(selectedRecord.id === record.id ? '-> ' : '- ') + (record.name || record.id)}
       </div>)}
     </div>}
     {selectedRecord.id && <EditRecord selectedSchema={selectedSchema} selectedRecord={selectedRecord} />}
@@ -102,7 +102,7 @@ function EditRecord({ selectedSchema, selectedRecord }) {
 
 function Form({ selectedSchema, selectedRecord = {} }) {
   return <form>
-    <fieldset>       
+    <fieldset>
       {Object.keys(selectedSchema.properties).map(prop => <Field id={prop} type={selectedSchema.properties[prop]} value={selectedRecord[prop]} />)}
     </fieldset>
   </form>

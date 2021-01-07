@@ -9,40 +9,22 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack && node index.js",
+    "start2": "webpack-dev-server",
     "test": "tape tests/**/*.js | tap-spec",
     "reset-db": "rm default.realm.lock && rm default.realm.note && rm default.realm && rm -rf default.realm.management"
   },
   "babel": {
     "presets": [
-      "@babel/env"
-    ],
-    "plugins": [
-      [
-        "@babel/transform-react-jsx",
-        {
-          "pragma": "h"
-        }
-      ]
+      "babel-preset-solid"
     ]
   },
   "dependencies": {
     "express": "^4.16.4",
     "hyperid": "^2.0.2",
-    "tape": "^4.11.0",
-    "realm": "^3.3.0",
+    "realm": "^10.1.2",
+    "solid-js": "^0.23.9",
     "tap-spec": "^5.0.0",
-    "webpack": "^4.40.0",
-    "webpack-cli": "^3.3.10",
-    "hyperapp": "^2.0.2",
-    "babel-loader": "^8.0.5",
-    "@babel/core": "^7.6.0",
-    "@babel/preset-env": "^7.6.3",
-    "@babel/register": "^7.6.2",
-    "@babel/plugin-transform-react-jsx": "^7.2.0",
-    "hyperapp-fx": "^1.0.0"
-  },
-  "engines": {
-    "node": "10.x"
+    "tape": "^4.11.0"
   },
   "repository": {
     "url": "https://glitch.com/edit/#!/hello-express"
@@ -52,5 +34,18 @@
     "node",
     "glitch",
     "express"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/register": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "babel-preset-solid": "^0.23.8",
+    "html-webpack-plugin": "^4.5.1",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.1",
+    "webpack-dev-server": "^3.11.1"
+  }
 }
