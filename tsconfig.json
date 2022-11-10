@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "lib": ["es2021", "dom"],
+    "baseUrl": "./",
+    "rootDir": ".",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "~/*": ["src/*"],
+      "~/mock/*": ["mock/*"]
+    },
+    "types": ["Node", "jest"]
+  },
+  "files": ["src/index.ts"],
+  "include": ["src", "mock"],
+  "exclude": ["node_modules", "public"]
+}
