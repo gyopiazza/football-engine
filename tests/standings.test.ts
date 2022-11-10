@@ -1,4 +1,3 @@
-import type { Match, ScheduleRound, Team } from '../types'
 import * as api from '../src/api'
 import * as testUtils from './testUtils'
 
