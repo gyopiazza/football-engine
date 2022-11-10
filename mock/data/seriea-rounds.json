@@ -74,7 +74,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 1,
           "score2": 2
@@ -89,7 +89,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 0,
           "score2": 1
@@ -209,7 +209,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "bologna",
@@ -299,7 +299,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "udinese",
@@ -334,7 +334,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "torino",
@@ -399,7 +399,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 3,
           "score2": 1
@@ -554,7 +554,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 0,
           "score2": 3
@@ -594,7 +594,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "cagliari",
@@ -644,7 +644,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "roma",
@@ -754,7 +754,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 0,
           "score2": 3
@@ -804,7 +804,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 0,
           "score2": 2
@@ -919,7 +919,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "napoli",
@@ -954,7 +954,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "inter",
@@ -1044,7 +1044,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "crotone",
@@ -1099,7 +1099,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 2,
           "score2": 3
@@ -1159,7 +1159,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 1,
           "score2": 0
@@ -1264,7 +1264,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "fiorentina",
@@ -1354,7 +1354,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "sassuolo",
@@ -1439,7 +1439,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 2,
           "score2": 3
@@ -1514,7 +1514,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 2,
           "score2": 0
@@ -1559,7 +1559,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "lazio",
@@ -1664,7 +1664,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "genoa",
@@ -1719,7 +1719,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 2,
           "score2": 1
@@ -1824,7 +1824,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 3,
           "score2": 1
@@ -1869,7 +1869,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "sassuolo",
@@ -1974,7 +1974,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "fiorentina",
@@ -2029,7 +2029,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 1,
           "score2": 0
@@ -2074,7 +2074,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 0,
           "score2": 3
@@ -2179,7 +2179,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "milan",
@@ -2289,7 +2289,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 1,
           "score2": 3
@@ -2454,7 +2454,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "hellasverona",
@@ -2474,7 +2474,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 3,
           "score2": 0
@@ -2504,12 +2504,12 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 1,
           "score2": 3
@@ -2679,7 +2679,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 3,
           "score2": 2
@@ -2764,7 +2764,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "torino",
@@ -2814,7 +2814,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "chievoverona",
@@ -2924,7 +2924,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 1,
           "score2": 0
@@ -3044,7 +3044,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "lazio",
@@ -3059,7 +3059,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "sampdoria",
@@ -3114,7 +3114,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 2,
           "score2": 0
@@ -3234,7 +3234,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 3,
           "score2": 2
@@ -3284,7 +3284,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 2,
           "score2": 1
@@ -3339,7 +3339,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "inter",
@@ -3494,7 +3494,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "napoli",
@@ -3544,7 +3544,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 1,
           "score2": 3
@@ -3594,7 +3594,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 3,
           "score2": 0
@@ -3694,7 +3694,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "milan",
@@ -3744,7 +3744,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "crotone",
@@ -3869,7 +3869,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 1,
           "score2": 2
@@ -3904,7 +3904,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 1,
           "score2": 2
@@ -3994,7 +3994,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 3,
           "score2": 3
@@ -4039,7 +4039,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "bologna",
@@ -4099,7 +4099,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "hellasverona",
@@ -4214,7 +4214,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 0,
           "score2": 3
@@ -4304,7 +4304,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 3,
           "score2": 2
@@ -4379,7 +4379,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "cagliari",
@@ -4454,7 +4454,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "juventus",
@@ -4509,7 +4509,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 2,
           "score2": 2
@@ -4614,7 +4614,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 3,
           "score2": 1
@@ -4659,7 +4659,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "atalanta",
@@ -4764,7 +4764,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "juventus",
@@ -4819,7 +4819,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 0,
           "score2": 2
@@ -4924,7 +4924,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 3,
           "score2": 3
@@ -4969,7 +4969,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "atalanta",
@@ -5014,7 +5014,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "chievoverona",
@@ -5129,7 +5129,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 0,
           "score2": 1
@@ -5229,7 +5229,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "roma",
@@ -5404,7 +5404,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 0,
           "score2": 0
@@ -5414,7 +5414,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "udinese",
@@ -5449,12 +5449,12 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 0,
           "score2": 3
@@ -5619,7 +5619,7 @@
           "team1": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "team2": {
             "key": "genoa",
@@ -5714,7 +5714,7 @@
           "team2": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "score1": 2,
           "score2": 1
@@ -5764,7 +5764,7 @@
           "team2": {
             "key": "benevento",
             "name": "Benevento",
-            "code": null
+            "code": "BEN"
           },
           "score1": 3,
           "score2": 3
@@ -5864,7 +5864,7 @@
           "team1": {
             "key": "spal",
             "name": "SPAL",
-            "code": null
+            "code": "SPA"
           },
           "team2": {
             "key": "sampdoria",
