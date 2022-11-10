@@ -94,12 +94,12 @@
     {
       "key": "spal",
       "name": "SPAL",
-      "code": null
+      "code": "SPA"
     },
     {
       "key": "benevento",
       "name": "Benevento",
-      "code": null
+      "code": "BEN"
     }
   ]
 }

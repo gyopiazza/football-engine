@@ -4,38 +4,37 @@ const serieAClubs = require('./data/seriea-clubs-2017-18.json')
 // const serieAMatches = require('./data/seriea-2017-18.json')
 const serieAMatches = require('./data/seriea-rounds.json')
 
-const seed = realm => {
+const seed = (realm) => {
   const data = {}
-  const teams = realm.objects("Team")
-  
+  const teams = realm.objects('Team')
+
   realm.write(() => {
-    
     // Teams
-    data.serieA_teams = serieAClubs.clubs.map(team => {
+    data.serieA_teams = serieAClubs.clubs.map((team) => {
       return realm.create('Team', {
         id: uuid(),
-        name: team.name
+        name: team.name,
       })
     })
-    
+
     // Leagues
     data.serieA_league = realm.create('League', {
       id: uuid(),
-      name: 'Serie A'
+      name: 'Serie A',
     })
-    
+
     // data.coppaItalia_league = realm.create('League', {
     //   id: uuid(),
     //   name: 'Coppa Italia'
     // })
-    
+
     // Seasons
     data.season = realm.create('Season', {
       id: uuid(),
       key: '17/18',
-      name: '2017/2018'
+      name: '2017/2018',
     })
-    
+
     // Competition: Serie A
     data.serieA_competition = realm.create('Competition', {
       id: uuid(),
@@ -45,28 +44,28 @@ const seed = realm => {
       season: data.season,
       start: '2017/08/24',
       end: '2018/05/24',
-      teams: data.serieA_teams
+      teams: data.serieA_teams,
     })
-//       // Competition: Coppa Italia
-//       const coppaItalia_competition = realm.create('Competition', {
-//         id: uuid(),
-//         key: 'coppaitalia.2019',
-//         name: 'Coppa Italia 19/20',
-//         league: coppaItalia,
-//         season: season,
-//         start: '2019/08/03',
-//         end: '2020/05/24',
-//         teams: teams
-//       })
+    //       // Competition: Coppa Italia
+    //       const coppaItalia_competition = realm.create('Competition', {
+    //         id: uuid(),
+    //         key: 'coppaitalia.2019',
+    //         name: 'Coppa Italia 19/20',
+    //         league: coppaItalia,
+    //         season: season,
+    //         start: '2019/08/03',
+    //         end: '2020/05/24',
+    //         teams: teams
+    //       })
   })
-    
-  
+
   // Rounds & Matches
-  
+
   const teamsCache = {}
   function getTeamByName(teamName) {
     teamsCache[teamName.toLowerCase()] =
-      teamsCache[teamName.toLowerCase()] || teams.filtered('name ==[c] $0', teamName)[0]
+      teamsCache[teamName.toLowerCase()] ||
+      teams.filtered('name ==[c] $0', teamName)[0]
     return teamsCache[teamName.toLowerCase()]
   }
 
@@ -77,10 +76,10 @@ const seed = realm => {
       num: index + 1,
       name: round.name,
       competition: data.serieA_competition,
-      matches: []
+      matches: [],
     })
 
-    round.matches.forEach(match => {
+    round.matches.forEach((match) => {
       const m = realm.create('Match', {
         id: uuid(),
         round: r,
