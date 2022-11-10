@@ -10,8 +10,6 @@ describe('Standings', () => {
   const matches = testUtils.mockMatches(numberOfTeams, { twolegs })
   const standings = api.processMatches(matches)
 
-  console.log(standings)
-
   it('should have the correct team standings', async () => {
     expect(standings.length).toBe(numberOfTeams)
   })
