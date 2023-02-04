@@ -1,4 +1,4 @@
-import { type Match } from '../../types'
+import { type Match } from '../../src/types'
 import { nationalTeams, teams } from './teams'
 import { rounds } from './rounds'
 import { phases } from './phases'

@@ -1,4 +1,4 @@
-import { type Phase } from '../../types'
+import { type Phase } from '../../src/types'
 import { competitions } from './competitions'
 import { nationalTeams, teams } from './teams'
 import { worldCupMatches } from './matches'

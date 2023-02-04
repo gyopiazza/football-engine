@@ -7,6 +7,7 @@ export type Season = {
   id: string
   key: string // seriea.17/18
   name: string // Serie A 2017/2018
+  league: League // data.serieA_league
 }
 
 export type Competition = {

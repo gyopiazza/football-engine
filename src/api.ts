@@ -6,7 +6,7 @@ import {
   ScheduleRound,
   Standings,
   Team,
-} from 'types'
+} from '~/types'
 
 const POINTS_PER_WIN = 3
 const POINTS_PER_DRAW = 1
@@ -198,12 +198,19 @@ export const standingsReducer = (standings: Standings[], match: Match) => {
   return standings
 }
 
-// Points
-// Head-to-head records (results and points)
-// Goal difference of head-to-head games
-// Goal difference overall
-// Higher number of goals scored
-// Draw
+/**
+ * Calculate the standings given a set of matches, following football rules.
+ *
+ * Points
+ * Points of head-to-head games
+ * Goal difference of head-to-head games
+ * Goal difference overall
+ * Higher number of goals scored
+ * Draw
+ *
+ * @param {Match[]} matches The matches to use for the calculations
+ * @returns {Standings[]} An array representing the standings order with precomputed data
+ */
 export const standingsSorter = (matches: Match[]) => {
   return (a: Standings, b: Standings) => {
     // Points

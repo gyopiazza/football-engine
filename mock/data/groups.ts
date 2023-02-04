@@ -1,4 +1,4 @@
-import { type Group } from '../../types'
+import { type Group } from '../../src/types'
 import { competitions } from './competitions'
 import { nationalTeams } from './teams'
 import { phases } from './phases'

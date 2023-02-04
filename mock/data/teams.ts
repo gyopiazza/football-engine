@@ -1,4 +1,4 @@
-import { type Team } from '../../types'
+import { type Team } from '../../src/types'
 
 // 4 teams = 6 matches
 // 5 teams = 10 matches
@@ -28,12 +28,12 @@ export const teams: Team[] = [
     name: 'Juventus',
     code: 'JUV',
   },
-  // {
-  //   id: '5',
-  //   key: 'inter',
-  //   name: 'Inter',
-  //   code: 'INT',
-  // },
+  {
+    id: '5',
+    key: 'inter',
+    name: 'Inter',
+    code: 'INT',
+  },
 ]
 
 export const nationalTeams: Team[] = [

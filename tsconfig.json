@@ -15,7 +15,7 @@
       "~/*": ["src/*"],
       "~/mock/*": ["mock/*"]
     },
-    "types": ["Node", "jest"]
+    "types": ["Node", "jest", "mongodb"]
   },
   "files": ["src/index.ts"],
   "include": ["src", "mock"],

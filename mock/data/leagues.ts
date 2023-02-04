@@ -1,4 +1,4 @@
-import { type League } from '../../types'
+import { type League } from '../../src/types'
 
 export const leagues: League[] = [
   {
